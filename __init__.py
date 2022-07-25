@@ -1,1 +1,1 @@
-from .EIRegressor import EmbeddedInterpreter
+from .EIRegressor import *
