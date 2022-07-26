@@ -1,13 +1,13 @@
 # coding=utf-8
 import time
 import numpy as np
-import pandas as pd
 import torch
 from sklearn.base import ClassifierMixin
 from torch.autograd import Variable
-from torch.utils.data.sampler import WeightedRandomSampler
 
 from .DSModelMultiQ import DSModelMultiQ
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class DSClassifierMultiQ(ClassifierMixin):
@@ -34,12 +34,14 @@ class DSClassifierMultiQ(ClassifierMixin):
         self.max_iter = max_iter
         self.batch_size = batch_size
         self.num_workers = num_workers
+        if device.type == "cuda":
+            self.num_workers = 0
         self.min_dJ = min_dloss
         self.balance_class_data = False
         self.debug_mode = debug_mode
         self.step_debug_mode = step_debug_mode
         self.model = DSModelMultiQ(
-            num_classes, precompute_rules=precompute_rules)
+            num_classes, precompute_rules=precompute_rules).to(device)
         self.classes_ = [k for k in range(self.k)]
 
     def fit(self, X, y, add_single_rules=False, single_rules_breaks=2, add_mult_rules=False, column_names=None, **kwargs):
@@ -97,12 +99,12 @@ class DSClassifierMultiQ(ClassifierMixin):
         self.model.train()
         self.model.clear_rmap()
 
-        Xt = Variable(torch.Tensor(X))
+        Xt = Variable(torch.Tensor(X).to(device))
         if self.lossfn == "CE":
-            yt = Variable(torch.LongTensor(y))
+            yt = Variable(torch.LongTensor(y).to(device))
         else:
             yt = torch.nn.functional.one_hot(
-                torch.LongTensor(y), self.k).float()
+                torch.LongTensor(y).to(device), self.k).float()
 
         dataset = torch.utils.data.TensorDataset(Xt, yt)
         N = len(dataset)
@@ -151,12 +153,12 @@ class DSClassifierMultiQ(ClassifierMixin):
 
         self.model.train()
         self.model.clear_rmap()
-        Xt = Variable(torch.Tensor(X))
+        Xt = Variable(torch.Tensor(X).to(device))
         if self.lossfn == "CE":
-            yt = Variable(torch.LongTensor(y))
+            yt = Variable(torch.LongTensor(y).to(device))
         else:
             yt = torch.nn.functional.one_hot(
-                torch.LongTensor(y), self.k).float()
+                torch.LongTensor(y).to(device), self.k).float()
 
         dataset = torch.utils.data.TensorDataset(Xt, yt)
         N = len(dataset)
@@ -260,12 +262,12 @@ class DSClassifierMultiQ(ClassifierMixin):
 
         self.model.train()
         self.model.clear_rmap()
-        Xt = Variable(torch.Tensor(X))
+        Xt = Variable(torch.Tensor(X).to(device))
         if self.lossfn == "CE":
-            yt = Variable(torch.LongTensor(y))
+            yt = Variable(torch.LongTensor(y).to(device))
         else:
             yt = torch.nn.functional.one_hot(
-                torch.LongTensor(y), self.k).float()
+                torch.LongTensor(y).to(device), self.k).float()
 
         dataset = torch.utils.data.TensorDataset(Xt, yt)
         N = len(dataset)
@@ -363,12 +365,12 @@ class DSClassifierMultiQ(ClassifierMixin):
         X = np.insert(X, 0, values=np.arange(0, len(X)), axis=1)
 
         with torch.no_grad():
-            Xt = torch.Tensor(X)
+            Xt = torch.Tensor(X).to(device)
             if one_hot:
                 return self.model(Xt).numpy()
             else:
                 _, yt_pred = torch.max(self.model(Xt), 1)
-                yt_pred = yt_pred.numpy()
+                yt_pred = yt_pred.cpu().numpy()
                 return yt_pred
 
     def predict_proba(self, X):
