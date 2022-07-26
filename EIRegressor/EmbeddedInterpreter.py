@@ -1,5 +1,6 @@
 # coding=utf-8
 import numpy as np
+from sklearn.metrics import f1_score, accuracy_score
 
 from .dsgd.DSClassifierMultiQ import DSClassifierMultiQ
 from .nanReplace import replace_nan_median
@@ -106,6 +107,19 @@ class EmbeddedInterpreter():
         """
         self.classifier.model.print_most_important_rules(
             classes=classes, threshold=threshold)
+
+    def evaluate_classifier(self, X_test, y_test):
+        """
+            Evaluates the classifier using the test data
+            :param X_test: Features for test
+            :param y_test: Labels of features
+            :return: F1 score macro, F1 score micro and accuracy score
+        """
+        y_pred = self.classifier.predict(X_test)
+        f1_macro = f1_score(y_test, y_pred, average='macro')
+        f1_micro = f1_score(y_test, y_pred, average='micro')
+        acc = accuracy_score(y_test, y_pred)
+        return f1_macro, f1_micro, acc
 
     def rules_to_txt(self, filename, classes=None, threshold=0.2, results={}):
         """
