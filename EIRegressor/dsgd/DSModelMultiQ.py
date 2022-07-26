@@ -65,7 +65,8 @@ class DSModelMultiQ(nn.Module):
                 # print("Warning: No rule especified for input No %d" % i)
                 out[i] = torch.ones((self.k,)).to(device) / self.k
             else:
-                mt = torch.index_select(ms, 0, torch.LongTensor(sel))
+                mt = torch.index_select(
+                    ms, 0, torch.LongTensor(sel).to(device))
                 qt = mt[:, :-1] + \
                     mt[:, -1].view(-1, 1) * \
                     torch.ones_like(mt[:, :-1]).to(device)
