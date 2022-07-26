@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score, mean_absolute_error
 
 def execute(n_buckets=3, bucketing_method="quantile"):
    # Load dataframe
-    data = pd.read_csv("./examples/datasets/movies.csv")
+    data = pd.read_csv("EIRegression/examples/datasets/movies.csv")
     target = "gross"
 
     # Data Clean

@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='EIReg',
-    version='0.1',
+    version='0.2',
     author='Lucas Oyarzun',
     description='Tabular interpretable regression with embedded interpreter',
     long_description=long_description,
