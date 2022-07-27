@@ -1,9 +1,11 @@
 # coding=utf-8
 import time
 import numpy as np
+import pandas as pd
 import torch
 from sklearn.base import ClassifierMixin
 from torch.autograd import Variable
+from torch.utils.data.sampler import WeightedRandomSampler
 
 from .DSModelMultiQ import DSModelMultiQ
 
@@ -34,6 +36,7 @@ class DSClassifierMultiQ(ClassifierMixin):
         self.max_iter = max_iter
         self.batch_size = batch_size
         self.num_workers = num_workers
+        # TODO Ver como dejar esto, con CUDA no funciona bien con mas de 1 worker
         if device.type == "cuda":
             self.num_workers = 0
         self.min_dJ = min_dloss
@@ -389,13 +392,27 @@ class DSClassifierMultiQ(ClassifierMixin):
         """
         pred = self.predict_proba([x])[0]
         cls = np.argmax(pred)
-        rls = self.model.get_rules_by_instance(x, order_by=cls)
+        rls, prds = self.model.get_rules_by_instance(x, order_by=cls)
 
         # String interpretation
-        builder = "DS Model predicts class %d\n" % cls
-        for i in range(len(pred)-1):
-            builder += " Class %d: \t%.3f\n" % (i, pred[i])
-        builder += " Uncertainty:\t%.3f\n\n" % pred[-1]
-        for i in range(min(len(rls), 5)):
-            builder += " "
-        return pred, cls, rls, builder
+        builder = "DS Model predicts class %d\n" % (cls + 1)
+        cols = ["rule"]
+        for i in range(len(pred)):
+            builder += " Class %d: \t%.3f\n" % (i+1, pred[i])
+            cols.append("mass_class_" + str(i+1))
+        # builder += " Uncertainty:\t%.3f\n\n" % pred[-1]
+        cols.append("uncertainty")
+
+        df_rls = pd.DataFrame(rls)
+        prds = [str(p) for p in prds]
+        df_rls.insert(0, "rule", prds)
+        df_rls = df_rls.loc[::-1].reset_index(drop=True)
+        df_rls.columns = cols
+
+        return pred, cls, df_rls, builder
+
+    def print_most_important_rules(self, classes=None, threshold=0.2):
+        return self.model.print_most_important_rules(classes, threshold)
+
+    def find_most_important_rules(self, classes=None, threshold=0.2):
+        return self.model.find_most_important_rules(classes, threshold)
