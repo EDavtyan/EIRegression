@@ -24,20 +24,33 @@ def execute():
     R2_PYFUME = []
 
     # Load dataframe
-    data = pd.read_csv("./examples/datasets/concrete_data.csv")
-    target = "concrete_compressive_strength"
+    data = pd.read_csv("experiments/datasets/insurance.csv")
+    target = "charges"
+
+    # Data Preprocessing
+    data = data.apply(pd.to_numeric, errors='ignore')
+    data = pd.get_dummies(data, drop_first=True)
+    data = data[data[target].notna()]
+
+    # Reorder to pyFUME
+    cols = data.columns.tolist()
+    cols = cols[9:] + cols[:9]
+    data = data[cols]
+    data.columns = data.columns.str.replace(" ", "_")
+
+    print(data.columns)
+    # Data Split
+    X, y = data.drop(target, axis=1).values, data[target].values
 
     for i in range(50):
         print(i+1)
-        # Data Split
-        X, y = data.drop(target, axis=1).values, data[target].values
         X_train, X_test, y_train, y_test = train_test_split(X, y)
 
         replace_nan_median(X_train)
         replace_nan_median(X_test)
 
         gb = GradientBoostingRegressor(
-            random_state=42, loss='absolute_error').fit(X_train, y_train)
+            random_state=42, loss='absolute_error', n_estimators=300).fit(X_train, y_train)
         y_pred = gb.predict(X_test)
         print(f"r2 of GradientBoostingRegressor is {r2_score(y_test, y_pred)}")
         print(
@@ -47,7 +60,7 @@ def execute():
         MAE_GB += [mean_absolute_error(y_test, y_pred)]
 
         rfRegressor = RandomForestRegressor(
-            random_state=42).fit(X_train, y_train)
+            random_state=42, n_estimators=300).fit(X_train, y_train)
         y_pred = rfRegressor.predict(X_test)
         print(f"r2 of randomForestRegressor is {r2_score(y_test, y_pred)}")
         print(

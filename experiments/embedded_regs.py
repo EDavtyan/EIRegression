@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.metrics import r2_score, mean_absolute_error
+from sklearn.metrics import r2_score, mean_absolute_error, accuracy_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -9,6 +9,7 @@ from sklearn.linear_model import LinearRegression
 from pyfume import pyFUME
 
 from EIRegressor import EmbeddedInterpreter, replace_nan_median
+from EIRegressor.bucketing import bucketing
 
 
 def execute():
@@ -22,22 +23,29 @@ def execute():
     R2_LINEAR_EMB = []
 
     # Load dataframe
-    data = pd.read_csv("./examples/datasets/concrete_data.csv")
-    target = "concrete_compressive_strength"
+    data = pd.read_csv("./examples/datasets/housing.csv")
+    target = "median_house_value"
 
-    for i in range(5):
+    # Data Preprocessing
+    data['total_bedrooms'].fillna(
+        data['total_bedrooms'].median(), inplace=True)
+    data = pd.get_dummies(data, drop_first=True)
+    data = data[data[target].notna()]
+
+    # Data Split
+    X, y = data.drop(target, axis=1).values, data[target].values
+
+    for i in range(15):
         print(i+1)
         # Data Split
         X_train, X_test, y_train, y_test = train_test_split(
-            data.drop(target, axis=1).values, data[target].values, test_size=0.33)
-
-        # replace_nan_median(X_train)
-        # replace_nan_median(X_test)
+            X, y, test_size=0.33)
 
         gbrreg = GradientBoostingRegressor
         EIgb = EmbeddedInterpreter(gbrreg,
-                                   reg_args={},
-                                   n_buckets=3, max_iter=4000, lossfn="MSE",
+                                   reg_args={"loss": "absolute_error",
+                                             "n_estimators": 300},
+                                   n_buckets=3, bucketing_method="max_score", max_iter=4000, lossfn="MSE",
                                    min_dloss=0.0001, lr=0.005, precompute_rules=True)
 
         EIgb.fit(X_train, y_train,
@@ -49,13 +57,14 @@ def execute():
         print("R2 for GradientBoostingEmbedded: ", r2_score(y_test, y_pred))
         print("MAE for GradientBoostingEmbedded: ",
               mean_absolute_error(y_test, y_pred))
+        print("clf score: ", EIgb.evaluate_classifier(X_test, y_test))
 
         R2_GB_EMB += [r2_score(y_test, y_pred)]
         MAE_GB_EMB += [mean_absolute_error(y_test, y_pred)]
 
         rfReg = RandomForestRegressor
         EIrf = EmbeddedInterpreter(rfReg,
-                                   reg_args={},
+                                   reg_args={"n_estimators": 300},
                                    n_buckets=3, max_iter=4000, lossfn="MSE",
                                    min_dloss=0.0001, lr=0.005, precompute_rules=True)
 
@@ -68,6 +77,7 @@ def execute():
         print("R2 for RandomForestEmbedded: ", r2_score(y_test, y_pred))
         print("MAE for RandomForestEmbedded: ",
               mean_absolute_error(y_test, y_pred))
+        print("clf score: ", EIgb.evaluate_classifier(X_test, y_test))
 
         R2_RFOREST_EMB += [r2_score(y_test, y_pred)]
         MAE_RFOREST_EMB += [mean_absolute_error(y_test, y_pred)]
@@ -91,6 +101,7 @@ def execute():
         print("R2 for MLPRegressionEmbedded: ", r2_score(y_test, y_pred))
         print("MAE for MLPRegressionEmbedded: ",
               mean_absolute_error(y_test, y_pred))
+        print("clf score: ", EIgb.evaluate_classifier(X_test, y_test))
 
         R2_MLP_EMB += [r2_score(y_test, y_pred)]
         MAE_MLP_EMB += [mean_absolute_error(y_test, y_pred)]
@@ -110,6 +121,7 @@ def execute():
         print("R2 for LinearRegressionEmbedded: ", r2_score(y_test, y_pred))
         print("MAE for LinearRegressionEmbedded: ",
               mean_absolute_error(y_test, y_pred))
+        print("clf score: ", EIgb.evaluate_classifier(X_test, y_test))
 
         R2_LINEAR_EMB += [r2_score(y_test, y_pred)]
         MAE_LINEAR_EMB += [mean_absolute_error(y_test, y_pred)]

@@ -24,18 +24,18 @@ def bucketing(data, bins, type):
         count = 0
         group_number = 0
         sorted_groups = {}
-        bins = []
+        bins = [min(data)]
         groups = np.zeros_like(data, dtype=np.int8)
         for i in range(len(sorted_array)):
             if count > jump*(group_number+1):
                 group_number += 1
-                bins += data[i]
+                bins += [sorted_array[i]]
             sorted_groups[sorted_array[i]] = group_number
             count += sorted_array[i]
-
+        bins += [max(data)]
         for i in range(len(groups)):
             groups[i] = sorted_groups[data[i]]
-        return (groups, bins)
+        return (groups, np.array(bins))
     else:
         print("type must be 'ranged', 'quantile' or 'max_score'")
         return ([], [])
