@@ -34,7 +34,7 @@ def execute():
 
     # Reorder to pyFUME
     cols = data.columns.tolist()
-    cols = cols[9:] + cols[:9]
+    cols = cols[4:] + cols[:4]
     data = data[cols]
     data.columns = data.columns.str.replace(" ", "_")
 
@@ -90,7 +90,8 @@ def execute():
         R2_LINEAR += [r2_score(y_test, y_pred)]
         MAE_LINEAR += [mean_absolute_error(y_test, y_pred)]
 
-        pyfumeReg = pyFUME(dataframe=data, nr_clus=3)
+        pyfumeReg = pyFUME(dataframe=data, nr_clus=3,
+                           percentage_training=0.75)
         MAE = pyfumeReg.calculate_error(method="MAE")
         R2 = 1 - pyfumeReg.calculate_error(method="MSE")/y_test.var()
         print(f"r2 of FuzzyRulesRegressor is {R2}")
