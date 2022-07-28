@@ -1,6 +1,7 @@
 # coding=utf-8
 import numpy as np
-from sklearn.metrics import f1_score, accuracy_score
+import pandas as pd
+from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 
 from .dsgd.DSClassifierMultiQ import DSClassifierMultiQ
 from .nanReplace import replace_nan_median
@@ -42,6 +43,7 @@ class EmbeddedInterpreter():
         self.y_dtype = y_train.dtype
         (buckets, bins) = bucketing(
             y_train, bins=self.n_buckets, type=self.bucketing_method)
+        self.bins = bins  # To test classifier later
         self.classifier.fit(X_train, buckets, **cla_kwargs)
         pred_bucket = self.classifier.predict(X_train)
         self.training_medians = replace_nan_median(X_train)
@@ -115,11 +117,18 @@ class EmbeddedInterpreter():
             :param y_test: Labels of features
             :return: F1 score macro, F1 score micro and accuracy score
         """
+        bins = []
+        if len(self.bins) == 2:
+            bins = np.append(min(y_test)-1, self.bins[1], max(y_test)+1)
+        else:
+            bins = np.append(
+                min(y_test)-1, np.append(self.bins[1:-1], max(y_test)+1))
+        y_test = pd.cut(y_test, bins, labels=False)
         y_pred = self.classifier.predict(X_test)
         f1_macro = f1_score(y_test, y_pred, average='macro')
-        f1_micro = f1_score(y_test, y_pred, average='micro')
         acc = accuracy_score(y_test, y_pred)
-        return f1_macro, f1_micro, acc
+        print(confusion_matrix(y_test, y_pred))
+        return f1_macro, acc
 
     def rules_to_txt(self, filename, classes=None, threshold=0.2, results={}):
         """
