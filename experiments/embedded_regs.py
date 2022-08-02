@@ -23,19 +23,18 @@ def execute():
     R2_LINEAR_EMB = []
 
     # Load dataframe
-    data = pd.read_csv("./examples/datasets/housing.csv")
-    target = "median_house_value"
+    data = pd.read_csv("examples/datasets/insurance.csv")
+    target = "charges"
 
     # Data Preprocessing
-    data['total_bedrooms'].fillna(
-        data['total_bedrooms'].median(), inplace=True)
+    data = data.apply(pd.to_numeric, errors='ignore')
     data = pd.get_dummies(data, drop_first=True)
     data = data[data[target].notna()]
 
     # Data Split
     X, y = data.drop(target, axis=1).values, data[target].values
 
-    for i in range(15):
+    for i in range(50):
         print(i+1)
         # Data Split
         X_train, X_test, y_train, y_test = train_test_split(
@@ -45,7 +44,7 @@ def execute():
         EIgb = EmbeddedInterpreter(gbrreg,
                                    reg_args={"loss": "absolute_error",
                                              "n_estimators": 300},
-                                   n_buckets=3, bucketing_method="max_score", max_iter=4000, lossfn="MSE",
+                                   n_buckets=3, bucketing_method="quantile", max_iter=4000, lossfn="MSE",
                                    min_dloss=0.0001, lr=0.005, precompute_rules=True)
 
         EIgb.fit(X_train, y_train,

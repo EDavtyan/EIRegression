@@ -115,10 +115,10 @@ class EmbeddedInterpreter():
             Evaluates the classifier using the test data
             :param X_test: Features for test
             :param y_test: Labels of features
-            :return: F1 score macro, F1 score micro and accuracy score
+            :return: F1 score macro and accuracy score
         """
         bins = []
-        if len(self.bins) == 2:
+        if len(self.bins) == 3:
             bins = np.append(min(y_test)-1, self.bins[1], max(y_test)+1)
         else:
             bins = np.append(

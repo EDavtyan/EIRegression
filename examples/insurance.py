@@ -8,7 +8,7 @@ from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 
 def execute(n_buckets=3, bucketing_method="quantile"):
     # Load dataframe
-    data = pd.read_csv("./datasets/insurance.csv")
+    data = pd.read_csv("examples/datasets/insurance.csv")
     target = "charges"
 
     # Data Preprocessing
@@ -39,4 +39,5 @@ def execute(n_buckets=3, bucketing_method="quantile"):
 
     results = {"R2": r2_score(y_test, y_pred),
                "MAE": mean_absolute_error(y_test, y_pred)}
-    eiReg.rules_to_txt("examples/results/housing_results.txt", results=results)
+    eiReg.rules_to_txt(
+        "examples/results/insurance_results.txt", results=results)

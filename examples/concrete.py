@@ -8,7 +8,7 @@ from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 
 def execute(n_buckets=3, bucketing_method="quantile"):
     # Load dataframe
-    data = pd.read_csv("./examples/datasets/concrete_data.csv")
+    data = pd.read_csv("examples/datasets/concrete_data.csv")
     target = "concrete_compressive_strength"
     X, y = data.drop(target, axis=1).values, data[target].values
     X_train, X_test, y_train, y_test = train_test_split(
@@ -33,4 +33,5 @@ def execute(n_buckets=3, bucketing_method="quantile"):
 
     results = {"R2": r2_score(y_test, y_pred),
                "MAE": mean_absolute_error(y_test, y_pred)}
-    eiReg.rules_to_txt("examples/results/housing_results.txt", results=results)
+    eiReg.rules_to_txt(
+        "examples/results/concrete_results.txt", results=results)

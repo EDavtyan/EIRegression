@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score, mean_absolute_error
 
 def execute(n_buckets=3, bucketing_method="quantile"):
    # Load dataframe
-    data = pd.read_csv("EIRegression/examples/datasets/movies.csv")
+    data = pd.read_csv("examples/datasets/movies.csv")
     target = "gross"
 
     # Data Clean
@@ -44,4 +44,4 @@ def execute(n_buckets=3, bucketing_method="quantile"):
 
     results = {"R2": r2_score(y_test, y_pred),
                "MAE": mean_absolute_error(y_test, y_pred)}
-    eiReg.rules_to_txt("examples/results/housing_results.txt", results=results)
+    eiReg.rules_to_txt("examples/results/movies_results.txt", results=results)

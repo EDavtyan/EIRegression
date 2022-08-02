@@ -8,7 +8,7 @@ from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 
 def execute(n_buckets=3, bucketing_method="quantile"):
     # Load dataframe
-    data = pd.read_csv("./examples/datasets/housing.csv")
+    data = pd.read_csv("examples/datasets/housing.csv")
     target = "median_house_value"
 
     # Data Preprocessing
