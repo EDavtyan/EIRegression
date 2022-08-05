@@ -24,6 +24,7 @@ class EmbeddedInterpreter():
         :param cla_kwargs: dict,  keyword arguments for the classifier
         """
         self.n_buckets = n_buckets
+        self.bins = []
         self.bucketing_method = bucketing_method
         self.y_dtype = None
         self.training_medians = None
@@ -75,6 +76,12 @@ class EmbeddedInterpreter():
         if return_buckets:
             return buck_pred, y_pred
         return y_pred
+
+    def get_bins(self):
+        """
+        Returns the bins used for bucketing the data
+        """
+        return self.bins
 
     def predict_proba(self, X):
         """
