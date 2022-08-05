@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 
 from .dsgd.DSClassifierMultiQ import DSClassifierMultiQ
+from .dsgd.DSRule import DSRule
 from .nanReplace import replace_nan_median
 from .bucketing import bucketing
 
@@ -90,6 +91,16 @@ class EmbeddedInterpreter():
         :return: Class scores for each feature vector and a explanation of the decision
         """
         return self.classifier.predict_explain(X)
+
+    def add_rule(self, rule, caption="", m_sing=None, m_uncert=None):
+        """
+        Adds a rule to the model. If no masses are provided, random masses will be used.
+        :param rule: lambda or callable, used as the predicate of the rule
+        :param caption: Description of the rule
+        :param m_sing: [optional] masses for singletons
+        :param m_uncert: [optional] mass for uncertainty
+        """
+        self.classifier.model.add_rule(DSRule(rule, caption), m_sing, m_uncert)
 
     def find_most_important_rules(self, classes=None, threshold=0.2):
         """
