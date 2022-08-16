@@ -27,7 +27,8 @@ def execute(n_buckets=3, bucketing_method="quantile"):
                                 bucketing_method=bucketing_method,
                                 reg_args={"loss": "absolute_error"},
                                 max_iter=4000, lossfn="MSE",
-                                min_dloss=0.0001, lr=0.005, precompute_rules=True)
+                                min_dloss=0.0001, lr=0.005, precompute_rules=True,
+                                force_precompute=True, device="cuda")
     eiReg.fit(X_train, y_train,
               reg_args={},
               add_single_rules=True, single_rules_breaks=3, add_multi_rules=True,

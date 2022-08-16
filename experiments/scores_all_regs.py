@@ -46,8 +46,8 @@ def execute():
         print(i+1)
         X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-        replace_nan_median(X_train)
-        replace_nan_median(X_test)
+        medians = replace_nan_median(X_train)
+        replace_nan_median(X_test, medians)
 
         gb = GradientBoostingRegressor(
             random_state=42, loss='absolute_error', n_estimators=300).fit(X_train, y_train)

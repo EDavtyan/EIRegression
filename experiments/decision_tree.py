@@ -33,8 +33,8 @@ def execute():
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
 
-    replace_nan_median(X_train)
-    replace_nan_median(X_test)
+    medians = replace_nan_median(X_train)
+    replace_nan_median(X_test, medians)
 
     # , min_impurity_decrease=0.0189)
     dt = DecisionTreeClassifier(random_state=42)
