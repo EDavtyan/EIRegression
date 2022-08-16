@@ -43,9 +43,13 @@ class EmbeddedInterpreter():
         """
 
         self.y_dtype = y_train.dtype
-        (buckets, bins) = bucketing(
-            y_train, bins=self.n_buckets, type=self.bucketing_method)
-        self.bins = bins  # To test classifier later
+        if self.bins == []:
+            (buckets, bins) = bucketing(
+                y_train, bins=self.n_buckets, type=self.bucketing_method)
+            self.bins = bins  # To test classifier later
+        else:
+            buckets = pd.cut(y_train, self.bins)
+        print(self.bins)
         self.classifier.fit(X_train, buckets, **cla_kwargs)
         pred_bucket = self.classifier.predict(X_train)
         self.training_medians = replace_nan_median(X_train)
@@ -82,6 +86,13 @@ class EmbeddedInterpreter():
         Returns the bins used for bucketing the data
         """
         return self.bins
+
+    def set_bins(self, bins):
+        """
+        Sets the bins used for bucketing the data
+        :param bins: Array of bins
+        """
+        self.bins = bins
 
     def predict_proba(self, X):
         """
