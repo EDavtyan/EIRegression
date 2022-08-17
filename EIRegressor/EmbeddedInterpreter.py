@@ -49,7 +49,6 @@ class EmbeddedInterpreter():
             self.bins = bins  # To test classifier later
         else:
             buckets = pd.cut(y_train, self.bins)
-        print(self.bins)
         self.classifier.fit(X_train, buckets, **cla_kwargs)
         pred_bucket = self.classifier.predict(X_train)
         self.training_medians = replace_nan_median(X_train)
