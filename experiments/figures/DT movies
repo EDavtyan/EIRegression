@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<budget &le; 25765000.0<br/>samples = 1406<br/>value = [450, 475, 481]<br/>class = high_gross>, fillcolor="#fefeff"] ;
+1 [label=<num_voted_users &le; 7785.0<br/>samples = 766<br/>value = [395, 272, 99]<br/>class = low_gross>, fillcolor="#f9e0ce"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<budget &le; 2600000.0<br/>samples = 267<br/>value = [218, 45, 4]<br/>class = low_gross>, fillcolor="#eb9d65"] ;
+1 -> 2 ;
+3 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 3 ;
+8 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 8 ;
+75 [label=<budget &le; 9800000.0<br/>samples = 499<br/>value = [177, 227, 95]<br/>class = medium_gross>, fillcolor="#e0fbeb"] ;
+1 -> 75 ;
+76 [label="(...)", fillcolor="#C0C0C0"] ;
+75 -> 76 ;
+163 [label="(...)", fillcolor="#C0C0C0"] ;
+75 -> 163 ;
+352 [label=<num_voted_users &le; 93648.0<br/>samples = 640<br/>value = [55, 203, 382]<br/>class = high_gross>, fillcolor="#cbaef4"] ;
+0 -> 352 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+353 [label=<num_voted_users &le; 8140.0<br/>samples = 300<br/>value = [47, 152, 101]<br/>class = medium_gross>, fillcolor="#ccf8df"] ;
+352 -> 353 ;
+354 [label="(...)", fillcolor="#C0C0C0"] ;
+353 -> 354 ;
+361 [label="(...)", fillcolor="#C0C0C0"] ;
+353 -> 361 ;
+504 [label=<budget &le; 49500000.0<br/>samples = 340<br/>value = [8, 51, 281]<br/>class = high_gross>, fillcolor="#9b61ea"] ;
+352 -> 504 ;
+505 [label="(...)", fillcolor="#C0C0C0"] ;
+504 -> 505 ;
+550 [label="(...)", fillcolor="#C0C0C0"] ;
+504 -> 550 ;
+}

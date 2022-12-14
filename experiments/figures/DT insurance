@@ -1,0 +1,21 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<smoker &le; 0.5<br/>samples = 896<br/>value = [289, 301, 306]<br/>class = high_charges>, fillcolor="#fefdff"] ;
+1 [label=<age &le; 36.5<br/>samples = 708<br/>value = [289, 301, 118]<br/>class = medium_charges>, fillcolor="#f9fefb"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<children &le; 2.5<br/>samples = 306<br/>value = [268, 15, 23]<br/>class = low_charges>, fillcolor="#e89254"] ;
+1 -> 2 ;
+3 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 3 ;
+106 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 106 ;
+129 [label=<age &le; 58.5<br/>samples = 402<br/>value = [21, 286, 95]<br/>class = medium_charges>, fillcolor="#84efb1"] ;
+1 -> 129 ;
+130 [label="(...)", fillcolor="#C0C0C0"] ;
+129 -> 130 ;
+279 [label="(...)", fillcolor="#C0C0C0"] ;
+129 -> 279 ;
+306 [label=<samples = 188<br/>value = [0, 0, 188]<br/>class = high_charges>, fillcolor="#8139e5"] ;
+0 -> 306 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+}

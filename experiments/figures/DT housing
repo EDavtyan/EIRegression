@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<ocean_proximity_INLAND &le; 0.5<br/>samples = 13828<br/>value = [4613, 4639, 4576]<br/>class = medium_value>, fillcolor="#feffff"] ;
+1 [label=<median_income &le; 5.032<br/>samples = 9411<br/>value = [1479, 3679, 4253]<br/>class = high_value>, fillcolor="#f2ebfc"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<median_income &le; 2.601<br/>samples = 6902<br/>value = [1474, 3338, 2090]<br/>class = medium_value>, fillcolor="#ccf8de"] ;
+1 -> 2 ;
+3 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 3 ;
+894 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 894 ;
+2825 [label=<median_income &le; 5.797<br/>samples = 2509<br/>value = [5, 341, 2163]<br/>class = high_value>, fillcolor="#9559e9"] ;
+1 -> 2825 ;
+2826 [label="(...)", fillcolor="#C0C0C0"] ;
+2825 -> 2826 ;
+3161 [label="(...)", fillcolor="#C0C0C0"] ;
+2825 -> 3161 ;
+3266 [label=<median_income &le; 4.097<br/>samples = 4417<br/>value = [3134, 960, 323]<br/>class = low_value>, fillcolor="#efb082"] ;
+0 -> 3266 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+3267 [label=<median_income &le; 3.034<br/>samples = 3417<br/>value = [2881, 474, 62]<br/>class = low_value>, fillcolor="#ea985d"] ;
+3266 -> 3267 ;
+3268 [label="(...)", fillcolor="#C0C0C0"] ;
+3267 -> 3268 ;
+3707 [label="(...)", fillcolor="#C0C0C0"] ;
+3267 -> 3707 ;
+4134 [label=<median_income &le; 6.325<br/>samples = 1000<br/>value = [253, 486, 261]<br/>class = medium_value>, fillcolor="#c3f7d9"] ;
+3266 -> 4134 ;
+4135 [label="(...)", fillcolor="#C0C0C0"] ;
+4134 -> 4135 ;
+4588 [label="(...)", fillcolor="#C0C0C0"] ;
+4134 -> 4588 ;
+}

@@ -10,21 +10,15 @@ import graphviz
 
 from EIRegressor import bucketing, replace_nan_median
 
-
+name = "DT concrete"
 def execute():
-    # Load dataframe
-    data = pd.read_csv("./examples/datasets/movies.csv")
-    target = "gross"
-
-    # Data Clean
-    data.drop(['movie_title', 'color', 'director_name', 'actor_1_name',
-               'actor_2_name', 'actor_3_name', 'language', 'country', 'content_rating', 'aspect_ratio'], axis=1, inplace=True)
-    data = data[data['title_year'] >= 1990]
-    data = data[data["num_critic_for_reviews"] >= 5]
-    data = data[data["num_voted_users"] >= 5]
-    data = data[data["movie_facebook_likes"] >= 5]
-    data = data[data[target].notna()]
-
+   # Load dataframe
+    data = pd.read_csv("examples/datasets/concrete_data.csv")
+    target = "concrete_compressive_strength"
+    X, y = data.drop(target, axis=1).values, data[target].values
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.33)
+    
     data[target] = bucketing(
         data[target], type="quantile", bins=3)[0]
 
@@ -50,11 +44,11 @@ def execute():
                                         f"low_{target}", f"medium_{target}", f"high_{target}"],
                                     filled=True, rounded=True,
                                     special_characters=True,
-                                    max_depth=3,
+                                    max_depth=2,
                                     impurity=False
 
                                     )
     graph = graphviz.Source(dot_data)
     graph.format = 'png'
-    graph.render('./experiments/figures/imdb_DT', view=True)
+    graph.render(f'./experiments/figures/{name}', view=True)
     plt.show()

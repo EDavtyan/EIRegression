@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<age &le; 21.0<br/>samples = 690<br/>value = [221, 230, 239]<br/>class = high_strength>, fillcolor="#fdfbfe"] ;
+1 [label=<cement &le; 388.45<br/>samples = 207<br/>value = [144, 44, 19]<br/>class = low_strength>, fillcolor="#efb286"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<superplasticizer &le; 9.05<br/>samples = 167<br/>value = [138, 23, 6]<br/>class = low_strength>, fillcolor="#ea9a61"] ;
+1 -> 2 ;
+3 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 3 ;
+16 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 16 ;
+35 [label=<age &le; 5.0<br/>samples = 40<br/>value = [6, 21, 13]<br/>class = medium_strength>, fillcolor="#c4f7da"] ;
+1 -> 35 ;
+36 [label="(...)", fillcolor="#C0C0C0"] ;
+35 -> 36 ;
+47 [label="(...)", fillcolor="#C0C0C0"] ;
+35 -> 47 ;
+56 [label=<water &le; 175.55<br/>samples = 483<br/>value = [77, 186, 220]<br/>class = high_strength>, fillcolor="#f1e8fc"] ;
+0 -> 56 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+57 [label=<cement &le; 203.35<br/>samples = 178<br/>value = [9, 36, 133]<br/>class = high_strength>, fillcolor="#a978ed"] ;
+56 -> 57 ;
+58 [label="(...)", fillcolor="#C0C0C0"] ;
+57 -> 58 ;
+87 [label="(...)", fillcolor="#C0C0C0"] ;
+57 -> 87 ;
+110 [label=<cement &le; 398.5<br/>samples = 305<br/>value = [68, 150, 87]<br/>class = medium_strength>, fillcolor="#c6f7db"] ;
+56 -> 110 ;
+111 [label="(...)", fillcolor="#C0C0C0"] ;
+110 -> 111 ;
+236 [label="(...)", fillcolor="#C0C0C0"] ;
+110 -> 236 ;
+}
