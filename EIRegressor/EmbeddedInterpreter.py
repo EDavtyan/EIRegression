@@ -2,9 +2,11 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
+from sklearn.pipeline import Pipeline
 
 from .dsgd.DSClassifierMultiQ import DSClassifierMultiQ
 from .dsgd.DSRule import DSRule
+from .model_optimizer import ModelOptimizer
 from .nanReplace import replace_nan_median
 from .bucketing import bucketing
 
@@ -14,31 +16,29 @@ class EmbeddedInterpreter():
     Implementation of Embedded interpreter regression based on DS model
     """
 
-    def __init__(self, regressor, n_buckets=3, bucketing_method="quantile",
-                 reg_args={}, **cla_kwargs):
+    def __init__(self, regressor, model_optimizer, model_preprocessor=None, n_buckets=3, bucketing_method="quantile",
+                 reg_default_args={}, reg_hp_args={}, hp_grids=None, **cla_kwargs):
         """
-        :param regressor: Regressor to be used for each bucket
-        :param n_buckets: int, the amount of evenly-populated generated buckets of regressors
-        :param bucketing_method: string, method to separate the target in different categories (ranged/quantile/max_score)
-        :param reg_args: dict, Arguments for the regressor
-        :param cla_kwargs: dict,  keyword arguments for the classifier
+        Initialize the EmbeddedInterpreter with new parameters for fine-tuning.
+        :param hp_grids: List of hyperparameter grids for each bucket's regressor.
+        :param optimizer_settings: Settings for the ModelOptimizer.
         """
         self.n_buckets = n_buckets
         self.bins = []
         self.bucketing_method = bucketing_method
         self.y_dtype = None
         self.training_medians = None
-        self.classifier = DSClassifierMultiQ(
-            num_classes=n_buckets, **cla_kwargs)
-        self.regressors = [regressor(
-            **reg_args) for i in range(n_buckets)]
+        self.classifier = DSClassifierMultiQ(num_classes=n_buckets, **cla_kwargs)
+        self.regressors = [regressor(**reg_default_args) for _ in range(n_buckets)]
+        self.hp_grids = hp_grids or [reg_hp_args for _ in range(n_buckets)]  # Default to empty grids if none provided
+        self.optimizer = model_optimizer
+        self.preprocessor=model_preprocessor
 
-    def fit(self, X_train, y_train, reg_args={}, **cla_kwargs):
+    def fit(self, X_train, y_train, **cla_kwargs):
         """
         Fits the model using the training data
         :param X: Features for training
         :param y: Labels of features
-        :param reg_args: Arguments for the regressor fitting
         :param cla_kwargs: Arguments for the DS classifier fitting
         """
 
@@ -58,7 +58,21 @@ class EmbeddedInterpreter():
             if len(bucket_X) == 0:
                 bucket_X = X_train[buckets == i]
                 bucket_y = y_train[buckets == i]
-            self.regressors[i].fit(bucket_X, bucket_y, **reg_args)
+            if self.hp_grids[i]:  # Check if there is a grid for the current bucket
+
+                regressor_pipeline = Pipeline([
+                    ('preprocessor', self.preprocessor),
+                    ('regressor', self.regressors[i])
+                ])
+
+                optimized_regressor = self.optimizer.optimize(
+                    regressor_pipeline, self.hp_grids[i], bucket_X, bucket_y,
+                    scoring='r2',  # Set scoring to a regression metric
+                    cv=5  # Or another value, possibly passed through optimizer_settings
+                )
+                self.regressors[i] = optimized_regressor
+            else:
+                self.regressors[i].fit(bucket_X, bucket_y)
 
     def predict(self, X_test, return_buckets=False):
         """
@@ -147,15 +161,15 @@ class EmbeddedInterpreter():
         """
         bins = []
         if len(self.bins) == 3:
-            bins = np.append(int(min(y_test)-1), np.append(self.bins[1], int(max(y_test)+1)))
+            bins = np.append(int(min(y_test) - 1), np.append(self.bins[1], int(max(y_test) + 1)))
         else:
             bins = np.append(
-                min(y_test)-1, np.append(self.bins[1:-1], max(y_test)+1))
+                min(y_test) - 1, np.append(self.bins[1:-1], max(y_test) + 1))
         y_test = pd.cut(y_test, bins, labels=False)
         y_pred = self.classifier.predict(X_test)
         f1_macro = f1_score(y_test, y_pred, average='macro')
         acc = accuracy_score(y_test, y_pred)
-        print(confusion_matrix(y_test, y_pred))
+        # print(confusion_matrix(y_test, y_pred))
         return f1_macro, acc
 
     def rules_to_txt(self, filename, classes=None, threshold=0.2, results={}):
@@ -177,4 +191,4 @@ class EmbeddedInterpreter():
                 file.write(f"\n---{key}---\n")
                 for rule in rules_list:
                     file.write(
-                        f"rule{rule [1]}: {rule[2]}\nprobabilities_array:{rule[4]}\n\n")
+                        f"rule{rule[1]}: {rule[2]}\nprobabilities_array:{rule[4]}\n\n")
