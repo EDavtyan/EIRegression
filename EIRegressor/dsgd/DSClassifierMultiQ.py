@@ -44,6 +44,7 @@ class DSClassifierMultiQ(ClassifierMixin):
                 self.device = torch.device("cpu")
             else:  # With GPU more workers may throw error
                 self.num_workers = 0
+        # self.device = torch.device("cpu")
         self.min_dJ = min_dloss
         self.balance_class_data = False
         self.debug_mode = debug_mode
