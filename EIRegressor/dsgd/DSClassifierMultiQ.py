@@ -38,13 +38,13 @@ class DSClassifierMultiQ(ClassifierMixin):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.device = torch.device(device)
+        self.device = torch.device("cpu")
         if self.device.type == "cuda" or self.device.type == "mps":
             if not torch.cuda.is_available() and not torch.backends.mps.is_available():
                 print("GPU acceleration is not available, using CPU")
                 self.device = torch.device("cpu")
             else:  # With GPU more workers may throw error
                 self.num_workers = 0
-        # self.device = torch.device("cpu")
         self.min_dJ = min_dloss
         self.balance_class_data = False
         self.debug_mode = debug_mode
@@ -101,7 +101,7 @@ class DSClassifierMultiQ(ClassifierMixin):
         elif self.debug_mode:
             return self._optimize_debug(X, y, optimizer, criterion, **kwargs)
         else:
-            return self._optimize(X, y, optimizer, criterion, )
+            return self._optimize(X, y, optimizer, criterion)
 
     def _optimize(self, X, y, optimizer, criterion):
         losses = []
@@ -360,7 +360,7 @@ class DSClassifierMultiQ(ClassifierMixin):
         masses = np.array(masses)
         return losses, epoch, dt, dt_forward, dt_loss, dt_optim, dt_norm, masses
 
-    def predict(self, X, one_hot=False):
+    def predict(self, X, one_hot=False, is_ensemble=False):
         """
         Predict the classes for the feature vectors
         :param X: Feature vectors
@@ -375,6 +375,10 @@ class DSClassifierMultiQ(ClassifierMixin):
 
         with torch.no_grad():
             Xt = torch.Tensor(X).to(self.device)
+            if is_ensemble:
+                yt_pred = self.model(Xt)
+                yt_pred = yt_pred.cpu().numpy()
+                return yt_pred
             if one_hot:
                 return self.model(Xt).numpy()
             else:
