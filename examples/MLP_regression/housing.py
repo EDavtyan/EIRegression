@@ -1,17 +1,18 @@
 from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 import pandas as pd
-import xgboost as xgb
 import os
 import json
 
+from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_absolute_error
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 
 from EIRegressor.model_optimizer import ModelOptimizer
 
 def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile"):
     # Load dataframe
     data = pd.read_csv("/home/edgar.davtyan/projects/recla_v1/examples/datasets/housing.csv")
+    # data = pd.read_csv("/Users/eddavtyan/Documents/XAI/Projects/EIRegression/experiments/datasets/housing.csv")
     target = "median_house_value"
 
     # Data Preprocessing
@@ -25,29 +26,25 @@ def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile"):
         X, y, test_size=0.33)
 
     regressor_hp_grid = {
-        'regressor__learning_rate': [0.01, 0.05, 0.1],
-        'regressor__n_estimators': [50, 100, 150],
-        'regressor__max_depth': [3, 5, 7],
-        'regressor__colsample_bytree': [0.7, 0.8, 0.9],
-        'regressor__gamma': [0, 0.1, 0.2],
-        'regressor__reg_alpha': [0, 0.1, 0.5],
-        'regressor__reg_lambda': [0.5, 1, 1.5]
+        'regressor__hidden_layer_sizes': [(100,), (100, 100)],
+        'regressor__activation': ['relu', 'tanh', 'logistic'],
+        'regressor__learning_rate_init': [0.01, 0.0001],
+        'regressor__alpha': [0.0001, 0.01],
+        'regressor__learning_rate': ['constant', 'invscaling', 'adaptive'],
+        'regressor__max_iter': [400]
     }
 
     regressor_default_args = {
-        "learning_rate": 0.05,
-        "n_estimators": 100,
-        "max_depth": 5,
-        "colsample_bytree": 0.8,
-        "gamma": 0.1,
-        "reg_alpha": 0.1,
-        "reg_lambda": 1
+        "hidden_layer_sizes": (100,),  # One hidden layer with 100 neurons
+        "activation": 'relu',  # ReLU activation function, f(x) = max(0, x)
+        "learning_rate_init": 0.001,  # Initial learning rate
     }
 
-    regressor_optimizer = ModelOptimizer(search_method="random", n_iter=450)
+
+    regressor_optimizer = ModelOptimizer(search_method="random", n_iter=25)
 
     # Creation of EI Regression with XGBoost
-    eiReg = EmbeddedInterpreter(regressor=xgb.XGBRegressor,
+    eiReg = EmbeddedInterpreter(regressor=MLPRegressor,
                                 model_optimizer=regressor_optimizer,
                                 model_preprocessor=None,
                                 n_buckets=n_buckets,
@@ -65,10 +62,12 @@ def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile"):
 
     r2 = r2_score(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
     acc, f1 = eiReg.evaluate_classifier(X_test, y_test)
 
     results = {"R2": r2,
                "MAE": mae,
+               "MSE": mse,
                "Accuracy": acc,
                "F1": f1}
 
@@ -107,6 +106,6 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations):
                     json.dump(all_results, json_file, indent=4)
 
 if __name__ == '__main__':
-    save_dir = "/Users/eddavtyan/Documents/XAI/Projects/EIRegression/examples/results/housing"
+    save_dir = "/Users/eddavtyan/Documents/XAI/Projects/EIRegression/examples/MLP_regression/results/housing"
     run_multiple_executions(save_dir, 3, 3)
 

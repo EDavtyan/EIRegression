@@ -1,13 +1,10 @@
-import sys
 import os
 
-from examples.movies import run_multiple_executions as movies_example
-from examples.housing import run_multiple_executions as housing_example
+from examples.XGBRegression.housing import run_multiple_executions as housing_example
 # from examples.insurance import run_multiple_executions as insurance_example
-from examples.concrete import run_multiple_executions as concrete_example
 
 
-def main():
+def main( ):
     N_BUCKETS = 15
     BUCKETING = "quantile"
     ITTERATIONS = 50
@@ -20,14 +17,14 @@ def main():
     # movies_example(num_buckets=N_BUCKETS,
     #                num_iterations=ITTERATIONS,
     #                save_dir=os.path.join(save_dir, "movies"))
-    # print("housing")
-    # housing_example(num_buckets=N_BUCKETS,
-    #                 num_iterations=ITTERATIONS,
-    #                 save_dir=os.path.join(save_dir, "housing"))
-    print("concrete")
-    concrete_example(num_buckets=N_BUCKETS,
-                     num_iterations=ITTERATIONS,
-                     save_dir=os.path.join(save_dir, "concrete"))
+    print("housing")
+    housing_example(num_buckets=N_BUCKETS,
+                    num_iterations=ITTERATIONS,
+                    save_dir=os.path.join(save_dir, "housing"))
+    # print("concrete")
+    # concrete_example(num_buckets=N_BUCKETS,
+    #                  num_iterations=ITTERATIONS,
+    #                  save_dir=os.path.join(save_dir, "concrete"))
 
 if __name__ == '__main__':
     main()
