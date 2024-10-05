@@ -4,14 +4,14 @@ Regression model for Machine Learning created with the goal of do intepretable r
 
 ## Examples
 
-[Examples](examples/) provides basic usages for this method. Rules obtained can be found in [results folder](examples/results/).
+`example.py` provides basic usages for this method.
 
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install every requirement in the `requirements.txt` file in a new environment.
 
 `python -m venv env`
-
+`source env/bin/activate`
 `pip install -r requirements.txt`
 
 ## Usage
@@ -26,13 +26,12 @@ Define number of buckets that will be used to discretize the data.
 Get data as Pandas DataFrame, set target feature and preprocess the data
 
 ```Python
-    data = pd.read_csv("./examples/datasets/housing.csv")
-    target = "median_house_value"
+    data = pd.read_csv("data/insurance.csv")
+    target = "charges"
 
     # Data Preprocessing
-    data['total_bedrooms'].fillna(data['total_bedrooms'].mean(), inplace=True)
+    data = data.apply(pd.to_numeric, errors='ignore')
     data = pd.get_dummies(data, drop_first=True)
-    data = data[data[target].notna()]
 
     # Data Split
     X, y = data.drop(target, axis=1).values, data[target].values
@@ -48,8 +47,7 @@ Import a Regression method. For example, Gradient Boosting.
 Define args for the regressor as a python dict.
 
 ```Python
-    reg_args={"loss": "absolute_error"}
-    reg_args={}
+    reg_args={"loss": "absolute_error", "n_estimators": 300}
 ```
 
 Set test and training datasets and create a Embedded Interpreter Regressor, give args for the regressor method.
@@ -61,7 +59,7 @@ Set test and training datasets and create a Embedded Interpreter Regressor, give
     eiReg = EmbeddedInterpreter(GradientBoostingRegressor,
                                 n_buckets=n_buckets,
                                 bucketing_method=bucketing_method,
-                                reg_args={"loss": "absolute_error"},
+                                reg_args=reg_args,
                                 max_iter=4000, lossfn="MSE",
                                 min_dloss=0.0001, lr=0.005, precompute_rules=True)
 ```
@@ -79,14 +77,9 @@ Get prediction results with new data.
 
 ```Python
     y_pred = eiReg.predict(X_test)
-    r2 =r2_score(y_test, y_pred)
-    MAE =mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    MAE = mean_absolute_error(y_test, y_pred)
     print(r2, MAE)
 ```
 
 Finally you can get the rules used by the classifier to predict the data.
-
-```Python
-    eiReg.print_most_important_rules()
-    eiReg.rules_to_txt("examples/results/housing_rules.txt")
-```
