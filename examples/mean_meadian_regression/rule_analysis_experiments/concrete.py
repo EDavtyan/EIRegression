@@ -6,25 +6,18 @@ import pandas as pd
 import xgboost as xgb
 import os
 import json
+# from tqdm import tqdm
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, confusion_matrix
 from EIRegressor.model_optimizer import ModelOptimizer
 
 
-def execute(save_dir, n_buckets=3, i=None, bucketing_method="kmeans", statistic="median"):
+def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile", statistic="median"):
     # Load dataframe
-    data = pd.read_csv("/home/edgar.davtyan/projects/recla_v1/examples/datasets/movies.csv")
-    target = "gross"
-
-    # Data Clean
-    data.drop(['movie_title', 'color', 'director_name', 'actor_1_name',
-               'actor_2_name', 'actor_3_name', 'language', 'country', 'content_rating', 'aspect_ratio'], axis=1,
-              inplace=True)
-
-    # data = data[data[target].notna()]
-    data = data.dropna()
+    data = pd.read_csv("/examples/datasets/concrete_data.csv")
+    target = "concrete_compressive_strength"
+    data = data[data[target].notna()]
 
     X, y = data.drop(target, axis=1).values, data[target].values
     X_train, X_test, y_train, y_test = train_test_split(
@@ -82,8 +75,7 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations):
 
         for iteration in range(1, num_iterations + 1):
             # Construct the expected path for the results of this iteration
-            expected_result_path = os.path.join(save_dir, "rules",
-                                                f"rule_results_{n_buckets}_buckets_{iteration}_iterations.txt")
+            expected_result_path = os.path.join(save_dir, "rules", f"rule_results_{n_buckets}_buckets_{iteration}_iterations.txt")
 
             # Check if this experiment's results already exist
             if not os.path.exists(expected_result_path):
@@ -96,5 +88,5 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations):
 
 
 if __name__ == '__main__':
-    save_dir = "/Users/eddavtyan/Documents/XAI/Projects/EIRegression/examples/results/movies"  # Change this to your actual save directory
-    run_multiple_executions(save_dir, 3, 3)  # This will run the execute function for 1-10 buckets, 50 times each
+    save_dir = "/Users/eddavtyan/Documents/XAI/Projects/EIRegression/examples/mean_meadian_regression/results/concrete"
+    run_multiple_executions(save_dir, 3, 3)
