@@ -38,7 +38,7 @@ class DSClassifierMultiQ(ClassifierMixin):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.device = torch.device(device)
-        self.device = torch.device("cpu")
+        # self.device = torch.device("cpu")
         if self.device.type == "cuda" or self.device.type == "mps":
             if not torch.cuda.is_available() and not torch.backends.mps.is_available():
                 print("GPU acceleration is not available, using CPU")

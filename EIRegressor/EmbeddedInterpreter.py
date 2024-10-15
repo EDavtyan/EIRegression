@@ -1,6 +1,7 @@
 # coding=utf-8
 import numpy as np
 import pandas as pd
+import os
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 from sklearn.pipeline import Pipeline
 
@@ -191,26 +192,88 @@ class EmbeddedInterpreter():
         """
         self.classifier.model.print_most_important_rules(
             classes=classes, threshold=threshold)
+        
+    def assign_buckets(self, y_values):
+        """
+        Assigns buckets to the provided y_values based on the bins determined during training.
+        :param y_values: Target values to assign buckets to
+        :return: Assigned bucket indices
+        """
+        return pd.cut(y_values, bins=self.bins, labels=False, include_lowest=True)
+    
+    def compute_weighted_accuracy(self, actual_values, predicted_buckets, similarity_matrices_dir):
+        """
+        Computes the Weighted Accuracy metric using the similarity matrices.
+        :param actual_values: Actual target values (y_test)
+        :param predicted_buckets: Predicted bucket indices from the classifier
+        :param similarity_matrices_dir: Directory where similarity matrices are stored
+        :return: Weighted Accuracy score
+        """
+        # Assign buckets to actual_values
+        actual_buckets = self.assign_buckets(actual_values)
+
+        # Load the similarity matrix corresponding to self.n_buckets
+        similarity_matrix_filename = f"similarity_matrix_{self.n_buckets}_buckets.npy"
+        similarity_matrix_path = os.path.join(similarity_matrices_dir, similarity_matrix_filename)
+        similarity_matrix = np.load(similarity_matrix_path)
+
+        # Ensure buckets are integers starting from 0
+        actual_buckets = np.array(actual_buckets).astype(int)
+        predicted_buckets = np.array(predicted_buckets).astype(int)
+
+        # Compute similarity scores for each sample
+        similarity_scores = []
+        for true_bucket, pred_bucket in zip(actual_buckets, predicted_buckets):
+            similarity = similarity_matrix[true_bucket, pred_bucket]
+            similarity_scores.append(similarity)
+
+        # Compute Weighted Accuracy
+        weighted_accuracy = np.mean(similarity_scores)
+        return weighted_accuracy
 
     def evaluate_classifier(self, X_test, y_test):
         """
-            Evaluates the classifier using the test data
-            :param X_test: Features for test
-            :param y_test: Labels of features
-            :return: F1 score macro and accuracy score
+        Evaluates the classifier using the test data
+        :param X_test: Features for test
+        :param y_test: Labels of features
+        :return: Accuracy score, F1 macro score, and confusion matrix
         """
-        bins = []
-        if len(self.bins) == 3:
-            bins = np.append(int(min(y_test) - 1), np.append(self.bins[1], int(max(y_test) + 1)))
-        else:
-            bins = np.append(
-                min(y_test) - 1, np.append(self.bins[1:-1], max(y_test) + 1))
-        y_test = pd.cut(y_test, bins, labels=False)
+        y_test_buckets = self.assign_buckets(y_test)
         y_pred = self.classifier.predict(X_test)
-        f1_macro = f1_score(y_test, y_pred, average='macro')
-        acc = accuracy_score(y_test, y_pred)
-        cm = confusion_matrix(y_test, y_pred)
+        f1_macro = f1_score(y_test_buckets, y_pred, average='macro')
+        acc = accuracy_score(y_test_buckets, y_pred)
+        cm = confusion_matrix(y_test_buckets, y_pred)
         return acc, f1_macro, cm
+    
+    def compute_weighted_accuracy(self, actual_values, predicted_buckets, similarity_matrices_dir):
+        """
+        Computes the Weighted Accuracy metric using the similarity matrices.
+        :param actual_values: Actual target values (y_test)
+        :param predicted_buckets: Predicted bucket indices from the classifier
+        :param similarity_matrices_dir: Directory where similarity matrices are stored
+        :return: Weighted Accuracy score
+        """
+        # Assign buckets to actual_values
+        actual_buckets = self.assign_buckets(actual_values)
+
+        # Load the similarity matrix corresponding to self.n_buckets
+        similarity_matrix_filename = f"XGBRegressor_concrete_3_breaks_{self.n_buckets}_buckets.npy"
+        similarity_matrix_path = os.path.join(similarity_matrices_dir, similarity_matrix_filename)
+        similarity_matrix = np.load(similarity_matrix_path)
+
+        # Ensure buckets are integers starting from 0
+        actual_buckets = np.array(actual_buckets).astype(int)
+        predicted_buckets = np.array(predicted_buckets).astype(int)
+
+        # Compute similarity scores for each sample
+        similarity_scores = []
+        for true_bucket, pred_bucket in zip(actual_buckets, predicted_buckets):
+            similarity = similarity_matrix[true_bucket, pred_bucket]
+            similarity_scores.append(similarity)
+
+        # Compute Weighted Accuracy
+        weighted_accuracy = np.mean(similarity_scores)
+        return weighted_accuracy
 
     def rules_to_txt(self, filename, classes=None, threshold=0.2, results={}):
         """
