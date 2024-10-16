@@ -3,7 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import argparse
-from organize_rules import organize_files_by_buckets
+
+from .organize_rules import organize_files_by_buckets
 
 
 def compute_iou(rules1, rules2, top_k):
@@ -55,6 +56,72 @@ def calculate_matrix(file_path, top_k):
                 iou_matrix[i, j] = compute_iou(rules_per_class[class1], rules_per_class[class2], top_k)
 
     return iou_matrix, classes
+
+def setup_directories(out_base):
+    if not os.path.exists(out_base):
+        os.makedirs(out_base)
+    matrices_dir = os.path.join(out_base, "matrices")
+    images_dir = os.path.join(out_base, "images")
+    os.makedirs(matrices_dir, exist_ok=True)
+    os.makedirs(images_dir, exist_ok=True)
+    return matrices_dir, images_dir
+
+
+def process_bucket_directory(bucket_directory_path, top_k):
+    matrices = []
+    class_labels = None
+    for filename in os.listdir(bucket_directory_path):
+        file_path = os.path.join(bucket_directory_path, filename)
+        if os.path.isfile(file_path):
+            matrix, classes = calculate_matrix(file_path, top_k)
+            if matrix is not None:
+                matrices.append(matrix)
+                if class_labels is None:
+                    class_labels = classes
+    return matrices, class_labels
+
+
+def save_matrix(matrix, output_path):
+    np.save(output_path, matrix)
+    # print(f"Matrix saved to {output_path}")
+
+
+def plot_heatmap(matrix, class_labels, title, image_path):
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(matrix, annot=True, fmt=".2f", xticklabels=class_labels, yticklabels=class_labels, cmap='viridis')
+    plt.title(title)
+    plt.xlabel("Buckets/Classes")
+    plt.ylabel("Buckets/Classes")
+    plt.tight_layout()
+    plt.savefig(image_path)
+    plt.close()
+    # print(f"Heatmap saved to {image_path}")
+
+
+def process_rule_similarities(rules_dir, dataset_name, out_base, top_k=5):
+    # Setup output directories
+    matrices_dir, images_dir = setup_directories(out_base)
+
+    # Organize files by buckets
+    organize_files_by_buckets(rules_dir)
+
+    # Process each bucket directory
+    for i in range(2, len(os.listdir(rules_dir)) + 2):
+        bucket_directory_path = os.path.join(rules_dir, f"{i}_buckets")
+        if os.path.exists(bucket_directory_path):
+            matrices, class_labels = process_bucket_directory(bucket_directory_path, top_k)
+            
+            if matrices:
+                avg_matrix = np.mean(matrices, axis=0)
+                title = f"Average Rule Similarity (Top {top_k} rules) - on {dataset_name} ({i} Buckets)"
+                matrix_filename = f"{dataset_name}_{i}_buckets.npy"
+                image_filename = f"{dataset_name}_{i}_buckets.png"
+                
+                # Save the matrix
+                save_matrix(avg_matrix, os.path.join(matrices_dir, matrix_filename))
+                
+                # Plot and save the heatmap
+                plot_heatmap(avg_matrix, class_labels, title, os.path.join(images_dir, image_filename))
 
 
 def main(directory_path, top_k, title, out):

@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append('/Users/ed/Documents/XAI/Projects/EIRegression')
+sys.path.append('/home/davtyan.edd/projects/EIRegression')
 
 from movies import run_multiple_executions as movies_example
 from housing import run_multiple_executions as housing_example

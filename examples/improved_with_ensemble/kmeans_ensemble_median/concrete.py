@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/Users/ed/Documents/XAI/Projects/EIRegression')
+sys.path.append('/home/davtyan.edd/projects/EIRegression')
 
 from EIRegressor.EmbeddedInterpreterEnsemble import EmbeddedInterpreterEnsemble
 import pandas as pd

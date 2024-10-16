@@ -1,5 +1,55 @@
+import os
+import re
 import pandas as pd
 import numpy as np
+
+os.chdir('/home/davtyan.edd/projects/EIRegression/')
+
+def compute_weighted_accuracy(actual_values, predicted_buckets, bins, n_buckets, similarity_matrices_dir):
+    """
+    Computes the Weighted Accuracy metric using the similarity matrices.
+    :param actual_values: Actual target values (y_test)
+    :param predicted_buckets: Predicted bucket indices from the classifier
+    :param bins: Bins used for bucketing the data
+    :param n_buckets: Number of buckets
+    :param similarity_matrices_dir: Directory where similarity matrices are stored
+    :return: Weighted Accuracy score
+    """
+    # Assign buckets to actual_values
+    min_value, max_value = actual_values.min(), actual_values.max()
+    extended_bins = [min(min_value, bins[0])] + list(bins[1:-1]) + [max(max_value, bins[-1])]
+    actual_buckets = pd.cut(actual_values, bins=extended_bins, labels=False, include_lowest=True)
+
+    # Define a pattern to match only the n_buckets part of the filename
+    pattern = re.compile(rf".*_{n_buckets}_buckets\.npy$")
+
+    # Search for the file in the similarity_matrices_dir directory
+    similarity_matrix_filename = next(
+        (f for f in os.listdir(similarity_matrices_dir) if pattern.match(f)), None
+    )
+    
+    if not similarity_matrix_filename:
+        raise FileNotFoundError(
+            f"No similarity matrix found for {n_buckets} buckets in {similarity_matrices_dir}"
+        )
+    
+    similarity_matrix_path = os.path.join(similarity_matrices_dir, similarity_matrix_filename)
+    similarity_matrix = np.load(similarity_matrix_path)
+
+    # Ensure buckets are integers starting from 0
+    actual_buckets = np.array(actual_buckets).astype(int)
+    predicted_buckets = np.array(predicted_buckets).astype(int)
+
+    # Compute similarity scores for each sample
+    similarity_scores = []
+    for true_bucket, pred_bucket in zip(actual_buckets, predicted_buckets):
+        similarity = similarity_matrix[true_bucket, pred_bucket]
+        similarity_scores.append(similarity)
+
+    # Compute Weighted Accuracy
+    weighted_accuracy = np.mean(similarity_scores)
+    return weighted_accuracy
+
 
 def replace_nan_median(matrix: np.ndarray, medians: np.ndarray = None) -> np.ndarray:
     """

@@ -1,6 +1,7 @@
 # coding=utf-8
 import numpy as np
 import pandas as pd
+import os
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 from sklearn.pipeline import Pipeline
 
@@ -191,25 +192,29 @@ class EmbeddedInterpreter():
         """
         self.classifier.model.print_most_important_rules(
             classes=classes, threshold=threshold)
+        
+    def assign_buckets(self, y_values):
+        """
+        Assigns buckets to the provided y_values based on the bins determined during training.
+        :param y_values: Target values to assign buckets to
+        :return: Assigned bucket indices
+        """
+        min_value, max_value = y_values.min(), y_values.max()
+        extended_bins = [min(min_value, self.bins[0])] + list(self.bins[1:-1]) + [max(max_value, self.bins[-1])]
+        return pd.cut(y_values, bins=extended_bins, labels=False, include_lowest=True)
 
     def evaluate_classifier(self, X_test, y_test):
         """
-            Evaluates the classifier using the test data
-            :param X_test: Features for test
-            :param y_test: Labels of features
-            :return: F1 score macro and accuracy score
+        Evaluates the classifier using the test data
+        :param X_test: Features for test
+        :param y_test: Labels of features
+        :return: Accuracy score, F1 macro score, and confusion matrix
         """
-        bins = []
-        if len(self.bins) == 3:
-            bins = np.append(int(min(y_test) - 1), np.append(self.bins[1], int(max(y_test) + 1)))
-        else:
-            bins = np.append(
-                min(y_test) - 1, np.append(self.bins[1:-1], max(y_test) + 1))
-        y_test = pd.cut(y_test, bins, labels=False)
+        y_test_buckets = self.assign_buckets(y_test)
         y_pred = self.classifier.predict(X_test)
-        f1_macro = f1_score(y_test, y_pred, average='macro')
-        acc = accuracy_score(y_test, y_pred)
-        cm = confusion_matrix(y_test, y_pred)
+        f1_macro = f1_score(y_test_buckets, y_pred, average='macro')
+        acc = accuracy_score(y_test_buckets, y_pred)
+        cm = confusion_matrix(y_test_buckets, y_pred)
         return acc, f1_macro, cm
 
     def rules_to_txt(self, filename, classes=None, threshold=0.2, results={}):
