@@ -3,7 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import argparse
-from organize_rules import organize_files_by_buckets
+
+from .organize_rules import organize_files_by_buckets
 
 
 def compute_iou(rules1, rules2, top_k):
@@ -82,7 +83,7 @@ def process_bucket_directory(bucket_directory_path, top_k):
 
 def save_matrix(matrix, output_path):
     np.save(output_path, matrix)
-    print(f"Matrix saved to {output_path}")
+    # print(f"Matrix saved to {output_path}")
 
 
 def plot_heatmap(matrix, class_labels, title, image_path):
@@ -94,7 +95,7 @@ def plot_heatmap(matrix, class_labels, title, image_path):
     plt.tight_layout()
     plt.savefig(image_path)
     plt.close()
-    print(f"Heatmap saved to {image_path}")
+    # print(f"Heatmap saved to {image_path}")
 
 
 def process_rule_similarities(rules_dir, dataset_name, out_base, top_k=5):
