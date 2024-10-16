@@ -3,7 +3,7 @@ import os
 import json
 import sys
 
-sys.path.append('/Users/ed/Documents/XAI/Projects/EIRegression')
+sys.path.append('/home/davtyan.edd/projects/EIRegression')
 
 from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 from EIRegressor.model_optimizer import ModelOptimizer

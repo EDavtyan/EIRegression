@@ -7,7 +7,7 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 from EIRegressor.model_optimizer import ModelOptimizer
 
-sys.path.append('/Users/ed/Documents/XAI/Projects/EIRegression')
+sys.path.append('/home/davtyan.edd/projects/EIRegression')
 
 
 def execute(save_dir, n_buckets=3, i=None, bucketing_method="kmeans", statistic="median"):

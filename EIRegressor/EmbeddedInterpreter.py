@@ -1,4 +1,5 @@
 # coding=utf-8
+import re
 import numpy as np
 import pandas as pd
 import os
@@ -199,37 +200,9 @@ class EmbeddedInterpreter():
         :param y_values: Target values to assign buckets to
         :return: Assigned bucket indices
         """
-        return pd.cut(y_values, bins=self.bins, labels=False, include_lowest=True)
-    
-    def compute_weighted_accuracy(self, actual_values, predicted_buckets, similarity_matrices_dir):
-        """
-        Computes the Weighted Accuracy metric using the similarity matrices.
-        :param actual_values: Actual target values (y_test)
-        :param predicted_buckets: Predicted bucket indices from the classifier
-        :param similarity_matrices_dir: Directory where similarity matrices are stored
-        :return: Weighted Accuracy score
-        """
-        # Assign buckets to actual_values
-        actual_buckets = self.assign_buckets(actual_values)
-
-        # Load the similarity matrix corresponding to self.n_buckets
-        similarity_matrix_filename = f"similarity_matrix_{self.n_buckets}_buckets.npy"
-        similarity_matrix_path = os.path.join(similarity_matrices_dir, similarity_matrix_filename)
-        similarity_matrix = np.load(similarity_matrix_path)
-
-        # Ensure buckets are integers starting from 0
-        actual_buckets = np.array(actual_buckets).astype(int)
-        predicted_buckets = np.array(predicted_buckets).astype(int)
-
-        # Compute similarity scores for each sample
-        similarity_scores = []
-        for true_bucket, pred_bucket in zip(actual_buckets, predicted_buckets):
-            similarity = similarity_matrix[true_bucket, pred_bucket]
-            similarity_scores.append(similarity)
-
-        # Compute Weighted Accuracy
-        weighted_accuracy = np.mean(similarity_scores)
-        return weighted_accuracy
+        min_value, max_value = y_values.min(), y_values.max()
+        extended_bins = [min(min_value, self.bins[0])] + list(self.bins[1:-1]) + [max(max_value, self.bins[-1])]
+        return pd.cut(y_values, bins=extended_bins, labels=False, include_lowest=True)
 
     def evaluate_classifier(self, X_test, y_test):
         """
@@ -256,8 +229,19 @@ class EmbeddedInterpreter():
         # Assign buckets to actual_values
         actual_buckets = self.assign_buckets(actual_values)
 
-        # Load the similarity matrix corresponding to self.n_buckets
-        similarity_matrix_filename = f"XGBRegressor_concrete_3_breaks_{self.n_buckets}_buckets.npy"
+        # Define a pattern to match only the n_buckets part of the filename
+        pattern = re.compile(rf".*_{self.n_buckets}_buckets\.npy$")
+
+        # Search for the file in the similarity_matrices_dir directory
+        similarity_matrix_filename = next(
+            (f for f in os.listdir(similarity_matrices_dir) if pattern.match(f)), None
+        )
+        
+        if not similarity_matrix_filename:
+            raise FileNotFoundError(
+                f"No similarity matrix found for {self.n_buckets} buckets in {similarity_matrices_dir}"
+            )
+        
         similarity_matrix_path = os.path.join(similarity_matrices_dir, similarity_matrix_filename)
         similarity_matrix = np.load(similarity_matrix_path)
 
