@@ -4,6 +4,7 @@ import pandas as pd
 import os
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 from sklearn.pipeline import Pipeline
+import torch
 
 from .dsgd.DSClassifierMultiQ import DSClassifierMultiQ
 from .dsgd.DSRule import DSRule
@@ -73,7 +74,7 @@ class EmbeddedInterpreter():
                     optimized_regressor = self.optimizer.optimize(
                         regressor_pipeline, self.hp_grids[i], bucket_X, bucket_y,
                         scoring='r2',  # Set scoring to a regression metric
-                        cv=5  # Or another value, possibly passed through optimizer_settings
+                        cv=3  # Or another value, possibly passed through optimizer_settings
                     )
                     self.regressors[i] = optimized_regressor
                 else:
@@ -258,3 +259,36 @@ class EmbeddedInterpreter():
             results[f"class{key}"] = top_scores
 
         return results
+    
+    def compute_similarity(self, x, y_true, threshold=0.2):
+        """
+        Compute the similarity between the activated rules for input x and the most important rules for the actual class y_true.
+        Similarity is defined as the proportion of the intersection between these two rule sets over the union.
+        :param x: Input sample (feature vector)
+        :param y_true: Actual class label (integer index)
+        :param threshold: Threshold for important rules
+        :return: Similarity score
+        """
+        # Get the activated rules for x
+        rules, preds = self.classifier.model.get_rules_by_instance(x)
+        # Represent the activated rules as a set of their string representations
+        activated_rules_set = set([str(pred) for pred in preds])
+
+        # Get the most important rules for y_true
+        important_rules_dict = self.classifier.model.find_most_important_rules(classes=[y_true], threshold=threshold)
+        important_rules_list = important_rules_dict.get(y_true, [])
+        # The important rules are stored as tuples; the third element is the rule's caption (string representation)
+        important_rules_set = set([rule_info[2] for rule_info in important_rules_list])
+
+        # Compute the intersection and union of the two rule sets
+        intersection = activated_rules_set & important_rules_set
+        # union = activated_rules_set | important_rules_set
+        union = important_rules_set
+
+        # Compute the similarity as the proportion of intersection over union
+        if len(union) == 0:
+            similarity = 0.0
+        else:
+            similarity = len(intersection) / len(union)
+
+        return similarity

@@ -37,7 +37,8 @@ def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile", single_r
         'regressor__max_depth': [10, 20, 30],
         'regressor__min_samples_split': [2, 5, 10],
         'regressor__min_samples_leaf': [1, 2, 4],
-        'regressor__bootstrap': [True, False]
+        'regressor__bootstrap': [True],
+        'regressor__n_jobs': [-1]
     }
 
     regressor_default_args = {
@@ -92,7 +93,7 @@ def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile", single_r
 
 def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name, single_rules_breaks=3):
     os.makedirs(save_dir, exist_ok=True)
-    all_results_file_path = os.path.join(save_dir, f"results_{num_buckets}_buckets_{num_iterations}_iterations.json")
+    all_results_file_path = os.path.join(save_dir, f"{dataset_name}_results_{num_buckets}_buckets_{num_iterations}_iterations.json")
 
     all_results = {}
     # Check if the consolidated results file exists and load it
@@ -105,8 +106,7 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name,
 
         for iteration in range(1, num_iterations + 1):
             # Construct the expected path for the results of this iteration
-            expected_result_path = os.path.join(save_dir, "rules",
-                                                f"{dataset_name}_results_{num_buckets}_buckets_{num_iterations}_iterations.json")
+            expected_result_path = os.path.join(save_dir, "rules", f"rule_results_{n_buckets}_buckets_{iteration}_iterations.txt")
 
             # Check if this experiment's results already exist
             if not os.path.exists(expected_result_path):
@@ -124,3 +124,8 @@ if __name__ == '__main__':
                             num_buckets=10,
                             num_iterations=50,
                             dataset_name='delta_elevators_3_breaks')
+
+    print("\n" + "="*47)
+    print("✨🎉   Thank you for using this program!   🎉✨")
+    print("        🚀 Program executed successfully 🚀")
+    print("="*47 + "\n")
