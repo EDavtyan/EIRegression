@@ -38,8 +38,8 @@ def compute_similarity_metrics(eiReg, X, y, y_true, n_buckets, threshold=0.2):
         pred_counts[y_pred] += 1
 
 
-        similarity = 1 if y_pred == y_actual else eiReg.compute_similarity(x_sample, y_actual, threshold=threshold)
-        # similarity = eiReg.compute_similarity(x_sample, y_actual, threshold=threshold)
+        similarity = 1 if y_pred == y_actual else eiReg.compute_similarity(x_sample, y_actual, threshold=threshold, include_rule_coverage=True)
+        # similarity = eiReg.compute_similarity(x_sample, y_actual, threshold=threshold, include_rule_coverage=True)
         similarity_matrix[y_actual, y_pred] += similarity
 
         similarity_scores.append(similarity)
@@ -56,7 +56,7 @@ def compute_similarity_metrics(eiReg, X, y, y_true, n_buckets, threshold=0.2):
     return average_similarity, similarity_matrix
 
 def plot_similarity_heatmap(average_similarity_matrix, n_buckets, save_dir):
-    average_similarity_matrix_plot_dir = os.path.join(save_dir, "rule_similarities_V2/heat_maps")
+    average_similarity_matrix_plot_dir = os.path.join(save_dir, "rule_similarities_V3_1/heat_maps")
 
     plt.figure(figsize=(10, 8))
     sns.heatmap(average_similarity_matrix, annot=True, fmt=".2f", cmap='viridis')
@@ -175,7 +175,7 @@ def compute_and_save_average_similarity_matrix(save_dir, bucket_results, n_bucke
     average_similarity_matrix = np.mean(similarity_matrices, axis=0)
 
     # Save the average similarity matrix
-    average_similarity_matrix_path = os.path.join(save_dir, "rule_similarities_V2/matricies", f"average_similarity_matrix_{n_buckets}_buckets.npy")
+    average_similarity_matrix_path = os.path.join(save_dir, "rule_similarities_V3_1/matricies", f"average_similarity_matrix_{n_buckets}_buckets.npy")
     os.makedirs(os.path.dirname(average_similarity_matrix_path), exist_ok=True)
     np.save(average_similarity_matrix_path, average_similarity_matrix)
 

@@ -94,6 +94,8 @@ class EmbeddedInterpreter():
                     stat = np.mean(bucket_y)
                 self.bucket_statistics.append(stat)
 
+        # Compute the coverage for each rule
+        self.compute_rule_coverage(X_train)
 
     def predict(self, X_test, return_buckets=False):
         """
@@ -260,35 +262,79 @@ class EmbeddedInterpreter():
 
         return results
     
-    def compute_similarity(self, x, y_true, threshold=0.2):
+    def compute_similarity(self, x, y_true, threshold=0.2, include_rule_coverage=False):
         """
         Compute the similarity between the activated rules for input x and the most important rules for the actual class y_true.
         Similarity is defined as the proportion of the intersection between these two rule sets over the union.
+        When include_rule_coverage is True, computes Weighted Jaccard Similarity using rule coverage.
         :param x: Input sample (feature vector)
         :param y_true: Actual class label (integer index)
         :param threshold: Threshold for important rules
+        :param include_rule_coverage: Flag to include rule coverage in similarity computation
         :return: Similarity score
         """
+        # # Convert x to DataFrame if necessary
+        # if self.column_names is not None:
+        #     x_df = pd.DataFrame([x], columns=self.column_names)
+        # else:
+        # x_df = pd.DataFrame([x])
+
         # Get the activated rules for x
         rules, preds = self.classifier.model.get_rules_by_instance(x)
-        # Represent the activated rules as a set of their string representations
-        activated_rules_set = set([str(pred) for pred in preds])
+        # 'preds' are the activated rules (DSRule instances)
+        activated_rules_set = set(preds)
 
         # Get the most important rules for y_true
         important_rules_dict = self.classifier.model.find_most_important_rules(classes=[y_true], threshold=threshold)
         important_rules_list = important_rules_dict.get(y_true, [])
-        # The important rules are stored as tuples; the third element is the rule's caption (string representation)
-        important_rules_set = set([rule_info[2] for rule_info in important_rules_list])
+        # Build a mapping from rule captions to DSRule objects
+        rule_caption_to_rule = {str(rule): rule for rule in self.classifier.model.preds}
+        # Get the DSRule objects for the important rules
+        important_rules_set = set()
+        for rule_info in important_rules_list:
+            rule_caption = rule_info[2]  # Rule caption
+            rule_obj = rule_caption_to_rule.get(rule_caption)
+            if rule_obj:
+                important_rules_set.add(rule_obj)
 
-        # Compute the intersection and union of the two rule sets
+        # Compute the intersection and union of the rule sets
         intersection = activated_rules_set & important_rules_set
+        union = activated_rules_set
         # union = activated_rules_set | important_rules_set
-        union = important_rules_set
 
-        # Compute the similarity as the proportion of intersection over union
-        if len(union) == 0:
-            similarity = 0.0
+        if include_rule_coverage:
+            # Compute the Weighted Jaccard Similarity
+            # Sum the coverage of overlapping rules (intersection)
+            overlap_coverage = sum(rule.coverage for rule in intersection)
+            # Sum the coverage of all rules in the union
+            total_coverage = sum(rule.coverage for rule in union)
+            # Compute similarity, handling division by zero
+            if total_coverage > 0:
+                similarity = overlap_coverage / total_coverage
+            else:
+                similarity = 0.0
         else:
-            similarity = len(intersection) / len(union)
+            # Original similarity calculation (unweighted)
+            if len(important_rules_set) == 0:
+                similarity = 0.0
+            else:
+                similarity = len(intersection) / len(important_rules_set)
 
         return similarity
+
+    def compute_rule_coverage(self, X_data):
+        """
+        Computes and updates the coverage for each rule in the classifier model.
+        :param X_data: Training data as a NumPy array.
+        """
+        # Convert X_data to DataFrame if column names are available
+        # if self.column_names is not None:
+        #     X_df = pd.DataFrame(X_data, columns=self.column_names)
+        # else:
+        X_df = pd.DataFrame(X_data)
+
+        # Iterate over all rules and compute coverage
+        for rule in self.classifier.model.preds:
+            # Apply rule to X_df to get a boolean array indicating where the rule applies
+            # Compute coverage as the sum of True values in the boolean array
+            rule.coverage = X_df.apply(rule, axis=1).sum()
