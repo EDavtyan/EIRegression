@@ -1,5 +1,8 @@
 # run_all_experiments.py
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 import os
 import sys
 import numpy as np
@@ -35,73 +38,74 @@ from movies import run_multiple_executions as run_movies
 
 NUM_BUCKETS=10
 NUM_ITERATIONS=25
+SAVE_DIR = "examples/rule_analysis_experiments/sim_def_V3_2/results_fixed"
 
 def main():
     # Bank32NH Dataset
-    print("Starting experiments for bank32NH dataset")
-    dataset_name = "bank32NH_3_breaks"
-    save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
-        dataset_name
-    )
-    run_bank32NH(
-        save_dir=save_dir,
-        num_buckets=NUM_BUCKETS,
-        num_iterations=NUM_ITERATIONS,
-        dataset_name=dataset_name
-    )
-    print("Finished experiments for bank32NH dataset\n")
+    # print("Starting experiments for bank32NH dataset")
+    # dataset_name = "bank32NH_3_breaks"
+    # save_dir = os.path.join(
+    #     "examples/rule_analysis_experiments/sim_def_V3_2/results",
+    #     dataset_name
+    # )
+    # run_bank32NH(
+    #     save_dir=save_dir,
+    #     num_buckets=NUM_BUCKETS,
+    #     num_iterations=NUM_ITERATIONS,
+    #     dataset_name=dataset_name
+    # )
+    # print("Finished experiments for bank32NH dataset\n")
 
-    # Concrete Dataset
-    print("Starting experiments for concrete dataset")
-    dataset_name = "concrete_3_breaks"
-    save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
-        dataset_name
-    )
-    run_concrete(
-        save_dir=save_dir,
-        num_buckets=NUM_BUCKETS,
-        num_iterations=NUM_ITERATIONS,
-        dataset_name=dataset_name
-    )
-    print("Finished experiments for concrete dataset\n")
+    # # Concrete Dataset
+    # print("Starting experiments for concrete dataset")
+    # dataset_name = "concrete_3_breaks"
+    # save_dir = os.path.join(
+    #     "examples/rule_analysis_experiments/sim_def_V3_2/results",
+    #     dataset_name
+    # )
+    # run_concrete(
+    #     save_dir=save_dir,
+    #     num_buckets=NUM_BUCKETS,
+    #     num_iterations=NUM_ITERATIONS,
+    #     dataset_name=dataset_name
+    # )
+    # print("Finished experiments for concrete dataset\n")
 
-    # Delta Elevators Dataset
-    print("Starting experiments for delta_elevators dataset")
-    dataset_name = "delta_elevators_3_breaks"
-    save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
-        dataset_name
-    )
-    run_delta_elevators(
-        save_dir=save_dir,
-        num_buckets=NUM_BUCKETS,
-        num_iterations=NUM_ITERATIONS,
-        dataset_name=dataset_name
-    )
-    print("Finished experiments for delta_elevators dataset\n")
+    # # Delta Elevators Dataset
+    # print("Starting experiments for delta_elevators dataset")
+    # dataset_name = "delta_elevators_3_breaks"
+    # save_dir = os.path.join(
+    #     "examples/rule_analysis_experiments/sim_def_V3_2/results",
+    #     dataset_name
+    # )
+    # run_delta_elevators(
+    #     save_dir=save_dir,
+    #     num_buckets=NUM_BUCKETS,
+    #     num_iterations=NUM_ITERATIONS,
+    #     dataset_name=dataset_name
+    # )
+    # print("Finished experiments for delta_elevators dataset\n")
 
     # House_16 Dataset
-    print("Starting experiments for house_16 dataset")
-    dataset_name = "house_16_3_breaks"
-    save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
-        dataset_name
-    )
-    run_house_16(
-        save_dir=save_dir,
-        num_buckets=NUM_BUCKETS,
-        num_iterations=NUM_ITERATIONS,
-        dataset_name=dataset_name
-    )
-    print("Finished experiments for house_16 dataset\n")
+    # print("Starting experiments for house_16 dataset")
+    # dataset_name = "house_16_3_breaks"
+    # save_dir = os.path.join(
+    #     "examples/rule_analysis_experiments/sim_def_V3_2/results",
+    #     dataset_name
+    # )
+    # run_house_16(
+    #     save_dir=save_dir,
+    #     num_buckets=NUM_BUCKETS,
+    #     num_iterations=NUM_ITERATIONS,
+    #     dataset_name=dataset_name
+    # )
+    # print("Finished experiments for house_16 dataset\n")
 
     # Housing Dataset
     print("Starting experiments for housing dataset")
     dataset_name = "housing_3_breaks"
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
+        SAVE_DIR,
         dataset_name
     )
     run_housing(
@@ -116,7 +120,7 @@ def main():
     print("Starting experiments for insurance dataset")
     dataset_name = "insurance_3_breaks"
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
+        SAVE_DIR,
         dataset_name
     )
     run_insurance(
@@ -131,7 +135,7 @@ def main():
     print("Starting experiments for movies dataset")
     dataset_name = 'movies_3_breaks'
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
+        SAVE_DIR,
         dataset_name
     )
     run_movies(

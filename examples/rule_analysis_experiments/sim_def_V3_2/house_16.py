@@ -69,7 +69,10 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name,
     - single_rules_breaks (int): Number of breaks for single rules.
     """
     os.makedirs(save_dir, exist_ok=True)
-    all_results_file_path = os.path.join(save_dir, f"results_{num_buckets}_buckets_{num_iterations}_iterations.json")
+    all_results_file_path = os.path.join(
+        save_dir,
+        f"{dataset_name}_results_{num_buckets}_buckets_{num_iterations}_iterations.json"
+    )
 
     all_results = {}
     # Check if the consolidated results file exists and load it
@@ -157,7 +160,7 @@ if __name__ == '__main__':
     dataset_name = "house_16_3_breaks"
 
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2_total/results",
+        "examples/rule_analysis_experiments/sim_def_V3_2/results_fixed",
         dataset_name
     )
     run_multiple_executions(

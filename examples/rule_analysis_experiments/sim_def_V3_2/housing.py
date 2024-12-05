@@ -24,16 +24,6 @@ from examples.rule_analysis_experiments.sim_def_V3_2.utils import (
 
 
 def load_and_preprocess_housing():
-    """
-    Load and preprocess the housing dataset.
-
-    Returns:
-    - X_train (np.ndarray): Training feature matrix.
-    - X_test (np.ndarray): Testing feature matrix.
-    - y_train (np.ndarray): Training target vector.
-    - y_test (np.ndarray): Testing target vector.
-    - column_names (list): List of feature names.
-    """
     # Load dataset
     data = pd.read_csv("examples/datasets/housing.csv")
     target = "median_house_value"
@@ -43,9 +33,13 @@ def load_and_preprocess_housing():
     data = pd.get_dummies(data, drop_first=True)
     data = data[data[target].notna()]
 
+    # Ensure all data is numeric
+    data = data.apply(pd.to_numeric, errors='coerce')
+    data = data.dropna(axis=1, how='all')
+
     # Separate features and target
-    X = data.drop(target, axis=1).values
-    y = data[target].values
+    X = data.drop(target, axis=1).values.astype(np.float64)
+    y = data[target].values.astype(np.float64)
     column_names = data.drop(target, axis=1).columns.tolist()
 
     # Split the data
@@ -54,6 +48,7 @@ def load_and_preprocess_housing():
     )
 
     return X_train, X_test, y_train, y_test, column_names
+
 
 
 def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name):

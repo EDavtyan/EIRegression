@@ -150,8 +150,9 @@ if __name__ == '__main__':
     dataset_name = "concrete_3_breaks"
 
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2/results",
-        dataset_name
+        "examples/rule_analysis_experiments/sim_def_V3_2/results_fixed",
+        
+        
     )
     run_multiple_executions(
         save_dir=save_dir,

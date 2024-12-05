@@ -183,12 +183,12 @@ if __name__ == '__main__':
     dataset_name = "bank32NH_3_breaks"
 
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2_total/results",
+        "examples/rule_analysis_experiments/sim_def_V3_2/results_fixed",
         dataset_name
     )
     run_multiple_executions(
         save_dir=save_dir,
         num_buckets=10,
-        num_iterations=25,
+        num_iterations=15,
         dataset_name=dataset_name
     )

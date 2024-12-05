@@ -18,6 +18,7 @@ from EIRegressor.utils import compute_weighted_accuracy
 from rule_analysis.compare_rules import process_rule_similarities
 from examples.rule_analysis_experiments.sim_def_V3_2.utils import (
     compute_and_save_average_similarity_matrix,
+    determine_optimal_buckets,
     update_results_with_weighted_accuracy,
     execute
 )
@@ -37,7 +38,7 @@ def load_and_preprocess_delta_elevators():
     # Load domain file for column names
     domain_data = pd.read_csv(
         "examples/datasets/Elevators/delta_elevators.domain",
-        delim_whitespace=True, header=None
+        sep='\s+', header=None  # Updated delimiter
     )
     column_names = domain_data.iloc[:, 0].apply(lambda x: x.split()[0]).tolist()
 
@@ -50,11 +51,7 @@ def load_and_preprocess_delta_elevators():
     target = "Se"
 
     # Data Preprocessing
-    data = data.apply(pd.to_numeric, errors='ignore')
-
-    # One-hot encoding for categorical variables if necessary
-    # If the dataset contains categorical variables, uncomment the following lines
-    # data = pd.get_dummies(data, drop_first=True)
+    data = data.apply(pd.to_numeric, errors='coerce')
 
     # Separate features and target
     X = data.drop(target, axis=1).values
@@ -67,8 +64,7 @@ def load_and_preprocess_delta_elevators():
 
     return X_train, X_test, y_train, y_test, column_names
 
-
-def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name):
+def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name, min_samples_per_bucket=5):
     """
     Run multiple executions of the EI Regression model across different bucket counts and iterations.
 
@@ -96,8 +92,12 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations, dataset_name)
 
     # Load and preprocess data
     X_train, X_test, y_train, y_test, column_names = load_and_preprocess_delta_elevators()
+    dataset_size = len(y_test)
 
-    for n_buckets in range(2, num_buckets + 1):
+    optimal_buckets = determine_optimal_buckets(dataset_size, max_buckets=num_buckets,
+                                                min_samples_per_bucket=min_samples_per_bucket)
+
+    for n_buckets in range(2, optimal_buckets + 1):
         bucket_key = f"{n_buckets}_buckets"
         bucket_results = all_results.get(bucket_key, [])
 
@@ -170,12 +170,13 @@ if __name__ == '__main__':
     dataset_name = "delta_elevators_3_breaks"
 
     save_dir = os.path.join(
-        "examples/rule_analysis_experiments/sim_def_V3_2_total/results",
+        "examples/rule_analysis_experiments/sim_def_V3_2/results_fixed",
         dataset_name
     )
     run_multiple_executions(
         save_dir=save_dir,
         num_buckets=10,
-        num_iterations=25,
+        num_iterations=2
+        5,
         dataset_name=dataset_name
     )

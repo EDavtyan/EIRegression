@@ -1,3 +1,5 @@
+# EmbeddedInterpreter.py
+
 # coding=utf-8
 import numpy as np
 import pandas as pd
@@ -204,7 +206,14 @@ class EmbeddedInterpreter():
         """
         min_value, max_value = y_values.min(), y_values.max()
         extended_bins = [min(min_value, self.bins[0])] + list(self.bins[1:-1]) + [max(max_value, self.bins[-1])]
-        return pd.cut(y_values, bins=extended_bins, labels=False, include_lowest=True)
+        buckets = pd.cut(y_values, bins=extended_bins, labels=False, include_lowest=True)
+        
+        # Handle NaN assignments if any
+        if np.isnan(buckets).any():
+            print("Warning: Some samples could not be assigned to a bucket. Assigning them to the nearest bucket.")
+            buckets = buckets.fillna(method='ffill').fillna(method='bfill')
+
+        return buckets
 
     def evaluate_classifier(self, X_test, y_test):
         """

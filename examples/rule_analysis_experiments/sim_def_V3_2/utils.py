@@ -1,3 +1,5 @@
+# utils.py
+
 import os
 import numpy as np
 import pandas as pd
@@ -13,10 +15,15 @@ from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 from EIRegressor.utils import compute_weighted_accuracy
 
 
-def compute_similarity_metrics(eiReg, X, y, y_true, n_buckets, threshold=0.2):
-    # Assign buckets to y and y_true 
-    y_pred_buckets = eiReg.assign_buckets(y)
+def compute_similarity_metrics(eiReg, X, buck_pred, y_true, n_buckets, threshold=0.2):
+    # Assign buckets to y_true 
     y_true_buckets = eiReg.assign_buckets(y_true)
+
+    # Check for NaNs or unassigned buckets
+    if np.isnan(y_true_buckets).any():
+        print("Warning: Some y_true_buckets are NaN after assignment.")
+    if np.isnan(buck_pred).any():
+        print("Warning: Some buck_pred are NaN after assignment.")
 
     # Initialize similarity matrix and counters
     similarity_matrix = np.zeros((n_buckets, n_buckets))
@@ -27,28 +34,35 @@ def compute_similarity_metrics(eiReg, X, y, y_true, n_buckets, threshold=0.2):
     similarity_scores = []
 
     # For each test sample
-    for x_sample, y_pred, y_actual in zip(X, y_pred_buckets, y_true_buckets):
-        y_pred = int(y_pred)
-        y_actual = int(y_actual)
-
-        # Increment the count for the actual bucket
-        counts[y_actual] += 1
-
-        # Increment the count for the predicted bucket
-        pred_counts[y_pred] += 1
-
-
-        similarity = 1 if y_pred == y_actual else eiReg.compute_similarity(x_sample, y_actual, threshold=threshold, include_rule_coverage=True)
-        # similarity = eiReg.compute_similarity(x_sample, y_actual, threshold=threshold, include_rule_coverage=True)
+    for x_sample, y_pred, y_actual in zip(X, buck_pred, y_true_buckets):
+        if pd.isnull(y_pred) or pd.isnull(y_actual):
+            similarity = 0.0  # or handle appropriately
+            print(f"Warning: Sample with y_pred={y_pred}, y_actual={y_actual} has invalid bucket assignments.")
+        else:
+            y_pred = int(y_pred)
+            y_actual = int(y_actual)
+            # Increment counts
+            counts[y_actual] += 1
+            pred_counts[y_pred] += 1
+            # Compute similarity
+            similarity = 1 if y_pred == y_actual else eiReg.compute_similarity(
+                x_sample, y_actual, threshold=threshold, include_rule_coverage=True)
         similarity_matrix[y_actual, y_pred] += similarity
-
         similarity_scores.append(similarity)
+
+    # Log bucket distributions
+    for i in range(n_buckets):
+        num_true = (y_true_buckets == i).sum()
+        num_pred = (buck_pred == i).sum()
+        print(f"Bucket {i}: num_true={num_true}, num_pred={num_pred}")
 
     # Normalize the similarity matrix by the number of records for each predicted bucket
     for i in range(n_buckets):
         for j in range(n_buckets):
             if pred_counts[j] > 0:
                 similarity_matrix[i, j] /= pred_counts[j]
+            else:
+                similarity_matrix[i, j] = 0  # Ensure no division by zero
 
     # Compute average similarity
     average_similarity = np.mean(similarity_scores) if similarity_scores else 0.0
@@ -131,7 +145,7 @@ def execute(
 
     # Compute similarity scores and similarity matrix
     average_similarity, similarity_matrix = compute_similarity_metrics(
-        eiReg, X_test, y_pred, y_test, n_buckets, threshold=threshold
+        eiReg, X_test, buck_pred, y_test, n_buckets, threshold=threshold
     )
 
     top_uncertainties = eiReg.get_top_uncertainties()
@@ -205,6 +219,7 @@ def update_results_with_weighted_accuracy(save_dir, bucket_results, n_buckets):
         y_test = np.array(result['y_test'])
         buck_pred = np.array(result['buck_pred'])
         bins = result['bins']
+
         # Compute weighted accuracy
         weighted_accuracy = compute_weighted_accuracy(
             actual_values=y_test,
@@ -224,7 +239,7 @@ def update_results_with_weighted_accuracy(save_dir, bucket_results, n_buckets):
 def compute_and_save_average_similarity_matrix(save_dir, bucket_results, n_buckets):
     """
     Compute and save the average similarity matrix across all iterations.
-
+    
     Parameters:
     - save_dir (str): Directory to save the average similarity matrix and heatmap.
     - bucket_results (list): List of result dictionaries.
@@ -235,6 +250,7 @@ def compute_and_save_average_similarity_matrix(save_dir, bucket_results, n_bucke
         sim_matrix = np.array(result['Similarity Matrix'])
         if sim_matrix.size == 0:
             print(f"Warning: Empty Similarity Matrix found in result: {result}")
+            continue  # Skip appending empty matrices
         similarity_matrices.append(sim_matrix)
 
     if not similarity_matrices:
@@ -257,3 +273,6 @@ def compute_and_save_average_similarity_matrix(save_dir, bucket_results, n_bucke
 
     # Optionally, save a heatmap of the average similarity matrix
     plot_similarity_heatmap(average_similarity_matrix, n_buckets, save_dir)
+
+def determine_optimal_buckets(dataset_size, max_buckets=10, min_samples_per_bucket=5):
+    return min(max_buckets, max(2, dataset_size // min_samples_per_bucket))

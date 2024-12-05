@@ -1,0 +1,498 @@
+MSE: 42691611.200542636
+
+Accuracy: 0.7398190045248869
+
+F1: 0.7394658135648143
+
+Average Similarity: 0.830019631317509
+
+Confusion Matrix: [[78, 8, 0, 0, 0], [6, 68, 8, 0, 0], [0, 9, 54, 27, 0], [2, 4, 20, 52, 6], [2, 7, 7, 9, 75]]
+
+Similarity Matrix: [[0.8863636363636364, 0.031296658796257856, 0.0, 0.0, 0.0], [0.03042477658319063, 0.7083333333333334, 0.031791728271856314, 0.0, 0.0], [0.0, 0.03296690972458441, 0.6067415730337079, 0.1009148250021084, 0.0], [0.010573994786305396, 0.016683632009626474, 0.06954920447230027, 0.5909090909090909, 0.022272479377679306], [0.010626083999131845, 0.028221616173968952, 0.025038325233950026, 0.033104022459598904, 0.9259259259259259]]
+
+Uncertainties: {'class0': [0.016645647585392, 0.06634192913770676, 0.06684137135744095, 0.08405812829732895, 0.09488131105899811], 'class1': [0.016645647585392, 0.060116611421108246, 0.06634192913770676, 0.06684137135744095, 0.08405812829732895], 'class2': [0.016645647585392, 0.047459885478019714, 0.060116611421108246, 0.06634192913770676, 0.06684137135744095], 'class3': [0.047459885478019714, 0.06634192913770676, 0.06684137135744095, 0.08405812829732895, 0.09488131105899811], 'class4': [0.047459885478019714, 0.060116611421108246, 0.11681129038333893, 0.12881986796855927, 0.1320371925830841]}
+
+Most important rules
+-----------------------------
+
+---0---
+rule16: smoker_yes = 0.0
+probabilities_array:[0.31835726 0.32997635 0.30565727 0.02936347 0.         0.01664565]
+
+rule30: Positive age - 39.256, smoker_yes - 0.193
+probabilities_array:[0.30792663 0.30131567 0.         0.         0.27394643 0.11681129]
+
+rule72: Positive smoker_yes - 0.193, region_southwest - 0.246
+probabilities_array:[0.26535097 0.29012614 0.24280441 0.13537653 0.         0.06634193]
+
+rule68: Positive smoker_yes - 0.193, region_northwest - 0.246
+probabilities_array:[0.2694635  0.30404305 0.24359547 0.09883983 0.         0.08405813]
+
+rule70: Positive smoker_yes - 0.193, region_southeast - 0.272
+probabilities_array:[0.26307023 0.29729828 0.23302765 0.13976246 0.         0.06684137]
+
+rule4: bmi < 26.565
+probabilities_array:[0.23628265 0.14864732 0.13178371 0.38840497 0.         0.09488131]
+
+rule34: Positive age - 39.256, region_southeast - 0.272
+probabilities_array:[0.26347622 0.26254347 0.         0.03010863 0.10963847 0.33423316]
+
+rule8: children = 0.0
+probabilities_array:[0.2275375  0.01588156 0.         0.29246897 0.18139827 0.2827137 ]
+
+rule0: age < 29.830
+probabilities_array:[0.3931396  0.         0.         0.01493135 0.         0.591929  ]
+
+rule32: Positive age - 39.256, region_northwest - 0.246
+probabilities_array:[0.3099265  0.1797487  0.         0.00786876 0.01036474 0.4920913 ]
+
+rule36: Positive age - 39.256, region_southwest - 0.246
+probabilities_array:[0.24310316 0.2867437  0.         0.04862533 0.00644136 0.41508645]
+
+rule26: Positive age - 39.256, children - 1.121
+probabilities_array:[2.4698472e-01 0.0000000e+00 8.4813480e-05 4.3895330e-02 1.1730021e-01
+ 5.9173501e-01]
+
+rule44: Positive bmi - 30.660, region_northwest - 0.246
+probabilities_array:[0.21432303 0.         0.03814363 0.16429143 0.         0.5832419 ]
+
+rule52: Positive children - 1.121, smoker_yes - 0.193
+probabilities_array:[0.2712968  0.02671014 0.         0.0180113  0.00225179 0.68173   ]
+
+rule19: region_northwest = 1.0
+probabilities_array:[0.21342164 0.08270068 0.00753205 0.00999658 0.04078558 0.6455634 ]
+
+rule77: Negative region_northwest - 0.246, region_southwest - 0.246
+probabilities_array:[2.3176199e-01 3.5290867e-02 1.5763359e-04 9.1904349e-04 3.0946195e-02
+ 7.0092428e-01]
+
+rule42: Positive bmi - 30.660, smoker_yes - 0.193
+probabilities_array:[0.09007348 0.19499514 0.1044502  0.         0.3659746  0.24450655]
+
+rule54: Positive children - 1.121, region_northwest - 0.246
+probabilities_array:[0.14599405 0.09296776 0.         0.03123302 0.1602266  0.56957847]
+
+rule23: region_southwest = 1.0
+probabilities_array:[0.18331724 0.09158398 0.029665   0.         0.02547845 0.6699553 ]
+
+rule65: Negative sex_male - 0.484, region_southeast - 0.272
+probabilities_array:[0.12788928 0.19195779 0.         0.         0.14455147 0.53560144]
+
+rule59: Negative children - 1.121, region_southwest - 0.246
+probabilities_array:[0.09625187 0.         0.10762276 0.17430519 0.21991971 0.4019004 ]
+
+rule10: children = 2.0
+probabilities_array:[0.11262736 0.1495601  0.03137803 0.         0.17924298 0.5271916 ]
+
+rule75: Negative region_northwest - 0.246, region_southeast - 0.272
+probabilities_array:[0.21713491 0.00347445 0.01111935 0.01036001 0.         0.75791126]
+
+rule79: Negative region_southeast - 0.272, region_southwest - 0.246
+probabilities_array:[0.18702587 0.01489154 0.01797313 0.04400464 0.00446431 0.7316405 ]
+
+rule21: region_southeast = 1.0
+probabilities_array:[0.17652854 0.01009974 0.02537029 0.05596351 0.00482824 0.7272097 ]
+
+rule56: Positive children - 1.121, region_southeast - 0.272
+probabilities_array:[0.11057758 0.095994   0.00350519 0.16148055 0.05815298 0.5702897 ]
+
+
+---1---
+rule2: 39.256 < age < 48.681
+probabilities_array:[0.         0.5423033  0.33621463 0.         0.06136546 0.06011661]
+
+rule16: smoker_yes = 0.0
+probabilities_array:[0.31835726 0.32997635 0.30565727 0.02936347 0.         0.01664565]
+
+rule68: Positive smoker_yes - 0.193, region_northwest - 0.246
+probabilities_array:[0.2694635  0.30404305 0.24359547 0.09883983 0.         0.08405813]
+
+rule70: Positive smoker_yes - 0.193, region_southeast - 0.272
+probabilities_array:[0.26307023 0.29729828 0.23302765 0.13976246 0.         0.06684137]
+
+rule1: 29.830 < age < 39.256
+probabilities_array:[0.         0.43129024 0.00148346 0.         0.20429581 0.36293054]
+
+rule72: Positive smoker_yes - 0.193, region_southwest - 0.246
+probabilities_array:[0.26535097 0.29012614 0.24280441 0.13537653 0.         0.06634193]
+
+rule30: Positive age - 39.256, smoker_yes - 0.193
+probabilities_array:[0.30792663 0.30131567 0.         0.         0.27394643 0.11681129]
+
+rule27: Negative age - 39.256, children - 1.121
+probabilities_array:[0.00107861 0.28538895 0.24711111 0.13554585 0.2020556  0.12881987]
+
+rule9: children = 1.0
+probabilities_array:[0.00288609 0.3258281  0.28221112 0.00068932 0.12864572 0.2597397 ]
+
+rule28: Positive age - 39.256, sex_male - 0.484
+probabilities_array:[0.         0.36160195 0.050815   0.         0.20416118 0.3834219 ]
+
+rule34: Positive age - 39.256, region_southeast - 0.272
+probabilities_array:[0.26347622 0.26254347 0.         0.03010863 0.10963847 0.33423316]
+
+rule36: Positive age - 39.256, region_southwest - 0.246
+probabilities_array:[0.24310316 0.2867437  0.         0.04862533 0.00644136 0.41508645]
+
+rule42: Positive bmi - 30.660, smoker_yes - 0.193
+probabilities_array:[0.09007348 0.19499514 0.1044502  0.         0.3659746  0.24450655]
+
+rule4: bmi < 26.565
+probabilities_array:[0.23628265 0.14864732 0.13178371 0.38840497 0.         0.09488131]
+
+rule11: children = 3.0
+probabilities_array:[0.         0.12729895 0.19145031 0.23763466 0.3115789  0.1320372 ]
+
+rule32: Positive age - 39.256, region_northwest - 0.246
+probabilities_array:[0.3099265  0.1797487  0.         0.00786876 0.01036474 0.4920913 ]
+
+rule65: Negative sex_male - 0.484, region_southeast - 0.272
+probabilities_array:[0.12788928 0.19195779 0.         0.         0.14455147 0.53560144]
+
+rule67: Negative sex_male - 0.484, region_southwest - 0.246
+probabilities_array:[0.00655786 0.18224995 0.         0.06337006 0.13781768 0.6100045 ]
+
+rule10: children = 2.0
+probabilities_array:[0.11262736 0.1495601  0.03137803 0.         0.17924298 0.5271916 ]
+
+rule58: Positive children - 1.121, region_southwest - 0.246
+probabilities_array:[0.04591246 0.13816881 0.         0.04125593 0.07825013 0.6964126 ]
+
+rule56: Positive children - 1.121, region_southeast - 0.272
+probabilities_array:[0.11057758 0.095994   0.00350519 0.16148055 0.05815298 0.5702897 ]
+
+rule54: Positive children - 1.121, region_northwest - 0.246
+probabilities_array:[0.14599405 0.09296776 0.         0.03123302 0.1602266  0.56957847]
+
+
+---2---
+rule2: 39.256 < age < 48.681
+probabilities_array:[0.         0.5423033  0.33621463 0.         0.06136546 0.06011661]
+
+rule16: smoker_yes = 0.0
+probabilities_array:[0.31835726 0.32997635 0.30565727 0.02936347 0.         0.01664565]
+
+rule13: children = 5.0
+probabilities_array:[0.         0.00051895 0.31944022 0.45502058 0.         0.22502021]
+
+rule35: Negative age - 39.256, region_southeast - 0.272
+probabilities_array:[0.         0.00606602 0.29664665 0.19514033 0.2834765  0.21867049]
+
+rule31: Negative age - 39.256, smoker_yes - 0.193
+probabilities_array:[0.         0.         0.32343048 0.33329087 0.05059632 0.2926823 ]
+
+rule72: Positive smoker_yes - 0.193, region_southwest - 0.246
+probabilities_array:[0.26535097 0.29012614 0.24280441 0.13537653 0.         0.06634193]
+
+rule68: Positive smoker_yes - 0.193, region_northwest - 0.246
+probabilities_array:[0.2694635  0.30404305 0.24359547 0.09883983 0.         0.08405813]
+
+rule70: Positive smoker_yes - 0.193, region_southeast - 0.272
+probabilities_array:[0.26307023 0.29729828 0.23302765 0.13976246 0.         0.06684137]
+
+rule27: Negative age - 39.256, children - 1.121
+probabilities_array:[0.00107861 0.28538895 0.24711111 0.13554585 0.2020556  0.12881987]
+
+rule9: children = 1.0
+probabilities_array:[0.00288609 0.3258281  0.28221112 0.00068932 0.12864572 0.2597397 ]
+
+rule37: Negative age - 39.256, region_southwest - 0.246
+probabilities_array:[0.         0.00338012 0.2563101  0.2012674  0.30788845 0.2311539 ]
+
+rule3: age > 48.681
+probabilities_array:[0.         0.         0.19091599 0.37121722 0.39040688 0.04745989]
+
+rule33: Negative age - 39.256, region_northwest - 0.246
+probabilities_array:[0.         0.02310866 0.23850156 0.18402585 0.308202   0.24616195]
+
+rule11: children = 3.0
+probabilities_array:[0.         0.12729895 0.19145031 0.23763466 0.3115789  0.1320372 ]
+
+rule6: 30.660 < bmi < 34.756
+probabilities_array:[0.         0.00128572 0.30625468 0.         0.14724556 0.54521406]
+
+rule53: Negative children - 1.121, smoker_yes - 0.193
+probabilities_array:[0.01712625 0.02542413 0.17382428 0.25812733 0.26330099 0.2621971 ]
+
+rule4: bmi < 26.565
+probabilities_array:[0.23628265 0.14864732 0.13178371 0.38840497 0.         0.09488131]
+
+rule55: Negative children - 1.121, region_northwest - 0.246
+probabilities_array:[0.02022344 0.         0.195729   0.14578316 0.19184569 0.44641873]
+
+rule57: Negative children - 1.121, region_southeast - 0.272
+probabilities_array:[0.04928634 0.         0.17946318 0.05750052 0.15986632 0.5538836 ]
+
+rule42: Positive bmi - 30.660, smoker_yes - 0.193
+probabilities_array:[0.09007348 0.19499514 0.1044502  0.         0.3659746  0.24450655]
+
+rule12: children = 4.0
+probabilities_array:[0.         0.06098318 0.11533633 0.46608925 0.         0.35759124]
+
+rule59: Negative children - 1.121, region_southwest - 0.246
+probabilities_array:[0.09625187 0.         0.10762276 0.17430519 0.21991971 0.4019004 ]
+
+rule25: Negative age - 39.256, bmi - 30.660
+probabilities_array:[0.04502805 0.02662982 0.09537984 0.         0.40694752 0.4260148 ]
+
+rule66: Positive sex_male - 0.484, region_southwest - 0.246
+probabilities_array:[0.00705087 0.         0.12873425 0.10315374 0.09373603 0.667325  ]
+
+
+---3---
+rule3: age > 48.681
+probabilities_array:[0.         0.         0.19091599 0.37121722 0.39040688 0.04745989]
+
+rule13: children = 5.0
+probabilities_array:[0.         0.00051895 0.31944022 0.45502058 0.         0.22502021]
+
+rule4: bmi < 26.565
+probabilities_array:[0.23628265 0.14864732 0.13178371 0.38840497 0.         0.09488131]
+
+rule12: children = 4.0
+probabilities_array:[0.         0.06098318 0.11533633 0.46608925 0.         0.35759124]
+
+rule31: Negative age - 39.256, smoker_yes - 0.193
+probabilities_array:[0.         0.         0.32343048 0.33329087 0.05059632 0.2926823 ]
+
+rule5: 26.565 < bmi < 30.660
+probabilities_array:[0.         0.         0.         0.34642982 0.278099   0.37547117]
+
+rule8: children = 0.0
+probabilities_array:[0.2275375  0.01588156 0.         0.29246897 0.18139827 0.2827137 ]
+
+rule11: children = 3.0
+probabilities_array:[0.         0.12729895 0.19145031 0.23763466 0.3115789  0.1320372 ]
+
+rule53: Negative children - 1.121, smoker_yes - 0.193
+probabilities_array:[0.01712625 0.02542413 0.17382428 0.25812733 0.26330099 0.2621971 ]
+
+rule37: Negative age - 39.256, region_southwest - 0.246
+probabilities_array:[0.         0.00338012 0.2563101  0.2012674  0.30788845 0.2311539 ]
+
+rule35: Negative age - 39.256, region_southeast - 0.272
+probabilities_array:[0.         0.00606602 0.29664665 0.19514033 0.2834765  0.21867049]
+
+rule24: Positive age - 39.256, bmi - 30.660
+probabilities_array:[0.00339507 0.         0.         0.3826104  0.         0.61399454]
+
+rule33: Negative age - 39.256, region_northwest - 0.246
+probabilities_array:[0.         0.02310866 0.23850156 0.18402585 0.308202   0.24616195]
+
+rule70: Positive smoker_yes - 0.193, region_southeast - 0.272
+probabilities_array:[0.26307023 0.29729828 0.23302765 0.13976246 0.         0.06684137]
+
+rule29: Negative age - 39.256, sex_male - 0.484
+probabilities_array:[0.06017349 0.         0.         0.29371747 0.08988665 0.55622244]
+
+rule72: Positive smoker_yes - 0.193, region_southwest - 0.246
+probabilities_array:[0.26535097 0.29012614 0.24280441 0.13537653 0.         0.06634193]
+
+rule76: Positive region_northwest - 0.246, region_southwest - 0.246
+probabilities_array:[0.00124259 0.         0.         0.25546417 0.20821303 0.5350802 ]
+
+rule27: Negative age - 39.256, children - 1.121
+probabilities_array:[0.00107861 0.28538895 0.24711111 0.13554585 0.2020556  0.12881987]
+
+rule43: Negative bmi - 30.660, smoker_yes - 0.193
+probabilities_array:[0.00760491 0.         0.         0.33147058 0.         0.66092455]
+
+rule78: Positive region_southeast - 0.272, region_southwest - 0.246
+probabilities_array:[0.00774313 0.         0.         0.20634992 0.3067296  0.4791773 ]
+
+rule74: Positive region_northwest - 0.246, region_southeast - 0.272
+probabilities_array:[0.00263738 0.         0.00415685 0.21350788 0.27658218 0.5031157 ]
+
+rule59: Negative children - 1.121, region_southwest - 0.246
+probabilities_array:[0.09625187 0.         0.10762276 0.17430519 0.21991971 0.4019004 ]
+
+rule48: Positive bmi - 30.660, region_southwest - 0.246
+probabilities_array:[0.05322371 0.         0.08917346 0.24789989 0.         0.60970294]
+
+rule51: Negative children - 1.121, sex_male - 0.484
+probabilities_array:[0.         0.         0.05816625 0.24201299 0.09323677 0.606584  ]
+
+rule68: Positive smoker_yes - 0.193, region_northwest - 0.246
+probabilities_array:[0.2694635  0.30404305 0.24359547 0.09883983 0.         0.08405813]
+
+rule55: Negative children - 1.121, region_northwest - 0.246
+probabilities_array:[0.02022344 0.         0.195729   0.14578316 0.19184569 0.44641873]
+
+rule64: Positive sex_male - 0.484, region_southeast - 0.272
+probabilities_array:[0.         0.         0.02035164 0.19569124 0.16463098 0.6193261 ]
+
+rule18: region_northwest = 0.0
+probabilities_array:[2.2069593e-05 0.0000000e+00 0.0000000e+00 1.6898423e-01 2.5789940e-01
+ 5.7309425e-01]
+
+rule56: Positive children - 1.121, region_southeast - 0.272
+probabilities_array:[0.11057758 0.095994   0.00350519 0.16148055 0.05815298 0.5702897 ]
+
+rule44: Positive bmi - 30.660, region_northwest - 0.246
+probabilities_array:[0.21432303 0.         0.03814363 0.16429143 0.         0.5832419 ]
+
+rule22: region_southwest = 0.0
+probabilities_array:[5.6942087e-04 0.0000000e+00 0.0000000e+00 1.7737466e-01 2.0657367e-01
+ 6.1548221e-01]
+
+rule60: Positive sex_male - 0.484, smoker_yes - 0.193
+probabilities_array:[0.         0.         0.02633746 0.18918526 0.13592125 0.64855605]
+
+rule17: smoker_yes = 1.0
+probabilities_array:[0.         0.         0.         0.11402303 0.3416254  0.54435164]
+
+rule14: sex_male = 0.0
+probabilities_array:[0.01168445 0.         0.05347406 0.16537422 0.06942426 0.7000431 ]
+
+rule62: Positive sex_male - 0.484, region_northwest - 0.246
+probabilities_array:[0.03933107 0.         0.05284158 0.15038197 0.02978385 0.72766155]
+
+
+---4---
+rule3: age > 48.681
+probabilities_array:[0.         0.         0.19091599 0.37121722 0.39040688 0.04745989]
+
+rule42: Positive bmi - 30.660, smoker_yes - 0.193
+probabilities_array:[0.09007348 0.19499514 0.1044502  0.         0.3659746  0.24450655]
+
+rule11: children = 3.0
+probabilities_array:[0.         0.12729895 0.19145031 0.23763466 0.3115789  0.1320372 ]
+
+rule30: Positive age - 39.256, smoker_yes - 0.193
+probabilities_array:[0.30792663 0.30131567 0.         0.         0.27394643 0.11681129]
+
+rule37: Negative age - 39.256, region_southwest - 0.246
+probabilities_array:[0.         0.00338012 0.2563101  0.2012674  0.30788845 0.2311539 ]
+
+rule25: Negative age - 39.256, bmi - 30.660
+probabilities_array:[0.04502805 0.02662982 0.09537984 0.         0.40694752 0.4260148 ]
+
+rule33: Negative age - 39.256, region_northwest - 0.246
+probabilities_array:[0.         0.02310866 0.23850156 0.18402585 0.308202   0.24616195]
+
+rule35: Negative age - 39.256, region_southeast - 0.272
+probabilities_array:[0.         0.00606602 0.29664665 0.19514033 0.2834765  0.21867049]
+
+rule53: Negative children - 1.121, smoker_yes - 0.193
+probabilities_array:[0.01712625 0.02542413 0.17382428 0.25812733 0.26330099 0.2621971 ]
+
+rule27: Negative age - 39.256, children - 1.121
+probabilities_array:[0.00107861 0.28538895 0.24711111 0.13554585 0.2020556  0.12881987]
+
+rule5: 26.565 < bmi < 30.660
+probabilities_array:[0.         0.         0.         0.34642982 0.278099   0.37547117]
+
+rule78: Positive region_southeast - 0.272, region_southwest - 0.246
+probabilities_array:[0.00774313 0.         0.         0.20634992 0.3067296  0.4791773 ]
+
+rule17: smoker_yes = 1.0
+probabilities_array:[0.         0.         0.         0.11402303 0.3416254  0.54435164]
+
+rule45: Negative bmi - 30.660, region_northwest - 0.246
+probabilities_array:[0.         0.08572961 0.         0.0625805  0.31402287 0.537667  ]
+
+rule73: Negative smoker_yes - 0.193, region_southwest - 0.246
+probabilities_array:[0.         0.         0.         0.0463703  0.35126492 0.6023648 ]
+
+rule69: Negative smoker_yes - 0.193, region_northwest - 0.246
+probabilities_array:[0.         0.         0.         0.09159704 0.3300852  0.57831776]
+
+rule74: Positive region_northwest - 0.246, region_southeast - 0.272
+probabilities_array:[0.00263738 0.         0.00415685 0.21350788 0.27658218 0.5031157 ]
+
+rule59: Negative children - 1.121, region_southwest - 0.246
+probabilities_array:[0.09625187 0.         0.10762276 0.17430519 0.21991971 0.4019004 ]
+
+rule1: 29.830 < age < 39.256
+probabilities_array:[0.         0.43129024 0.00148346 0.         0.20429581 0.36293054]
+
+rule8: children = 0.0
+probabilities_array:[0.2275375  0.01588156 0.         0.29246897 0.18139827 0.2827137 ]
+
+rule28: Positive age - 39.256, sex_male - 0.484
+probabilities_array:[0.         0.36160195 0.050815   0.         0.20416118 0.3834219 ]
+
+rule47: Negative bmi - 30.660, region_southeast - 0.272
+probabilities_array:[0.04660693 0.07065566 0.         0.05817604 0.27758998 0.54697144]
+
+rule71: Negative smoker_yes - 0.193, region_southeast - 0.272
+probabilities_array:[0.         0.         0.         0.05421092 0.31762964 0.6281594 ]
+
+rule18: region_northwest = 0.0
+probabilities_array:[2.2069593e-05 0.0000000e+00 0.0000000e+00 1.6898423e-01 2.5789940e-01
+ 5.7309425e-01]
+
+rule55: Negative children - 1.121, region_northwest - 0.246
+probabilities_array:[0.02022344 0.         0.195729   0.14578316 0.19184569 0.44641873]
+
+rule7: bmi > 34.756
+probabilities_array:[0.09851855 0.         0.         0.         0.27351528 0.62796617]
+
+rule76: Positive region_northwest - 0.246, region_southwest - 0.246
+probabilities_array:[0.00124259 0.         0.         0.25546417 0.20821303 0.5350802 ]
+
+rule9: children = 1.0
+probabilities_array:[0.00288609 0.3258281  0.28221112 0.00068932 0.12864572 0.2597397 ]
+
+rule10: children = 2.0
+probabilities_array:[0.11262736 0.1495601  0.03137803 0.         0.17924298 0.5271916 ]
+
+rule22: region_southwest = 0.0
+probabilities_array:[5.6942087e-04 0.0000000e+00 0.0000000e+00 1.7737466e-01 2.0657367e-01
+ 6.1548221e-01]
+
+rule50: Positive children - 1.121, sex_male - 0.484
+probabilities_array:[0.07721852 0.08538136 0.00344195 0.02278505 0.19899927 0.61217386]
+
+rule39: Negative bmi - 30.660, children - 1.121
+probabilities_array:[0.05230565 0.00287868 0.06221464 0.06591437 0.19590588 0.6207807 ]
+
+rule34: Positive age - 39.256, region_southeast - 0.272
+probabilities_array:[0.26347622 0.26254347 0.         0.03010863 0.10963847 0.33423316]
+
+rule49: Negative bmi - 30.660, region_southwest - 0.246
+probabilities_array:[0.0000000e+00 2.9113807e-02 4.1210378e-04 5.6143976e-03 2.5242382e-01
+ 7.1243584e-01]
+
+rule57: Negative children - 1.121, region_southeast - 0.272
+probabilities_array:[0.04928634 0.         0.17946318 0.05750052 0.15986632 0.5538836 ]
+
+rule20: region_southeast = 0.0
+probabilities_array:[2.9199235e-03 0.0000000e+00 3.1006103e-04 8.2573786e-02 2.2670355e-01
+ 6.8749267e-01]
+
+rule54: Positive children - 1.121, region_northwest - 0.246
+probabilities_array:[0.14599405 0.09296776 0.         0.03123302 0.1602266  0.56957847]
+
+rule65: Negative sex_male - 0.484, region_southeast - 0.272
+probabilities_array:[0.12788928 0.19195779 0.         0.         0.14455147 0.53560144]
+
+rule6: 30.660 < bmi < 34.756
+probabilities_array:[0.         0.00128572 0.30625468 0.         0.14724556 0.54521406]
+
+rule64: Positive sex_male - 0.484, region_southeast - 0.272
+probabilities_array:[0.         0.         0.02035164 0.19569124 0.16463098 0.6193261 ]
+
+rule2: 39.256 < age < 48.681
+probabilities_array:[0.         0.5423033  0.33621463 0.         0.06136546 0.06011661]
+
+rule67: Negative sex_male - 0.484, region_southwest - 0.246
+probabilities_array:[0.00655786 0.18224995 0.         0.06337006 0.13781768 0.6100045 ]
+
+rule63: Negative sex_male - 0.484, region_northwest - 0.246
+probabilities_array:[0.00717819 0.02326172 0.         0.0059638  0.21362638 0.7499699 ]
+
+rule26: Positive age - 39.256, children - 1.121
+probabilities_array:[2.4698472e-01 0.0000000e+00 8.4813480e-05 4.3895330e-02 1.1730021e-01
+ 5.9173501e-01]
+
+rule60: Positive sex_male - 0.484, smoker_yes - 0.193
+probabilities_array:[0.         0.         0.02633746 0.18918526 0.13592125 0.64855605]
+
+rule15: sex_male = 1.0
+probabilities_array:[0.01980646 0.09908901 0.         0.00806294 0.15287612 0.7201655 ]
+
+rule61: Negative sex_male - 0.484, smoker_yes - 0.193
+probabilities_array:[1.10218100e-01 9.35371444e-02 1.00876996e-02 1.74275920e-04
+ 1.23974815e-01 6.62007868e-01]
+
