@@ -1,0 +1,55 @@
+Running execution for 1 bucket(s), iteration 1
+Training samples: 6376, Features: 6
+Testing samples: 3141, Features: 6
+
+[Training] Bucket Distribution for n_buckets=1:
+  Bucket 0: 6376 samples
+
+[Training] Predicted Bucket Distribution after Classification for n_buckets=1:
+  Bucket 0: 6376 samples
+Traceback (most recent call last):
+  File "/home/davtyan.edd/projects/EIRegression/examples/RFRegression/delta_elevators.py", line 245, in <module>
+    run_multiple_executions(
+  File "/home/davtyan.edd/projects/EIRegression/examples/RFRegression/delta_elevators.py", line 222, in run_multiple_executions
+    results = execute(
+              ^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/examples/RFRegression/delta_elevators.py", line 143, in execute
+    eiReg.fit(
+  File "/home/davtyan.edd/projects/EIRegression/EIRegressor/EmbeddedInterpreter.py", line 116, in fit
+    optimized_regressor = self.optimizer.optimize(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/EIRegressor/model_optimizer.py", line 55, in optimize
+    search.fit(X_train, y_train)
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/base.py", line 1473, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/model_selection/_search.py", line 1019, in fit
+    self._run_search(evaluate_candidates)
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/model_selection/_search.py", line 1573, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/model_selection/_search.py", line 965, in evaluate_candidates
+    out = parallel(
+          ^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/utils/parallel.py", line 74, in __call__
+    return super().__call__(iterable_with_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/joblib/parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+                                                ^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/joblib/parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/utils/parallel.py", line 136, in __call__
+    return self.function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/model_selection/_validation.py", line 876, in _fit_and_score
+    estimator = estimator.set_params(**clone(parameters, safe=False))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/pipeline.py", line 237, in set_params
+    self._set_params("steps", **kwargs)
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/utils/metaestimators.py", line 69, in _set_params
+    super().set_params(**params)
+  File "/home/davtyan.edd/projects/EIRegression/.venv/lib/python3.11/site-packages/sklearn/base.py", line 279, in set_params
+    raise ValueError(
+ValueError: Invalid parameter 'regressor_n_jobs' for estimator Pipeline(steps=[('preprocessor', None),
+                ('regressor', RandomForestRegressor(max_depth=20))]). Valid parameters are: ['memory', 'steps', 'verbose'].

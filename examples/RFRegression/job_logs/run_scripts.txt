@@ -1,0 +1,12 @@
+# Run file in the remote session
+
+nohup /home/davtyan.edd/projects/EIRegression/.venv/bin/python /home/davtyan.edd/projects/EIRegression/examples/RFRegression/delta_elevators.py > /home/davtyan.edd/projects/EIRegression/examples/RFRegression/job_logs/output_delta_elevators.log 2>&1 &
+
+# command to list all Python processes
+ps aux | grep python
+
+# process strong kill
+kill -9 PROCESS_ID
+
+# TODO
+# run RFRegression on delta_elevators and bank32NH
