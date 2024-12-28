@@ -12,6 +12,13 @@ class DSRule(object):
         """
         self.ld = ld
         self.caption = caption
+        self.coverage = 0  # Initialize coverage
+
+    def get_coverage(self):
+        return self.coverage
+    
+    def set_coverage(self, coverage_score):
+        self.coverage = coverage_score
 
     def __str__(self):
         return self.caption

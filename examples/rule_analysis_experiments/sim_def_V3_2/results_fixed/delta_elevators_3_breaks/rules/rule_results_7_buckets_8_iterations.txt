@@ -1,0 +1,494 @@
+MSE: 2.880611270296084e-06
+
+Accuracy: 0.5211716014008277
+
+F1: 0.42591676120164446
+
+Average Similarity: 0.7396009110522469
+
+Confusion Matrix: [[158, 259, 19, 0, 0], [145, 817, 172, 1, 1], [8, 213, 511, 41, 73], [0, 37, 281, 22, 67], [0, 13, 141, 33, 129]]
+
+Similarity Matrix: [[0.5080385852090032, 0.09912207475027941, 0.008127203557008883, 0.0, 0.0, 0.0, 0.0], [0.260779743036345, 0.6101568334578044, 0.062051487989754864, 0.004311821905332959, 0.0015344374264843973, 0.0, 0.0], [0.01334941054394134, 0.07276742103636308, 0.45462633451957296, 0.1960144094593426, 0.11868078974487901, 0.0, 0.0], [0.0, 0.012845183460783716, 0.10159316311663424, 0.2268041237113402, 0.10884308918659068, 0.0, 0.0], [0.0, 0.004661421339562504, 0.0512751059325143, 0.1572035319261264, 0.4777777777777778, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+
+Uncertainties: {'class0': [0.25969722867012024, 0.32684558629989624, 0.3377225399017334, 0.4445493221282959, 0.4497690200805664], 'class1': [0.25969722867012024, 0.32684558629989624, 0.37241581082344055, 0.4445493221282959, 0.4497690200805664], 'class2': [0.018174290657043457, 0.07236263155937195, 0.2118496596813202, 0.2751322090625763, 0.2978838384151459], 'class3': [0.018174290657043457, 0.07236263155937195, 0.2118496596813202, 0.2751322090625763, 0.2978838384151459], 'class4': [0.018174290657043457, 0.07236263155937195, 0.2118496596813202, 0.2751322090625763, 0.2978838384151459], 'class5': [], 'class6': []}
+
+Most important rules
+-----------------------------
+
+---0---
+rule0: climbRate < -3.659
+probabilities_array:[0.38047594 0.35982686 0.         0.         0.         0.
+ 0.         0.25969723]
+
+rule32: Positive climbRate - -0.313, diffClb - 0.000
+probabilities_array:[3.3022895e-01 1.1515032e-01 2.8823447e-04 6.9660340e-03 2.2052087e-01
+ 0.0000000e+00 0.0000000e+00 3.2684559e-01]
+
+rule16: diffClb < -0.120
+probabilities_array:[4.4728059e-01 1.1567329e-04 0.0000000e+00 0.0000000e+00 0.0000000e+00
+ 0.0000000e+00 0.0000000e+00 5.5260372e-01]
+
+rule35: Negative climbRate - -0.313, diffDiffClb - -0.000
+probabilities_array:[0.30603883 0.21617444 0.03323736 0.         0.         0.
+ 0.         0.44454932]
+
+rule55: Negative diffClb - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.28465226 0.20637709 0.         0.00938383 0.00103224 0.
+ 0.         0.49855462]
+
+rule43: Negative Altitude - -12.174, diffDiffClb - -0.000
+probabilities_array:[0.1821138  0.14552368 0.09205891 0.         0.02958294 0.
+ 0.         0.55072063]
+
+rule1: -3.659 < climbRate < -0.313
+probabilities_array:[0.15499415 0.2640761  0.09696222 0.         0.         0.
+ 0.         0.4839675 ]
+
+rule46: Positive RollRate - 0.000, diffClb - 0.000
+probabilities_array:[0.17086512 0.10825633 0.05132464 0.03860698 0.07558137 0.
+ 0.         0.55536556]
+
+rule48: Positive RollRate - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.1379061  0.03760808 0.15037483 0.12984338 0.06452101 0.
+ 0.         0.47974658]
+
+rule4: Altitude < -29.386
+probabilities_array:[0.16034918 0.11854232 0.15713999 0.00155    0.         0.
+ 0.         0.5624186 ]
+
+rule9: -0.003 < RollRate < 0.000
+probabilities_array:[0.151285   0.13742122 0.         0.10735062 0.05447477 0.
+ 0.         0.5494684 ]
+
+rule27: Negative climbRate - -0.313, Altitude - -12.174
+probabilities_array:[0.15690568 0.14343277 0.08857293 0.0447249  0.         0.
+ 0.         0.56636375]
+
+rule15: curRoll > 0.012
+probabilities_array:[0.15020461 0.17728886 0.09405139 0.02490686 0.         0.
+ 0.         0.5535483 ]
+
+rule38: Positive Altitude - -12.174, curRoll - 0.001
+probabilities_array:[0.15464488 0.15459685 0.08044595 0.03139943 0.         0.
+ 0.         0.5789129 ]
+
+rule37: Negative Altitude - -12.174, RollRate - 0.000
+probabilities_array:[0.15231223 0.16680959 0.05391321 0.03445562 0.         0.
+ 0.         0.5925093 ]
+
+rule40: Positive Altitude - -12.174, diffClb - 0.000
+probabilities_array:[0.11598241 0.08192575 0.1424918  0.04954236 0.12784304 0.
+ 0.         0.48221463]
+
+rule23: diffDiffClb = 0.0
+probabilities_array:[0.09024753 0.0426519  0.09694077 0.23161429 0.20082301 0.
+ 0.         0.33772254]
+
+rule10: 0.000 < RollRate < 0.004
+probabilities_array:[0.10361399 0.13396582 0.03105574 0.16912043 0.11247504 0.
+ 0.         0.44976902]
+
+rule7: Altitude > 5.039
+probabilities_array:[0.127326   0.16553076 0.04447371 0.03234208 0.06478836 0.
+ 0.         0.5655391 ]
+
+rule6: -12.174 < Altitude < 5.039
+probabilities_array:[0.1303516  0.1655035  0.01398597 0.09355046 0.         0.
+ 0.         0.59660846]
+
+rule8: RollRate < -0.003
+probabilities_array:[0.1169337  0.27429974 0.         0.         0.         0.
+ 0.         0.60876656]
+
+rule53: Negative curRoll - 0.001, diffDiffClb - -0.000
+probabilities_array:[0.10693633 0.12177408 0.14221361 0.04717721 0.         0.
+ 0.         0.58189875]
+
+rule45: Negative RollRate - 0.000, curRoll - 0.001
+probabilities_array:[0.09876941 0.1269547  0.12639937 0.0509273  0.00342036 0.
+ 0.         0.59352887]
+
+
+---1---
+rule0: climbRate < -3.659
+probabilities_array:[0.38047594 0.35982686 0.         0.         0.         0.
+ 0.         0.25969723]
+
+rule17: -0.120 < diffClb < 0.000
+probabilities_array:[0.         0.35820282 0.22879507 0.04058635 0.         0.
+ 0.         0.3724158 ]
+
+rule1: -3.659 < climbRate < -0.313
+probabilities_array:[0.15499415 0.2640761  0.09696222 0.         0.         0.
+ 0.         0.4839675 ]
+
+rule35: Negative climbRate - -0.313, diffDiffClb - -0.000
+probabilities_array:[0.30603883 0.21617444 0.03323736 0.         0.         0.
+ 0.         0.44454932]
+
+rule8: RollRate < -0.003
+probabilities_array:[0.1169337  0.27429974 0.         0.         0.         0.
+ 0.         0.60876656]
+
+rule55: Negative diffClb - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.28465226 0.20637709 0.         0.00938383 0.00103224 0.
+ 0.         0.49855462]
+
+rule5: -29.386 < Altitude < -12.174
+probabilities_array:[0.         0.16353005 0.11245799 0.15538695 0.11244328 0.
+ 0.         0.45618173]
+
+rule15: curRoll > 0.012
+probabilities_array:[0.15020461 0.17728886 0.09405139 0.02490686 0.         0.
+ 0.         0.5535483 ]
+
+rule32: Positive climbRate - -0.313, diffClb - 0.000
+probabilities_array:[3.3022895e-01 1.1515032e-01 2.8823447e-04 6.9660340e-03 2.2052087e-01
+ 0.0000000e+00 0.0000000e+00 3.2684559e-01]
+
+rule10: 0.000 < RollRate < 0.004
+probabilities_array:[0.10361399 0.13396582 0.03105574 0.16912043 0.11247504 0.
+ 0.         0.44976902]
+
+rule41: Negative Altitude - -12.174, diffClb - 0.000
+probabilities_array:[0.03780388 0.19636053 0.12514772 0.01229205 0.         0.
+ 0.         0.62839586]
+
+rule7: Altitude > 5.039
+probabilities_array:[0.127326   0.16553076 0.04447371 0.03234208 0.06478836 0.
+ 0.         0.5655391 ]
+
+rule26: Positive climbRate - -0.313, Altitude - -12.174
+probabilities_array:[0.02967598 0.1626317  0.08850691 0.06566321 0.07618761 0.
+ 0.         0.5773346 ]
+
+rule37: Negative Altitude - -12.174, RollRate - 0.000
+probabilities_array:[0.15231223 0.16680959 0.05391321 0.03445562 0.         0.
+ 0.         0.5925093 ]
+
+rule6: -12.174 < Altitude < 5.039
+probabilities_array:[0.1303516  0.1655035  0.01398597 0.09355046 0.         0.
+ 0.         0.59660846]
+
+rule43: Negative Altitude - -12.174, diffDiffClb - -0.000
+probabilities_array:[0.1821138  0.14552368 0.09205891 0.         0.02958294 0.
+ 0.         0.55072063]
+
+rule38: Positive Altitude - -12.174, curRoll - 0.001
+probabilities_array:[0.15464488 0.15459685 0.08044595 0.03139943 0.         0.
+ 0.         0.5789129 ]
+
+rule31: Negative climbRate - -0.313, curRoll - 0.001
+probabilities_array:[0.07340873 0.12940359 0.09856533 0.13026981 0.05421245 0.
+ 0.         0.51414007]
+
+rule27: Negative climbRate - -0.313, Altitude - -12.174
+probabilities_array:[0.15690568 0.14343277 0.08857293 0.0447249  0.         0.
+ 0.         0.56636375]
+
+rule9: -0.003 < RollRate < 0.000
+probabilities_array:[0.151285   0.13742122 0.         0.10735062 0.05447477 0.
+ 0.         0.5494684 ]
+
+rule30: Positive climbRate - -0.313, curRoll - 0.001
+probabilities_array:[0.08779351 0.16605759 0.0965303  0.         0.         0.
+ 0.         0.6496186 ]
+
+rule42: Positive Altitude - -12.174, diffDiffClb - -0.000
+probabilities_array:[0.0342738  0.14037979 0.11507031 0.11136268 0.         0.
+ 0.         0.59891343]
+
+rule33: Negative climbRate - -0.313, diffClb - 0.000
+probabilities_array:[0.         0.13667908 0.24597973 0.02477287 0.         0.
+ 0.         0.5925683 ]
+
+rule29: Negative climbRate - -0.313, RollRate - 0.000
+probabilities_array:[0.06683307 0.148135   0.13610528 0.01779067 0.         0.
+ 0.         0.63113594]
+
+rule12: curRoll < -0.009
+probabilities_array:[0.05922885 0.11707113 0.09784844 0.05356453 0.13591237 0.
+ 0.         0.5363747 ]
+
+rule4: Altitude < -29.386
+probabilities_array:[0.16034918 0.11854232 0.15713999 0.00155    0.         0.
+ 0.         0.5624186 ]
+
+rule45: Negative RollRate - 0.000, curRoll - 0.001
+probabilities_array:[0.09876941 0.1269547  0.12639937 0.0509273  0.00342036 0.
+ 0.         0.59352887]
+
+rule44: Positive RollRate - 0.000, curRoll - 0.001
+probabilities_array:[0.03271637 0.1671089  0.09953208 0.0084228  0.         0.
+ 0.         0.69221985]
+
+rule53: Negative curRoll - 0.001, diffDiffClb - -0.000
+probabilities_array:[0.10693633 0.12177408 0.14221361 0.04717721 0.         0.
+ 0.         0.58189875]
+
+rule28: Positive climbRate - -0.313, RollRate - 0.000
+probabilities_array:[0.06757127 0.13937189 0.05558309 0.01996061 0.06530494 0.
+ 0.         0.6522082 ]
+
+rule14: 0.001 < curRoll < 0.012
+probabilities_array:[0.08362655 0.1612061  0.01960364 0.03505071 0.         0.
+ 0.         0.700513  ]
+
+rule46: Positive RollRate - 0.000, diffClb - 0.000
+probabilities_array:[0.17086512 0.10825633 0.05132464 0.03860698 0.07558137 0.
+ 0.         0.55536556]
+
+rule52: Positive curRoll - 0.001, diffDiffClb - -0.000
+probabilities_array:[0.04963882 0.12785493 0.0718144  0.05640626 0.05713884 0.
+ 0.         0.6371468 ]
+
+rule47: Negative RollRate - 0.000, diffClb - 0.000
+probabilities_array:[0.         0.15027304 0.13527578 0.01623248 0.         0.
+ 0.         0.6982187 ]
+
+rule40: Positive Altitude - -12.174, diffClb - 0.000
+probabilities_array:[0.11598241 0.08192575 0.1424918  0.04954236 0.12784304 0.
+ 0.         0.48221463]
+
+rule39: Negative Altitude - -12.174, curRoll - 0.001
+probabilities_array:[0.02664364 0.11336381 0.14200218 0.00824676 0.08120614 0.
+ 0.         0.6285375 ]
+
+rule50: Positive curRoll - 0.001, diffClb - 0.000
+probabilities_array:[0.04750235 0.13299805 0.0957291  0.03303158 0.         0.
+ 0.         0.6907389 ]
+
+rule51: Negative curRoll - 0.001, diffClb - 0.000
+probabilities_array:[0.06664531 0.12439868 0.09539735 0.00146015 0.03670682 0.
+ 0.         0.6753917 ]
+
+
+---2---
+rule3: climbRate > 3.033
+probabilities_array:[0.0000000e+00 4.6484047e-04 2.6172864e-01 3.4425926e-01 3.7531748e-01
+ 2.7855212e-05 2.7633831e-05 1.8174291e-02]
+
+rule18: 0.000 < diffClb < 0.120
+probabilities_array:[0.         0.0566866  0.33471158 0.2610899  0.         0.
+ 0.         0.34751186]
+
+rule19: diffClb > 0.120
+probabilities_array:[0.         0.         0.20271799 0.31646466 0.40845463 0.
+ 0.         0.07236263]
+
+rule11: RollRate > 0.004
+probabilities_array:[0.00735224 0.         0.23498881 0.33699054 0.20881873 0.
+ 0.         0.21184966]
+
+rule2: -0.313 < climbRate < 3.033
+probabilities_array:[0.         0.         0.3004964  0.30382928 0.01104346 0.
+ 0.         0.38463086]
+
+rule17: -0.120 < diffClb < 0.000
+probabilities_array:[0.         0.35820282 0.22879507 0.04058635 0.         0.
+ 0.         0.3724158 ]
+
+rule54: Positive diffClb - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.         0.05014849 0.19308896 0.20889273 0.24998596 0.
+ 0.         0.29788384]
+
+rule34: Positive climbRate - -0.313, diffDiffClb - -0.000
+probabilities_array:[0.         0.04899757 0.14022294 0.26355657 0.27209067 0.
+ 0.         0.2751322 ]
+
+rule33: Negative climbRate - -0.313, diffClb - 0.000
+probabilities_array:[0.         0.13667908 0.24597973 0.02477287 0.         0.
+ 0.         0.5925683 ]
+
+rule13: -0.009 < curRoll < 0.001
+probabilities_array:[0.         0.06638779 0.16593124 0.1393251  0.18515433 0.
+ 0.         0.4432016 ]
+
+rule48: Positive RollRate - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.1379061  0.03760808 0.15037483 0.12984338 0.06452101 0.
+ 0.         0.47974658]
+
+rule40: Positive Altitude - -12.174, diffClb - 0.000
+probabilities_array:[0.11598241 0.08192575 0.1424918  0.04954236 0.12784304 0.
+ 0.         0.48221463]
+
+rule4: Altitude < -29.386
+probabilities_array:[0.16034918 0.11854232 0.15713999 0.00155    0.         0.
+ 0.         0.5624186 ]
+
+rule23: diffDiffClb = 0.0
+probabilities_array:[0.09024753 0.0426519  0.09694077 0.23161429 0.20082301 0.
+ 0.         0.33772254]
+
+rule5: -29.386 < Altitude < -12.174
+probabilities_array:[0.         0.16353005 0.11245799 0.15538695 0.11244328 0.
+ 0.         0.45618173]
+
+rule53: Negative curRoll - 0.001, diffDiffClb - -0.000
+probabilities_array:[0.10693633 0.12177408 0.14221361 0.04717721 0.         0.
+ 0.         0.58189875]
+
+rule36: Positive Altitude - -12.174, RollRate - 0.000
+probabilities_array:[0.02298792 0.11261755 0.15781434 0.0169415  0.03978943 0.
+ 0.         0.64984924]
+
+rule39: Negative Altitude - -12.174, curRoll - 0.001
+probabilities_array:[0.02664364 0.11336381 0.14200218 0.00824676 0.08120614 0.
+ 0.         0.6285375 ]
+
+rule45: Negative RollRate - 0.000, curRoll - 0.001
+probabilities_array:[0.09876941 0.1269547  0.12639937 0.0509273  0.00342036 0.
+ 0.         0.59352887]
+
+rule29: Negative climbRate - -0.313, RollRate - 0.000
+probabilities_array:[0.06683307 0.148135   0.13610528 0.01779067 0.         0.
+ 0.         0.63113594]
+
+rule1: -3.659 < climbRate < -0.313
+probabilities_array:[0.15499415 0.2640761  0.09696222 0.         0.         0.
+ 0.         0.4839675 ]
+
+rule31: Negative climbRate - -0.313, curRoll - 0.001
+probabilities_array:[0.07340873 0.12940359 0.09856533 0.13026981 0.05421245 0.
+ 0.         0.51414007]
+
+rule41: Negative Altitude - -12.174, diffClb - 0.000
+probabilities_array:[0.03780388 0.19636053 0.12514772 0.01229205 0.         0.
+ 0.         0.62839586]
+
+rule42: Positive Altitude - -12.174, diffDiffClb - -0.000
+probabilities_array:[0.0342738  0.14037979 0.11507031 0.11136268 0.         0.
+ 0.         0.59891343]
+
+rule12: curRoll < -0.009
+probabilities_array:[0.05922885 0.11707113 0.09784844 0.05356453 0.13591237 0.
+ 0.         0.5363747 ]
+
+rule15: curRoll > 0.012
+probabilities_array:[0.15020461 0.17728886 0.09405139 0.02490686 0.         0.
+ 0.         0.5535483 ]
+
+rule43: Negative Altitude - -12.174, diffDiffClb - -0.000
+probabilities_array:[0.1821138  0.14552368 0.09205891 0.         0.02958294 0.
+ 0.         0.55072063]
+
+rule47: Negative RollRate - 0.000, diffClb - 0.000
+probabilities_array:[0.         0.15027304 0.13527578 0.01623248 0.         0.
+ 0.         0.6982187 ]
+
+
+---3---
+rule3: climbRate > 3.033
+probabilities_array:[0.0000000e+00 4.6484047e-04 2.6172864e-01 3.4425926e-01 3.7531748e-01
+ 2.7855212e-05 2.7633831e-05 1.8174291e-02]
+
+rule19: diffClb > 0.120
+probabilities_array:[0.         0.         0.20271799 0.31646466 0.40845463 0.
+ 0.         0.07236263]
+
+rule11: RollRate > 0.004
+probabilities_array:[0.00735224 0.         0.23498881 0.33699054 0.20881873 0.
+ 0.         0.21184966]
+
+rule34: Positive climbRate - -0.313, diffDiffClb - -0.000
+probabilities_array:[0.         0.04899757 0.14022294 0.26355657 0.27209067 0.
+ 0.         0.2751322 ]
+
+rule2: -0.313 < climbRate < 3.033
+probabilities_array:[0.         0.         0.3004964  0.30382928 0.01104346 0.
+ 0.         0.38463086]
+
+rule18: 0.000 < diffClb < 0.120
+probabilities_array:[0.         0.0566866  0.33471158 0.2610899  0.         0.
+ 0.         0.34751186]
+
+rule23: diffDiffClb = 0.0
+probabilities_array:[0.09024753 0.0426519  0.09694077 0.23161429 0.20082301 0.
+ 0.         0.33772254]
+
+rule54: Positive diffClb - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.         0.05014849 0.19308896 0.20889273 0.24998596 0.
+ 0.         0.29788384]
+
+rule10: 0.000 < RollRate < 0.004
+probabilities_array:[0.10361399 0.13396582 0.03105574 0.16912043 0.11247504 0.
+ 0.         0.44976902]
+
+rule5: -29.386 < Altitude < -12.174
+probabilities_array:[0.         0.16353005 0.11245799 0.15538695 0.11244328 0.
+ 0.         0.45618173]
+
+rule13: -0.009 < curRoll < 0.001
+probabilities_array:[0.         0.06638779 0.16593124 0.1393251  0.18515433 0.
+ 0.         0.4432016 ]
+
+rule48: Positive RollRate - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.1379061  0.03760808 0.15037483 0.12984338 0.06452101 0.
+ 0.         0.47974658]
+
+rule31: Negative climbRate - -0.313, curRoll - 0.001
+probabilities_array:[0.07340873 0.12940359 0.09856533 0.13026981 0.05421245 0.
+ 0.         0.51414007]
+
+rule9: -0.003 < RollRate < 0.000
+probabilities_array:[0.151285   0.13742122 0.         0.10735062 0.05447477 0.
+ 0.         0.5494684 ]
+
+rule42: Positive Altitude - -12.174, diffDiffClb - -0.000
+probabilities_array:[0.0342738  0.14037979 0.11507031 0.11136268 0.         0.
+ 0.         0.59891343]
+
+
+---4---
+rule19: diffClb > 0.120
+probabilities_array:[0.         0.         0.20271799 0.31646466 0.40845463 0.
+ 0.         0.07236263]
+
+rule3: climbRate > 3.033
+probabilities_array:[0.0000000e+00 4.6484047e-04 2.6172864e-01 3.4425926e-01 3.7531748e-01
+ 2.7855212e-05 2.7633831e-05 1.8174291e-02]
+
+rule34: Positive climbRate - -0.313, diffDiffClb - -0.000
+probabilities_array:[0.         0.04899757 0.14022294 0.26355657 0.27209067 0.
+ 0.         0.2751322 ]
+
+rule54: Positive diffClb - 0.000, diffDiffClb - -0.000
+probabilities_array:[0.         0.05014849 0.19308896 0.20889273 0.24998596 0.
+ 0.         0.29788384]
+
+rule11: RollRate > 0.004
+probabilities_array:[0.00735224 0.         0.23498881 0.33699054 0.20881873 0.
+ 0.         0.21184966]
+
+rule32: Positive climbRate - -0.313, diffClb - 0.000
+probabilities_array:[3.3022895e-01 1.1515032e-01 2.8823447e-04 6.9660340e-03 2.2052087e-01
+ 0.0000000e+00 0.0000000e+00 3.2684559e-01]
+
+rule23: diffDiffClb = 0.0
+probabilities_array:[0.09024753 0.0426519  0.09694077 0.23161429 0.20082301 0.
+ 0.         0.33772254]
+
+rule13: -0.009 < curRoll < 0.001
+probabilities_array:[0.         0.06638779 0.16593124 0.1393251  0.18515433 0.
+ 0.         0.4432016 ]
+
+rule40: Positive Altitude - -12.174, diffClb - 0.000
+probabilities_array:[0.11598241 0.08192575 0.1424918  0.04954236 0.12784304 0.
+ 0.         0.48221463]
+
+rule12: curRoll < -0.009
+probabilities_array:[0.05922885 0.11707113 0.09784844 0.05356453 0.13591237 0.
+ 0.         0.5363747 ]
+
+rule10: 0.000 < RollRate < 0.004
+probabilities_array:[0.10361399 0.13396582 0.03105574 0.16912043 0.11247504 0.
+ 0.         0.44976902]
+
+rule5: -29.386 < Altitude < -12.174
+probabilities_array:[0.         0.16353005 0.11245799 0.15538695 0.11244328 0.
+ 0.         0.45618173]
+
+
+---5---
+
+---6---

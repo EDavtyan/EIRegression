@@ -1,0 +1,974 @@
+MSE: 6028094508.210364
+
+Accuracy: 0.43232530827950677
+
+F1: 0.4252006266524391
+
+Average Similarity: 0.4899390475950253
+
+Confusion Matrix: [[695, 196, 60, 19, 8, 5, 4], [215, 414, 211, 76, 30, 12, 18], [96, 219, 329, 251, 73, 28, 26], [31, 112, 182, 358, 162, 81, 51], [19, 63, 90, 232, 214, 198, 120], [10, 33, 47, 110, 176, 312, 261], [8, 14, 25, 50, 68, 177, 623]]
+
+Similarity Matrix: [[0.6471135940409684, 0.02513335594929196, 0.006740151093203757, 0.0016704992458758088, 0.0013499166462216832, 0.0007471042197307246, 0.0004701590317087448], [0.030387910834180406, 0.3939105613701237, 0.022031331614737196, 0.0067000103572842145, 0.004093415659743965, 0.0017537244081022778, 0.0017372800111959434], [0.013055391495261566, 0.026705702243998413, 0.3485169491525424, 0.020245352570546618, 0.008776542440675137, 0.003302975455642945, 0.002281751049537454], [0.00418340721559839, 0.013061614939114629, 0.018187499462298896, 0.3266423357664234, 0.01768617107808039, 0.008799185075825933, 0.004353765772506378], [0.0026032363028122797, 0.007035308500080264, 0.009255001747418166, 0.017622314713700765, 0.292749658002736, 0.020600678406207593, 0.008800022628255511], [0.0012375942839372277, 0.0035124175810561935, 0.004974563514071211, 0.009309440320694078, 0.02000375921961112, 0.3837638376383764, 0.02151713844515487], [0.0010604027993126337, 0.0013432376566741885, 0.0024974674472816854, 0.004392509539060433, 0.007406987814038612, 0.017654400866910218, 0.5648232094288305]]
+
+Uncertainties: {'class0': [0.061648838222026825, 0.07195758819580078, 0.08629773557186127, 0.1001160517334938, 0.2112983763217926], 'class1': [0.033072493970394135, 0.043778613209724426, 0.061648838222026825, 0.07195758819580078, 0.08629773557186127], 'class2': [0.033072493970394135, 0.043778613209724426, 0.061648838222026825, 0.07195758819580078, 0.08629773557186127], 'class3': [0.033072493970394135, 0.043778613209724426, 0.061648838222026825, 0.07195758819580078, 0.08629773557186127], 'class4': [0.033072493970394135, 0.043778613209724426, 0.061648838222026825, 0.07195758819580078, 0.08629773557186127], 'class5': [0.033072493970394135, 0.043778613209724426, 0.061648838222026825, 0.07195758819580078, 0.08629773557186127], 'class6': [0.043778613209724426, 0.1001160517334938, 0.14979998767375946, 0.16180312633514404, 0.2087649703025818]}
+
+Most important rules
+-----------------------------
+
+---0---
+rule28: median_income < 2.592
+probabilities_array:[0.35029373 0.33364645 0.08318133 0.02158012 0.         0.
+ 0.         0.21129838]
+
+rule154: Positive median_income - 3.865, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.27213636 0.25778535 0.21307214 0.03233152 0.         0.
+ 0.         0.22467467]
+
+rule2: -119.580 < longitude < -118.233
+probabilities_array:[0.22461194 0.11388248 0.         0.01982385 0.05957362 0.10661992
+ 0.3753721  0.10011605]
+
+rule12: total_rooms < 1147.507
+probabilities_array:[0.21224563 0.15131061 0.25964788 0.14147    0.08947015 0.07389811
+ 0.         0.07195759]
+
+rule5: 34.204 < latitude < 35.641
+probabilities_array:[0.20322885 0.07693718 0.19422403 0.23930065 0.1502826  0.07437791
+ 0.         0.06164884]
+
+rule6: 35.641 < latitude < 37.078
+probabilities_array:[0.4036644  0.         0.         0.         0.05073411 0.
+ 0.         0.5456015 ]
+
+rule1: -120.927 < longitude < -119.580
+probabilities_array:[0.25300157 0.15323071 0.00122512 0.         0.         0.
+ 0.12851737 0.4640252 ]
+
+rule153: Negative median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[2.1324229e-01 0.0000000e+00 7.7615964e-04 1.1091123e-06 1.1523968e-04
+ 9.2624113e-02 3.2579538e-01 3.6744571e-01]
+
+rule158: Positive median_income - 3.865, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[2.21497551e-01 2.22840562e-01 1.05382726e-01 4.60559614e-02
+ 0.00000000e+00 2.17305351e-05 0.00000000e+00 4.04201418e-01]
+
+rule54: Positive longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.21772073 0.08464457 0.         0.         0.00255746 0.09454365
+ 0.16635966 0.43417397]
+
+rule163: Negative ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[2.7067664e-01 1.6761056e-01 0.0000000e+00 3.5849039e-04 1.1818875e-03
+ 0.0000000e+00 0.0000000e+00 5.6017238e-01]
+
+rule161: Negative ocean_proximity_INLAND - 0.319, ocean_proximity_ISLAND - 0.000
+probabilities_array:[2.6384652e-01 1.7590851e-01 9.3561951e-03 4.2238663e-04 5.3467700e-04
+ 0.0000000e+00 0.0000000e+00 5.4993170e-01]
+
+rule23: population > 2213.561
+probabilities_array:[0.12734167 0.16676489 0.26496568 0.18991031 0.11097392 0.05374585
+ 0.         0.08629774]
+
+rule75: Negative latitude - 35.641, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.23639566 0.01281047 0.         0.         0.03417328 0.07369281
+ 0.11674275 0.52618504]
+
+rule165: Negative ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[2.4511801e-01 1.9173834e-01 0.0000000e+00 4.4957585e-05 3.4300960e-03
+ 7.7870919e-04 0.0000000e+00 5.5888987e-01]
+
+rule156: Positive median_income - 3.865, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.21239166 0.21988471 0.03283601 0.03216633 0.0009178  0.
+ 0.         0.5018035 ]
+
+rule33: ocean_proximity_INLAND = 1.0
+probabilities_array:[2.2623451e-01 1.7281379e-01 3.7356202e-02 4.3838058e-04 1.2974078e-03
+ 0.0000000e+00 0.0000000e+00 5.6185973e-01]
+
+rule14: 2645.149 < total_rooms < 4142.790
+probabilities_array:[0.14681828 0.03613832 0.10565472 0.0498811  0.14872177 0.04248285
+ 0.         0.47030294]
+
+rule141: Negative population - 1427.045, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[1.6798435e-01 3.5396248e-02 1.2120580e-01 1.1578642e-02 3.3552319e-02
+ 5.1759311e-04 0.0000000e+00 6.2976503e-01]
+
+rule139: Negative population - 1427.045, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.1434657  0.00719703 0.15406933 0.08364179 0.         0.04005298
+ 0.         0.57157314]
+
+rule24: households < 237.456
+probabilities_array:[0.12923738 0.05425479 0.03304211 0.11653432 0.07315295 0.
+ 0.05793678 0.53584164]
+
+rule134: Positive population - 1427.045, ocean_proximity_INLAND - 0.319
+probabilities_array:[1.6129307e-01 0.0000000e+00 0.0000000e+00 0.0000000e+00 0.0000000e+00
+ 4.9811992e-04 1.9526772e-01 6.4294106e-01]
+
+rule10: 28.691 < housing_median_age < 37.190
+probabilities_array:[0.10224149 0.00990998 0.08323793 0.22222191 0.08432191 0.04417831
+ 0.         0.45388848]
+
+rule169: Negative ocean_proximity_ISLAND - 0.000, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[9.5880024e-02 5.8444753e-02 5.6724763e-05 0.0000000e+00 4.7988594e-02
+ 1.5014900e-01 2.1578887e-01 4.3169209e-01]
+
+rule119: Negative total_bedrooms - 539.828, households - 501.687
+probabilities_array:[0.10497835 0.06969506 0.         0.07325541 0.09804274 0.15441695
+ 0.01547888 0.48413268]
+
+rule21: 640.529 < population < 1427.045
+probabilities_array:[1.8355185e-01 0.0000000e+00 1.0167172e-01 1.6576868e-04 6.9520262e-05
+ 4.4642136e-04 0.0000000e+00 7.1409476e-01]
+
+rule39: ocean_proximity_NEAR OCEAN = 1.0
+probabilities_array:[9.4936170e-02 6.3666321e-02 7.0605507e-05 0.0000000e+00 6.6086225e-02
+ 1.3376746e-01 1.8441617e-01 4.5705700e-01]
+
+rule11: housing_median_age > 37.190
+probabilities_array:[0.07388897 0.02652825 0.         0.         0.02788724 0.12290222
+ 0.3666693  0.38212404]
+
+rule109: Negative total_rooms - 2645.149, ocean_proximity_INLAND - 0.319
+probabilities_array:[1.0774780e-01 2.2213729e-03 0.0000000e+00 2.6977042e-04 4.8515428e-04
+ 6.8889111e-02 2.3436376e-01 5.8602303e-01]
+
+rule79: Negative latitude - 35.641, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.15973365 0.07093555 0.00261681 0.00358031 0.04016371 0.
+ 0.         0.72296995]
+
+rule171: Negative ocean_proximity_NEAR BAY - 0.111, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.09375959 0.03221005 0.         0.         0.05974808 0.10884341
+ 0.17281355 0.53262526]
+
+rule110: Positive total_rooms - 2645.149, ocean_proximity_ISLAND - 0.000
+probabilities_array:[1.1205986e-01 5.4081954e-02 1.3635780e-01 5.0483871e-02 2.7739096e-02
+ 3.3242689e-04 0.0000000e+00 6.1894500e-01]
+
+rule16: total_bedrooms < 249.516
+probabilities_array:[0.09562982 0.14085118 0.06040343 0.08381407 0.04035241 0.
+ 0.         0.5789491 ]
+
+rule81: Negative latitude - 35.641, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.10594577 0.10096761 0.09161656 0.05809807 0.02174404 0.00139682
+ 0.         0.62023115]
+
+
+---1---
+rule28: median_income < 2.592
+probabilities_array:[0.35029373 0.33364645 0.08318133 0.02158012 0.         0.
+ 0.         0.21129838]
+
+rule154: Positive median_income - 3.865, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.27213636 0.25778535 0.21307214 0.03233152 0.         0.
+ 0.         0.22467467]
+
+rule152: Positive median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.00034334 0.2023868  0.25478384 0.20814165 0.15593515 0.03293296
+ 0.         0.14547625]
+
+rule30: 3.865 < median_income < 5.137
+probabilities_array:[0.02734883 0.17732689 0.31135798 0.26915112 0.13227673 0.04946593
+ 0.         0.03307249]
+
+rule23: population > 2213.561
+probabilities_array:[0.12734167 0.16676489 0.26496568 0.18991031 0.11097392 0.05374585
+ 0.         0.08629774]
+
+rule12: total_rooms < 1147.507
+probabilities_array:[0.21224563 0.15131061 0.25964788 0.14147    0.08947015 0.07389811
+ 0.         0.07195759]
+
+rule158: Positive median_income - 3.865, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[2.21497551e-01 2.22840562e-01 1.05382726e-01 4.60559614e-02
+ 0.00000000e+00 2.17305351e-05 0.00000000e+00 4.04201418e-01]
+
+rule7: latitude > 37.078
+probabilities_array:[0.         0.21097812 0.16390909 0.10637946 0.00976649 0.03837907
+ 0.09662891 0.37395883]
+
+rule40: Positive longitude - -119.580, latitude - 35.641
+probabilities_array:[0.         0.19519033 0.08565576 0.         0.00093955 0.12843452
+ 0.25076857 0.3390113 ]
+
+rule156: Positive median_income - 3.865, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.21239166 0.21988471 0.03283601 0.03216633 0.0009178  0.
+ 0.         0.5018035 ]
+
+rule137: Negative population - 1427.045, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.0630132  0.18297058 0.12237331 0.10873433 0.0881465  0.03115098
+ 0.         0.40361106]
+
+rule2: -119.580 < longitude < -118.233
+probabilities_array:[0.22461194 0.11388248 0.         0.01982385 0.05957362 0.10661992
+ 0.3753721  0.10011605]
+
+rule29: 2.592 < median_income < 3.865
+probabilities_array:[0.00033102 0.1015552  0.12596609 0.20243338 0.20473477 0.19389085
+ 0.12731011 0.04377861]
+
+rule4: latitude < 34.204
+probabilities_array:[0.         0.15194814 0.06062763 0.01305636 0.00358842 0.07729824
+ 0.25483656 0.43864468]
+
+rule165: Negative ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[2.4511801e-01 1.9173834e-01 0.0000000e+00 4.4957585e-05 3.4300960e-03
+ 7.7870919e-04 0.0000000e+00 5.5888987e-01]
+
+rule1: -120.927 < longitude < -119.580
+probabilities_array:[0.25300157 0.15323071 0.00122512 0.         0.         0.
+ 0.12851737 0.4640252 ]
+
+rule99: Negative housing_median_age - 28.691, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0000000e+00 2.2511573e-01 5.6701459e-02 2.1802174e-04 3.7603904e-02
+ 1.6493080e-02 2.0628037e-02 6.4323974e-01]
+
+rule101: Negative total_rooms - 2645.149, total_bedrooms - 539.828
+probabilities_array:[0.         0.13407348 0.         0.06155058 0.18906042 0.09461537
+ 0.11153896 0.4091612 ]
+
+rule161: Negative ocean_proximity_INLAND - 0.319, ocean_proximity_ISLAND - 0.000
+probabilities_array:[2.6384652e-01 1.7590851e-01 9.3561951e-03 4.2238663e-04 5.3467700e-04
+ 0.0000000e+00 0.0000000e+00 5.4993170e-01]
+
+rule33: ocean_proximity_INLAND = 1.0
+probabilities_array:[2.2623451e-01 1.7281379e-01 3.7356202e-02 4.3838058e-04 1.2974078e-03
+ 0.0000000e+00 0.0000000e+00 5.6185973e-01]
+
+rule163: Negative ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[2.7067664e-01 1.6761056e-01 0.0000000e+00 3.5849039e-04 1.1818875e-03
+ 0.0000000e+00 0.0000000e+00 5.6017238e-01]
+
+rule108: Positive total_rooms - 2645.149, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.01180605 0.13206083 0.20298919 0.09471199 0.08505913 0.02207865
+ 0.         0.45129418]
+
+rule5: 34.204 < latitude < 35.641
+probabilities_array:[0.20322885 0.07693718 0.19422403 0.23930065 0.1502826  0.07437791
+ 0.         0.06164884]
+
+rule8: housing_median_age < 20.192
+probabilities_array:[0.00112702 0.1173505  0.19186828 0.136146   0.06671365 0.05446715
+ 0.         0.4323274 ]
+
+rule16: total_bedrooms < 249.516
+probabilities_array:[0.09562982 0.14085118 0.06040343 0.08381407 0.04035241 0.
+ 0.         0.5789491 ]
+
+rule135: Negative population - 1427.045, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.08963083 0.24924743 0.12376894 0.12881653 0.04977062
+ 0.         0.3587656 ]
+
+rule144: Positive households - 501.687, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.04831333 0.15051076 0.10425539 0.02631751 0.03457107 0.
+ 0.         0.636032  ]
+
+rule3: longitude > -118.233
+probabilities_array:[0.00077706 0.06810772 0.38761958 0.27871427 0.04313496 0.00995922
+ 0.         0.21168727]
+
+rule54: Positive longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.21772073 0.08464457 0.         0.         0.00255746 0.09454365
+ 0.16635966 0.43417397]
+
+rule22: 1427.045 < population < 2213.561
+probabilities_array:[0.0419065  0.12918852 0.00109019 0.02982473 0.0174407  0.
+ 0.14542437 0.635125  ]
+
+rule122: Positive total_bedrooms - 539.828, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.03944912 0.11461759 0.04839822 0.05154799 0.05854195 0.06112228
+ 0.         0.6263228 ]
+
+rule69: Negative latitude - 35.641, population - 1427.045
+probabilities_array:[0.01031204 0.12309737 0.115292   0.065616   0.01568037 0.00434043
+ 0.         0.6656618 ]
+
+
+---2---
+rule3: longitude > -118.233
+probabilities_array:[0.00077706 0.06810772 0.38761958 0.27871427 0.04313496 0.00995922
+ 0.         0.21168727]
+
+rule30: 3.865 < median_income < 5.137
+probabilities_array:[0.02734883 0.17732689 0.31135798 0.26915112 0.13227673 0.04946593
+ 0.         0.03307249]
+
+rule23: population > 2213.561
+probabilities_array:[0.12734167 0.16676489 0.26496568 0.18991031 0.11097392 0.05374585
+ 0.         0.08629774]
+
+rule12: total_rooms < 1147.507
+probabilities_array:[0.21224563 0.15131061 0.25964788 0.14147    0.08947015 0.07389811
+ 0.         0.07195759]
+
+rule152: Positive median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.00034334 0.2023868  0.25478384 0.20814165 0.15593515 0.03293296
+ 0.         0.14547625]
+
+rule5: 34.204 < latitude < 35.641
+probabilities_array:[0.20322885 0.07693718 0.19422403 0.23930065 0.1502826  0.07437791
+ 0.         0.06164884]
+
+rule154: Positive median_income - 3.865, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.27213636 0.25778535 0.21307214 0.03233152 0.         0.
+ 0.         0.22467467]
+
+rule135: Negative population - 1427.045, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.08963083 0.24924743 0.12376894 0.12881653 0.04977062
+ 0.         0.3587656 ]
+
+rule29: 2.592 < median_income < 3.865
+probabilities_array:[0.00033102 0.1015552  0.12596609 0.20243338 0.20473477 0.19389085
+ 0.12731011 0.04377861]
+
+rule108: Positive total_rooms - 2645.149, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.01180605 0.13206083 0.20298919 0.09471199 0.08505913 0.02207865
+ 0.         0.45129418]
+
+rule8: housing_median_age < 20.192
+probabilities_array:[0.00112702 0.1173505  0.19186828 0.136146   0.06671365 0.05446715
+ 0.         0.4323274 ]
+
+rule7: latitude > 37.078
+probabilities_array:[0.         0.21097812 0.16390909 0.10637946 0.00976649 0.03837907
+ 0.09662891 0.37395883]
+
+rule137: Negative population - 1427.045, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.0630132  0.18297058 0.12237331 0.10873433 0.0881465  0.03115098
+ 0.         0.40361106]
+
+rule139: Negative population - 1427.045, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.1434657  0.00719703 0.15406933 0.08364179 0.         0.04005298
+ 0.         0.57157314]
+
+rule28: median_income < 2.592
+probabilities_array:[0.35029373 0.33364645 0.08318133 0.02158012 0.         0.
+ 0.         0.21129838]
+
+rule158: Positive median_income - 3.865, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[2.21497551e-01 2.22840562e-01 1.05382726e-01 4.60559614e-02
+ 0.00000000e+00 2.17305351e-05 0.00000000e+00 4.04201418e-01]
+
+rule60: Positive longitude - -119.580, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0193295  0.09519184 0.16914642 0.06927828 0.         0.
+ 0.         0.64705396]
+
+rule55: Negative longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.02617707 0.11725882 0.17211947 0.14945148 0.01831225
+ 0.         0.5166809 ]
+
+rule40: Positive longitude - -119.580, latitude - 35.641
+probabilities_array:[0.         0.19519033 0.08565576 0.         0.00093955 0.12843452
+ 0.25076857 0.3390113 ]
+
+rule14: 2645.149 < total_rooms < 4142.790
+probabilities_array:[0.14681828 0.03613832 0.10565472 0.0498811  0.14872177 0.04248285
+ 0.         0.47030294]
+
+rule74: Positive latitude - 35.641, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.02100881 0.14571488 0.1582568  0.01028794 0.03305258
+ 0.         0.631679  ]
+
+rule91: Negative housing_median_age - 28.691, median_income - 3.865
+probabilities_array:[0.00979635 0.07412681 0.12679595 0.02544641 0.05211262 0.13176034
+ 0.         0.5799616 ]
+
+rule110: Positive total_rooms - 2645.149, ocean_proximity_ISLAND - 0.000
+probabilities_array:[1.1205986e-01 5.4081954e-02 1.3635780e-01 5.0483871e-02 2.7739096e-02
+ 3.3242689e-04 0.0000000e+00 6.1894500e-01]
+
+rule112: Positive total_rooms - 2645.149, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.03831994 0.07275536 0.11239026 0.04145797 0.09552059 0.07224707
+ 0.         0.56730884]
+
+rule0: longitude < -120.927
+probabilities_array:[3.6086727e-05 0.0000000e+00 6.7173533e-02 1.4755568e-01 2.1171550e-01
+ 1.6074976e-01 1.0112506e-01 3.1164438e-01]
+
+rule10: 28.691 < housing_median_age < 37.190
+probabilities_array:[0.10224149 0.00990998 0.08323793 0.22222191 0.08432191 0.04417831
+ 0.         0.45388848]
+
+rule164: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0000000e+00 1.5499609e-04 5.7381839e-02 2.0574766e-01 2.0115660e-01
+ 1.8961205e-01 1.3718186e-01 2.0876497e-01]
+
+rule141: Negative population - 1427.045, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[1.6798435e-01 3.5396248e-02 1.2120580e-01 1.1578642e-02 3.3552319e-02
+ 5.1759311e-04 0.0000000e+00 6.2976503e-01]
+
+rule94: Positive housing_median_age - 28.691, ocean_proximity_ISLAND - 0.000
+probabilities_array:[1.57221599e-04 6.99429438e-02 9.90943015e-02 1.31666452e-01
+ 1.03108406e-01 2.05236692e-02 0.00000000e+00 5.75507045e-01]
+
+
+---3---
+rule30: 3.865 < median_income < 5.137
+probabilities_array:[0.02734883 0.17732689 0.31135798 0.26915112 0.13227673 0.04946593
+ 0.         0.03307249]
+
+rule5: 34.204 < latitude < 35.641
+probabilities_array:[0.20322885 0.07693718 0.19422403 0.23930065 0.1502826  0.07437791
+ 0.         0.06164884]
+
+rule3: longitude > -118.233
+probabilities_array:[0.00077706 0.06810772 0.38761958 0.27871427 0.04313496 0.00995922
+ 0.         0.21168727]
+
+rule29: 2.592 < median_income < 3.865
+probabilities_array:[0.00033102 0.1015552  0.12596609 0.20243338 0.20473477 0.19389085
+ 0.12731011 0.04377861]
+
+rule152: Positive median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.00034334 0.2023868  0.25478384 0.20814165 0.15593515 0.03293296
+ 0.         0.14547625]
+
+rule23: population > 2213.561
+probabilities_array:[0.12734167 0.16676489 0.26496568 0.18991031 0.11097392 0.05374585
+ 0.         0.08629774]
+
+rule164: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0000000e+00 1.5499609e-04 5.7381839e-02 2.0574766e-01 2.0115660e-01
+ 1.8961205e-01 1.3718186e-01 2.0876497e-01]
+
+rule12: total_rooms < 1147.507
+probabilities_array:[0.21224563 0.15131061 0.25964788 0.14147    0.08947015 0.07389811
+ 0.         0.07195759]
+
+rule10: 28.691 < housing_median_age < 37.190
+probabilities_array:[0.10224149 0.00990998 0.08323793 0.22222191 0.08432191 0.04417831
+ 0.         0.45388848]
+
+rule162: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.00240796 0.02389586 0.14715499 0.23996814 0.21462314
+ 0.16074064 0.21120933]
+
+rule160: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.03811287 0.15537016 0.19115065 0.18232946
+ 0.15392375 0.27911314]
+
+rule0: longitude < -120.927
+probabilities_array:[3.6086727e-05 0.0000000e+00 6.7173533e-02 1.4755568e-01 2.1171550e-01
+ 1.6074976e-01 1.0112506e-01 3.1164438e-01]
+
+rule55: Negative longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.02617707 0.11725882 0.17211947 0.14945148 0.01831225
+ 0.         0.5166809 ]
+
+rule32: ocean_proximity_INLAND = 0.0
+probabilities_array:[0.         0.         0.03994144 0.12011559 0.17674002 0.19735245
+ 0.15832043 0.30753002]
+
+rule135: Negative population - 1427.045, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.08963083 0.24924743 0.12376894 0.12881653 0.04977062
+ 0.         0.3587656 ]
+
+rule8: housing_median_age < 20.192
+probabilities_array:[0.00112702 0.1173505  0.19186828 0.136146   0.06671365 0.05446715
+ 0.         0.4323274 ]
+
+rule157: Negative median_income - 3.865, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.         0.02143358 0.09942676 0.12281729 0.21867596
+ 0.2596215  0.2780249 ]
+
+rule7: latitude > 37.078
+probabilities_array:[0.         0.21097812 0.16390909 0.10637946 0.00976649 0.03837907
+ 0.09662891 0.37395883]
+
+rule137: Negative population - 1427.045, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.0630132  0.18297058 0.12237331 0.10873433 0.0881465  0.03115098
+ 0.         0.40361106]
+
+rule74: Positive latitude - 35.641, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.02100881 0.14571488 0.1582568  0.01028794 0.03305258
+ 0.         0.631679  ]
+
+rule94: Positive housing_median_age - 28.691, ocean_proximity_ISLAND - 0.000
+probabilities_array:[1.57221599e-04 6.99429438e-02 9.90943015e-02 1.31666452e-01
+ 1.03108406e-01 2.05236692e-02 0.00000000e+00 5.75507045e-01]
+
+rule24: households < 237.456
+probabilities_array:[0.12923738 0.05425479 0.03304211 0.11653432 0.07315295 0.
+ 0.05793678 0.53584164]
+
+rule108: Positive total_rooms - 2645.149, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.01180605 0.13206083 0.20298919 0.09471199 0.08505913 0.02207865
+ 0.         0.45129418]
+
+rule37: ocean_proximity_NEAR BAY = 1.0
+probabilities_array:[8.3262578e-02 1.2569031e-04 2.3237709e-03 1.2665145e-01 3.2632735e-02
+ 1.2774354e-02 1.0617779e-01 6.3605160e-01]
+
+rule9: 20.192 < housing_median_age < 28.691
+probabilities_array:[0.05108665 0.01346211 0.         0.09432042 0.12876694 0.00756027
+ 0.13467872 0.57012486]
+
+
+---4---
+rule29: 2.592 < median_income < 3.865
+probabilities_array:[0.00033102 0.1015552  0.12596609 0.20243338 0.20473477 0.19389085
+ 0.12731011 0.04377861]
+
+rule162: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.00240796 0.02389586 0.14715499 0.23996814 0.21462314
+ 0.16074064 0.21120933]
+
+rule159: Negative median_income - 3.865, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[6.0452207e-04 0.0000000e+00 1.3639939e-04 4.5673825e-02 2.5711396e-01
+ 2.2523385e-01 1.5990524e-01 3.1133220e-01]
+
+rule164: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0000000e+00 1.5499609e-04 5.7381839e-02 2.0574766e-01 2.0115660e-01
+ 1.8961205e-01 1.3718186e-01 2.0876497e-01]
+
+rule0: longitude < -120.927
+probabilities_array:[3.6086727e-05 0.0000000e+00 6.7173533e-02 1.4755568e-01 2.1171550e-01
+ 1.6074976e-01 1.0112506e-01 3.1164438e-01]
+
+rule5: 34.204 < latitude < 35.641
+probabilities_array:[0.20322885 0.07693718 0.19422403 0.23930065 0.1502826  0.07437791
+ 0.         0.06164884]
+
+rule160: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.03811287 0.15537016 0.19115065 0.18232946
+ 0.15392375 0.27911314]
+
+rule152: Positive median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.00034334 0.2023868  0.25478384 0.20814165 0.15593515 0.03293296
+ 0.         0.14547625]
+
+rule30: 3.865 < median_income < 5.137
+probabilities_array:[0.02734883 0.17732689 0.31135798 0.26915112 0.13227673 0.04946593
+ 0.         0.03307249]
+
+rule155: Negative median_income - 3.865, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.         0.03933436 0.16807772 0.2513439
+ 0.29232594 0.24891806]
+
+rule32: ocean_proximity_INLAND = 0.0
+probabilities_array:[0.         0.         0.03994144 0.12011559 0.17674002 0.19735245
+ 0.15832043 0.30753002]
+
+rule101: Negative total_rooms - 2645.149, total_bedrooms - 539.828
+probabilities_array:[0.         0.13407348 0.         0.06155058 0.18906042 0.09461537
+ 0.11153896 0.4091612 ]
+
+rule23: population > 2213.561
+probabilities_array:[0.12734167 0.16676489 0.26496568 0.18991031 0.11097392 0.05374585
+ 0.         0.08629774]
+
+rule157: Negative median_income - 3.865, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.         0.02143358 0.09942676 0.12281729 0.21867596
+ 0.2596215  0.2780249 ]
+
+rule27: households > 765.918
+probabilities_array:[0.         0.         0.00140885 0.         0.1794759  0.14976135
+ 0.16062161 0.5087323 ]
+
+rule12: total_rooms < 1147.507
+probabilities_array:[0.21224563 0.15131061 0.25964788 0.14147    0.08947015 0.07389811
+ 0.         0.07195759]
+
+rule135: Negative population - 1427.045, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.08963083 0.24924743 0.12376894 0.12881653 0.04977062
+ 0.         0.3587656 ]
+
+rule31: median_income > 5.137
+probabilities_array:[0.         0.         0.         0.00707666 0.10803638 0.2508224
+ 0.3746847  0.25937992]
+
+rule20: population < 640.529
+probabilities_array:[0.         0.00161254 0.00064572 0.0313068  0.09289078 0.26429883
+ 0.45944533 0.14979999]
+
+rule14: 2645.149 < total_rooms < 4142.790
+probabilities_array:[0.14681828 0.03613832 0.10565472 0.0498811  0.14872177 0.04248285
+ 0.         0.47030294]
+
+rule55: Negative longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.         0.02617707 0.11725882 0.17211947 0.14945148 0.01831225
+ 0.         0.5166809 ]
+
+rule9: 20.192 < housing_median_age < 28.691
+probabilities_array:[0.05108665 0.01346211 0.         0.09432042 0.12876694 0.00756027
+ 0.13467872 0.57012486]
+
+rule52: Positive longitude - -119.580, median_income - 3.865
+probabilities_array:[0.06596349 0.06570937 0.05033897 0.03739593 0.14477201 0.00858806
+ 0.         0.6272322 ]
+
+rule2: -119.580 < longitude < -118.233
+probabilities_array:[0.22461194 0.11388248 0.         0.01982385 0.05957362 0.10661992
+ 0.3753721  0.10011605]
+
+rule137: Negative population - 1427.045, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.0630132  0.18297058 0.12237331 0.10873433 0.0881465  0.03115098
+ 0.         0.40361106]
+
+rule119: Negative total_bedrooms - 539.828, households - 501.687
+probabilities_array:[0.10497835 0.06969506 0.         0.07325541 0.09804274 0.15441695
+ 0.01547888 0.48413268]
+
+rule108: Positive total_rooms - 2645.149, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.01180605 0.13206083 0.20298919 0.09471199 0.08505913 0.02207865
+ 0.         0.45129418]
+
+rule10: 28.691 < housing_median_age < 37.190
+probabilities_array:[0.10224149 0.00990998 0.08323793 0.22222191 0.08432191 0.04417831
+ 0.         0.45388848]
+
+rule132: Positive population - 1427.045, median_income - 3.865
+probabilities_array:[0.05869833 0.         0.09993757 0.06925596 0.114168   0.05157778
+ 0.         0.60636234]
+
+rule94: Positive housing_median_age - 28.691, ocean_proximity_ISLAND - 0.000
+probabilities_array:[1.57221599e-04 6.99429438e-02 9.90943015e-02 1.31666452e-01
+ 1.03108406e-01 2.05236692e-02 0.00000000e+00 5.75507045e-01]
+
+rule112: Positive total_rooms - 2645.149, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.03831994 0.07275536 0.11239026 0.04145797 0.09552059 0.07224707
+ 0.         0.56730884]
+
+
+---5---
+rule35: ocean_proximity_ISLAND = 1.0
+probabilities_array:[0.         0.         0.         0.         0.         0.4099241
+ 0.42827275 0.16180313]
+
+rule20: population < 640.529
+probabilities_array:[0.         0.00161254 0.00064572 0.0313068  0.09289078 0.26429883
+ 0.45944533 0.14979999]
+
+rule155: Negative median_income - 3.865, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.         0.03933436 0.16807772 0.2513439
+ 0.29232594 0.24891806]
+
+rule31: median_income > 5.137
+probabilities_array:[0.         0.         0.         0.00707666 0.10803638 0.2508224
+ 0.3746847  0.25937992]
+
+rule29: 2.592 < median_income < 3.865
+probabilities_array:[0.00033102 0.1015552  0.12596609 0.20243338 0.20473477 0.19389085
+ 0.12731011 0.04377861]
+
+rule162: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.00240796 0.02389586 0.14715499 0.23996814 0.21462314
+ 0.16074064 0.21120933]
+
+rule157: Negative median_income - 3.865, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.         0.02143358 0.09942676 0.12281729 0.21867596
+ 0.2596215  0.2780249 ]
+
+rule159: Negative median_income - 3.865, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[6.0452207e-04 0.0000000e+00 1.3639939e-04 4.5673825e-02 2.5711396e-01
+ 2.2523385e-01 1.5990524e-01 3.1133220e-01]
+
+rule164: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0000000e+00 1.5499609e-04 5.7381839e-02 2.0574766e-01 2.0115660e-01
+ 1.8961205e-01 1.3718186e-01 2.0876497e-01]
+
+rule32: ocean_proximity_INLAND = 0.0
+probabilities_array:[0.         0.         0.03994144 0.12011559 0.17674002 0.19735245
+ 0.15832043 0.30753002]
+
+rule160: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.03811287 0.15537016 0.19115065 0.18232946
+ 0.15392375 0.27911314]
+
+rule0: longitude < -120.927
+probabilities_array:[3.6086727e-05 0.0000000e+00 6.7173533e-02 1.4755568e-01 2.1171550e-01
+ 1.6074976e-01 1.0112506e-01 3.1164438e-01]
+
+rule2: -119.580 < longitude < -118.233
+probabilities_array:[0.22461194 0.11388248 0.         0.01982385 0.05957362 0.10661992
+ 0.3753721  0.10011605]
+
+rule169: Negative ocean_proximity_ISLAND - 0.000, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[9.5880024e-02 5.8444753e-02 5.6724763e-05 0.0000000e+00 4.7988594e-02
+ 1.5014900e-01 2.1578887e-01 4.3169209e-01]
+
+rule40: Positive longitude - -119.580, latitude - 35.641
+probabilities_array:[0.         0.19519033 0.08565576 0.         0.00093955 0.12843452
+ 0.25076857 0.3390113 ]
+
+rule119: Negative total_bedrooms - 539.828, households - 501.687
+probabilities_array:[0.10497835 0.06969506 0.         0.07325541 0.09804274 0.15441695
+ 0.01547888 0.48413268]
+
+rule15: total_rooms > 4142.790
+probabilities_array:[0.0000000e+00 5.7312995e-03 0.0000000e+00 1.4477978e-04 0.0000000e+00
+ 1.4227241e-01 3.8586882e-01 4.6598265e-01]
+
+rule11: housing_median_age > 37.190
+probabilities_array:[0.07388897 0.02652825 0.         0.         0.02788724 0.12290222
+ 0.3666693  0.38212404]
+
+rule27: households > 765.918
+probabilities_array:[0.         0.         0.00140885 0.         0.1794759  0.14976135
+ 0.16062161 0.5087323 ]
+
+rule39: ocean_proximity_NEAR OCEAN = 1.0
+probabilities_array:[9.4936170e-02 6.3666321e-02 7.0605507e-05 0.0000000e+00 6.6086225e-02
+ 1.3376746e-01 1.8441617e-01 4.5705700e-01]
+
+rule5: 34.204 < latitude < 35.641
+probabilities_array:[0.20322885 0.07693718 0.19422403 0.23930065 0.1502826  0.07437791
+ 0.         0.06164884]
+
+rule12: total_rooms < 1147.507
+probabilities_array:[0.21224563 0.15131061 0.25964788 0.14147    0.08947015 0.07389811
+ 0.         0.07195759]
+
+rule80: Positive latitude - 35.641, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[3.8753802e-04 1.4678079e-06 0.0000000e+00 1.6045297e-02 7.6322772e-02
+ 1.6696556e-01 1.3679191e-01 6.0348547e-01]
+
+rule61: Negative longitude - -119.580, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.01762762 0.         0.         0.00242766 0.10983726 0.16580796
+ 0.06546243 0.6388371 ]
+
+rule153: Negative median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[2.1324229e-01 0.0000000e+00 7.7615964e-04 1.1091123e-06 1.1523968e-04
+ 9.2624113e-02 3.2579538e-01 3.6744571e-01]
+
+rule101: Negative total_rooms - 2645.149, total_bedrooms - 539.828
+probabilities_array:[0.         0.13407348 0.         0.06155058 0.18906042 0.09461537
+ 0.11153896 0.4091612 ]
+
+rule68: Positive latitude - 35.641, population - 1427.045
+probabilities_array:[7.4353129e-02 0.0000000e+00 8.2072914e-03 5.9834696e-05 7.1822800e-02
+ 1.4078555e-01 9.8136634e-02 6.0663480e-01]
+
+rule91: Negative housing_median_age - 28.691, median_income - 3.865
+probabilities_array:[0.00979635 0.07412681 0.12679595 0.02544641 0.05211262 0.13176034
+ 0.         0.5799616 ]
+
+rule25: 237.456 < households < 501.687
+probabilities_array:[1.0277787e-01 4.5728438e-02 2.2404757e-03 1.0705383e-03 6.5480519e-05
+ 1.6959181e-01 0.0000000e+00 6.7852539e-01]
+
+rule54: Positive longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.21772073 0.08464457 0.         0.         0.00255746 0.09454365
+ 0.16635966 0.43417397]
+
+rule171: Negative ocean_proximity_NEAR BAY - 0.111, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.09375959 0.03221005 0.         0.         0.05974808 0.10884341
+ 0.17281355 0.53262526]
+
+rule72: Positive latitude - 35.641, median_income - 3.865
+probabilities_array:[0.         0.07388546 0.03084042 0.04575235 0.0841939  0.13308129
+ 0.00757587 0.6246707 ]
+
+rule115: Negative total_rooms - 2645.149, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[6.1079167e-02 2.9531576e-02 0.0000000e+00 1.3675585e-05 3.6686271e-02
+ 1.5289375e-01 4.5773212e-02 6.7402232e-01]
+
+rule23: population > 2213.561
+probabilities_array:[0.12734167 0.16676489 0.26496568 0.18991031 0.11097392 0.05374585
+ 0.         0.08629774]
+
+rule30: 3.865 < median_income < 5.137
+probabilities_array:[0.02734883 0.17732689 0.31135798 0.26915112 0.13227673 0.04946593
+ 0.         0.03307249]
+
+rule92: Positive housing_median_age - 28.691, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.09395535 0.01499766 0.05441665 0.         0.06835929 0.11572196
+ 0.04918225 0.6033668 ]
+
+rule143: Negative households - 501.687, median_income - 3.865
+probabilities_array:[0.         0.02691453 0.06405723 0.0740518  0.09109721 0.11724853
+ 0.01682697 0.60980374]
+
+rule4: latitude < 34.204
+probabilities_array:[0.         0.15194814 0.06062763 0.01305636 0.00358842 0.07729824
+ 0.25483656 0.43864468]
+
+rule147: Negative households - 501.687, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.0000000e+00 1.3123463e-05 6.4444845e-03 5.6358587e-02 5.9321832e-02
+ 1.2326799e-01 9.2120625e-02 6.6247332e-01]
+
+rule87: Negative housing_median_age - 28.691, population - 1427.045
+probabilities_array:[2.2711897e-04 4.4539057e-02 1.5094825e-02 1.8130234e-04 1.4710455e-02
+ 1.3713297e-01 8.6014681e-02 7.0209956e-01]
+
+rule44: Positive longitude - -119.580, total_rooms - 2645.149
+probabilities_array:[0.00711782 0.00268506 0.00225291 0.00358425 0.05859463 0.12938654
+ 0.11104341 0.6853354 ]
+
+rule140: Positive population - 1427.045, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[1.8697671e-04 3.0788420e-02 0.0000000e+00 1.5557666e-02 1.2064215e-02
+ 1.2983106e-01 1.2339498e-01 6.8817669e-01]
+
+
+---6---
+rule20: population < 640.529
+probabilities_array:[0.         0.00161254 0.00064572 0.0313068  0.09289078 0.26429883
+ 0.45944533 0.14979999]
+
+rule35: ocean_proximity_ISLAND = 1.0
+probabilities_array:[0.         0.         0.         0.         0.         0.4099241
+ 0.42827275 0.16180313]
+
+rule2: -119.580 < longitude < -118.233
+probabilities_array:[0.22461194 0.11388248 0.         0.01982385 0.05957362 0.10661992
+ 0.3753721  0.10011605]
+
+rule31: median_income > 5.137
+probabilities_array:[0.         0.         0.         0.00707666 0.10803638 0.2508224
+ 0.3746847  0.25937992]
+
+rule11: housing_median_age > 37.190
+probabilities_array:[0.07388897 0.02652825 0.         0.         0.02788724 0.12290222
+ 0.3666693  0.38212404]
+
+rule155: Negative median_income - 3.865, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.         0.03933436 0.16807772 0.2513439
+ 0.29232594 0.24891806]
+
+rule153: Negative median_income - 3.865, ocean_proximity_INLAND - 0.319
+probabilities_array:[2.1324229e-01 0.0000000e+00 7.7615964e-04 1.1091123e-06 1.1523968e-04
+ 9.2624113e-02 3.2579538e-01 3.6744571e-01]
+
+rule15: total_rooms > 4142.790
+probabilities_array:[0.0000000e+00 5.7312995e-03 0.0000000e+00 1.4477978e-04 0.0000000e+00
+ 1.4227241e-01 3.8586882e-01 4.6598265e-01]
+
+rule157: Negative median_income - 3.865, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.         0.02143358 0.09942676 0.12281729 0.21867596
+ 0.2596215  0.2780249 ]
+
+rule40: Positive longitude - -119.580, latitude - 35.641
+probabilities_array:[0.         0.19519033 0.08565576 0.         0.00093955 0.12843452
+ 0.25076857 0.3390113 ]
+
+rule4: latitude < 34.204
+probabilities_array:[0.         0.15194814 0.06062763 0.01305636 0.00358842 0.07729824
+ 0.25483656 0.43864468]
+
+rule162: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[0.         0.00240796 0.02389586 0.14715499 0.23996814 0.21462314
+ 0.16074064 0.21120933]
+
+rule169: Negative ocean_proximity_ISLAND - 0.000, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[9.5880024e-02 5.8444753e-02 5.6724763e-05 0.0000000e+00 4.7988594e-02
+ 1.5014900e-01 2.1578887e-01 4.3169209e-01]
+
+rule29: 2.592 < median_income < 3.865
+probabilities_array:[0.00033102 0.1015552  0.12596609 0.20243338 0.20473477 0.19389085
+ 0.12731011 0.04377861]
+
+rule160: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.         0.03811287 0.15537016 0.19115065 0.18232946
+ 0.15392375 0.27911314]
+
+rule159: Negative median_income - 3.865, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[6.0452207e-04 0.0000000e+00 1.3639939e-04 4.5673825e-02 2.5711396e-01
+ 2.2523385e-01 1.5990524e-01 3.1133220e-01]
+
+rule32: ocean_proximity_INLAND = 0.0
+probabilities_array:[0.         0.         0.03994144 0.12011559 0.17674002 0.19735245
+ 0.15832043 0.30753002]
+
+rule164: Positive ocean_proximity_INLAND - 0.319, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.0000000e+00 1.5499609e-04 5.7381839e-02 2.0574766e-01 2.0115660e-01
+ 1.8961205e-01 1.3718186e-01 2.0876497e-01]
+
+rule39: ocean_proximity_NEAR OCEAN = 1.0
+probabilities_array:[9.4936170e-02 6.3666321e-02 7.0605507e-05 0.0000000e+00 6.6086225e-02
+ 1.3376746e-01 1.8441617e-01 4.5705700e-01]
+
+rule109: Negative total_rooms - 2645.149, ocean_proximity_INLAND - 0.319
+probabilities_array:[1.0774780e-01 2.2213729e-03 0.0000000e+00 2.6977042e-04 4.8515428e-04
+ 6.8889111e-02 2.3436376e-01 5.8602303e-01]
+
+rule54: Positive longitude - -119.580, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.21772073 0.08464457 0.         0.         0.00255746 0.09454365
+ 0.16635966 0.43417397]
+
+rule19: total_bedrooms > 830.140
+probabilities_array:[0.         0.         0.         0.         0.01582613 0.07995015
+ 0.24328996 0.6609338 ]
+
+rule171: Negative ocean_proximity_NEAR BAY - 0.111, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.09375959 0.03221005 0.         0.         0.05974808 0.10884341
+ 0.17281355 0.53262526]
+
+rule27: households > 765.918
+probabilities_array:[0.         0.         0.00140885 0.         0.1794759  0.14976135
+ 0.16062161 0.5087323 ]
+
+rule113: Negative total_rooms - 2645.149, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[4.2631950e-02 2.7792439e-02 0.0000000e+00 2.4961022e-04 0.0000000e+00
+ 2.6679389e-02 2.2371452e-01 6.7893213e-01]
+
+rule134: Positive population - 1427.045, ocean_proximity_INLAND - 0.319
+probabilities_array:[1.6129307e-01 0.0000000e+00 0.0000000e+00 0.0000000e+00 0.0000000e+00
+ 4.9811992e-04 1.9526772e-01 6.4294106e-01]
+
+rule0: longitude < -120.927
+probabilities_array:[3.6086727e-05 0.0000000e+00 6.7173533e-02 1.4755568e-01 2.1171550e-01
+ 1.6074976e-01 1.0112506e-01 3.1164438e-01]
+
+rule131: Negative population - 1427.045, households - 501.687
+probabilities_array:[4.7203597e-02 4.8706483e-02 2.5987320e-02 3.3834812e-04 0.0000000e+00
+ 6.4834841e-02 1.8522455e-01 6.2770486e-01]
+
+rule1: -120.927 < longitude < -119.580
+probabilities_array:[0.25300157 0.15323071 0.00122512 0.         0.         0.
+ 0.12851737 0.4640252 ]
+
+rule101: Negative total_rooms - 2645.149, total_bedrooms - 539.828
+probabilities_array:[0.         0.13407348 0.         0.06155058 0.18906042 0.09461537
+ 0.11153896 0.4091612 ]
+
+rule111: Negative total_rooms - 2645.149, ocean_proximity_ISLAND - 0.000
+probabilities_array:[0.         0.00925103 0.         0.0106157  0.00320177 0.06959607
+ 0.21082562 0.69650984]
+
+rule7: latitude > 37.078
+probabilities_array:[0.         0.21097812 0.16390909 0.10637946 0.00976649 0.03837907
+ 0.09662891 0.37395883]
+
+rule9: 20.192 < housing_median_age < 28.691
+probabilities_array:[0.05108665 0.01346211 0.         0.09432042 0.12876694 0.00756027
+ 0.13467872 0.57012486]
+
+rule129: Negative total_bedrooms - 539.828, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[0.10080779 0.         0.         0.00922884 0.0136407  0.03378905
+ 0.17312637 0.66940725]
+
+rule105: Negative total_rooms - 2645.149, households - 501.687
+probabilities_array:[0.0000000e+00 2.1893883e-04 3.0364806e-03 4.1879319e-02 2.3727702e-02
+ 4.6424503e-03 2.0248641e-01 7.2400874e-01]
+
+rule75: Negative latitude - 35.641, ocean_proximity_INLAND - 0.319
+probabilities_array:[0.23639566 0.01281047 0.         0.         0.03417328 0.07369281
+ 0.11674275 0.52618504]
+
+rule80: Positive latitude - 35.641, ocean_proximity_NEAR OCEAN - 0.129
+probabilities_array:[3.8753802e-04 1.4678079e-06 0.0000000e+00 1.6045297e-02 7.6322772e-02
+ 1.6696556e-01 1.3679191e-01 6.0348547e-01]
+
+rule22: 1427.045 < population < 2213.561
+probabilities_array:[0.0419065  0.12918852 0.00109019 0.02982473 0.0174407  0.
+ 0.14542437 0.635125  ]
+
+rule90: Positive housing_median_age - 28.691, median_income - 3.865
+probabilities_array:[0.08378405 0.0480229  0.         0.02734112 0.02583818 0.01304905
+ 0.14961576 0.65234894]
+
+rule95: Negative housing_median_age - 28.691, ocean_proximity_ISLAND - 0.000
+probabilities_array:[1.0821560e-01 0.0000000e+00 0.0000000e+00 1.9803600e-05 0.0000000e+00
+ 7.6592833e-02 1.5108435e-01 6.6408741e-01]
+
+rule88: Positive housing_median_age - 28.691, households - 501.687
+probabilities_array:[3.3785824e-02 1.1305172e-02 0.0000000e+00 3.7761129e-04 1.0072592e-01
+ 6.2594689e-02 1.4381126e-01 6.4739960e-01]
+
+rule167: Negative ocean_proximity_ISLAND - 0.000, ocean_proximity_NEAR BAY - 0.111
+probabilities_array:[8.01628008e-02 8.67827403e-05 4.85765195e-04 1.01314045e-01
+ 7.98879843e-03 2.86530033e-02 1.39040127e-01 6.42268717e-01]
+
+rule136: Positive population - 1427.045, ocean_proximity_ISLAND - 0.000
+probabilities_array:[9.0296036e-03 0.0000000e+00 0.0000000e+00 4.1220270e-04 6.9782516e-04
+ 5.5904213e-02 1.8816245e-01 7.4579376e-01]
+

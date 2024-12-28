@@ -1,9 +1,18 @@
 import os
+import sys
 import json
 import pandas as pd
+import xgboost as xgb
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+# Append the project path to sys.path and set the working directory
+sys.path.append('/home/davtyan.edd/projects/EIRegression/')
+os.chdir('/home/davtyan.edd/projects/EIRegression/')
+
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-import xgboost as xgb
+
 from EIRegressor.EmbeddedInterpreter import EmbeddedInterpreter
 from EIRegressor.model_optimizer import ModelOptimizer
 
@@ -14,16 +23,16 @@ def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile", single_r
     # test_data = pd.read_csv("/Users/eddavtyan/Documents/XAI/Projects/EIRegression/examples/datasets/bank32NH/bank32nh.test", delim_whitespace=True, header=None)
 
     train_data = pd.read_csv(
-        "/home/edgar.davtyan/projects/recla_v1/examples/datasets/bank32NH/bank32nh.data",
+        "examples/datasets/bank32NH/bank32nh.data",
         delim_whitespace=True, header=None)
     test_data = pd.read_csv(
-        "/home/edgar.davtyan/projects/recla_v1/examples/datasets/bank32NH/bank32nh.test",
+        "examples/datasets/bank32NH/bank32nh.test",
         delim_whitespace=True, header=None)
 
     # Load domain file for column names
     # domain_data = pd.read_csv("/Users/eddavtyan/Documents/XAI/Projects/EIRegression/examples/datasets/bank32NH/bank32nh.domain", delim_whitespace=True, header=None)
     domain_data = pd.read_csv(
-        "/home/edgar.davtyan/projects/recla_v1/examples/datasets/bank32NH/bank32nh.domain",
+        "examples/datasets/bank32NH/bank32nh.domain",
         delim_whitespace=True, header=None)
     column_names = domain_data.iloc[:, 0].apply(lambda x: x.split()[0]).tolist()
 
@@ -137,5 +146,5 @@ def run_multiple_executions(save_dir, num_buckets, num_iterations, single_rules_
 
 
 if __name__ == '__main__':
-    save_dir = "examples/RFRegression/bank32NH"
-    run_multiple_executions(save_dir, 3, 1)
+    save_dir = "examples/XGBRegression/results/bank32NH_3_breaks"
+    run_multiple_executions(save_dir, 10, 25)

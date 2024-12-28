@@ -1,0 +1,472 @@
+MSE: 3038826756505740.0
+
+Accuracy: 0.45010924981791695
+
+F1: 0.4432248191802863
+
+Average Similarity: 0.49551674521960715
+
+Confusion Matrix: [[176, 62, 29, 13, 7], [77, 88, 66, 32, 13], [40, 59, 104, 61, 26], [16, 34, 59, 73, 79], [3, 15, 19, 45, 177]]
+
+Similarity Matrix: [[0.5641025641025641, 0.023223050733063785, 0.009197395337164033, 0.005103004382827715, 0.001278129359772767], [0.02357111840133304, 0.34108527131782945, 0.019607861260270837, 0.011900841864617475, 0.0025535134273670826], [0.011872222045869086, 0.02066619329185435, 0.37545126353790614, 0.02292608608008045, 0.005271904586398111], [0.004726658727291007, 0.011386653805847686, 0.018104676689575838, 0.32589285714285715, 0.014417173141462585], [0.0009097298812055823, 0.005212408352287108, 0.005692801608996096, 0.01474603894118372, 0.5860927152317881]]
+
+Uncertainties: {'class0': [0.18174955248832703, 0.19436155259609222, 0.3472762405872345, 0.36099812388420105, 0.474285364151001], 'class1': [0.18174955248832703, 0.19436155259609222, 0.23565787076950073, 0.2616681754589081, 0.3472762405872345], 'class2': [0.19436155259609222, 0.23565787076950073, 0.24584701657295227, 0.2616681754589081, 0.3472762405872345], 'class3': [0.19436155259609222, 0.23565787076950073, 0.24584701657295227, 0.2616681754589081, 0.3472762405872345], 'class4': [0.18174955248832703, 0.24584701657295227, 0.2616681754589081, 0.38146457076072693, 0.4889172911643982]}
+
+Most important rules
+-----------------------------
+
+---0---
+rule51: budget > 212885038.648
+probabilities_array:[0.39015114 0.19686121 0.         0.         0.23123813 0.18174955]
+
+rule22: 722.070 < director_facebook_likes < 2693.078
+probabilities_array:[0.31898367 0.10746866 0.10975052 0.11652097 0.         0.34727624]
+
+rule9: -3021.741 < num_voted_users < 98792.966
+probabilities_array:[0.20972893 0.1933377  0.21028976 0.19228208 0.         0.19436155]
+
+rule16: num_user_for_reviews < 37.369
+probabilities_array:[0.38543764 0.         0.         0.         0.         0.61456233]
+
+rule12: num_critic_for_reviews < 75.856
+probabilities_array:[0.31850374 0.10976798 0.         0.         0.         0.5717283 ]
+
+rule1: 5.735 < imdb_score < 6.470
+probabilities_array:[0.26383966 0.         0.02858202 0.07519739 0.11010489 0.52227604]
+
+rule5: 1996.525 < title_year < 2003.285
+probabilities_array:[0.28931838 0.12209328 0.         0.         0.         0.58858836]
+
+rule49: -124143687.635 < budget < 44370675.506
+probabilities_array:[0.1854593  0.21406052 0.19587947 0.04360259 0.         0.36099812]
+
+rule3: imdb_score > 7.205
+probabilities_array:[0.2325374  0.12147712 0.11029185 0.         0.         0.53569365]
+
+rule59: Negative imdb_score - 6.470, num_user_for_reviews - 315.768
+probabilities_array:[0.16153634 0.06146915 0.         0.07988346 0.07007536 0.62703574]
+
+rule102: Positive num_voted_users - 98792.966, director_facebook_likes - 722.070
+probabilities_array:[0.10574815 0.11776983 0.18955539 0.11264122 0.         0.47428536]
+
+rule55: Negative imdb_score - 6.470, num_voted_users - 98792.966
+probabilities_array:[0.1577428  0.0638615  0.         0.06309665 0.06312702 0.6521721 ]
+
+rule65: Negative imdb_score - 6.470, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.1614018  0.09506234 0.00298017 0.         0.04604855 0.6945072 ]
+
+rule136: Positive num_user_for_reviews - 315.768, director_facebook_likes - 722.070
+probabilities_array:[0.14977784 0.12365332 0.         0.         0.02713881 0.6994301 ]
+
+rule177: Negative actor_1_facebook_likes - 7400.443, budget - 44370675.506
+probabilities_array:[0.17498513 0.03311558 0.04157208 0.         0.         0.7503272 ]
+
+rule6: 2003.285 < title_year < 2010.046
+probabilities_array:[0.14810069 0.08460564 0.03616467 0.01442605 0.         0.716703  ]
+
+rule112: Positive num_voted_users - 98792.966, movie_facebook_likes - 9095.070
+probabilities_array:[0.07967298 0.16722713 0.06763696 0.21059045 0.         0.4748725 ]
+
+rule97: Negative title_year - 2003.285, budget - 44370675.506
+probabilities_array:[0.12255432 0.03984401 0.04372184 0.12876467 0.00612125 0.65899396]
+
+rule73: Negative imdb_score - 6.470, duration - 109.249
+probabilities_array:[0.14834905 0.01984539 0.         0.02652249 0.08460441 0.7206786 ]
+
+
+---1---
+rule0: imdb_score < 5.735
+probabilities_array:[0.         0.29487923 0.21265392 0.13327786 0.         0.35918903]
+
+rule17: 37.369 < num_user_for_reviews < 315.768
+probabilities_array:[0.         0.23317616 0.30756435 0.21470128 0.0089003  0.23565787]
+
+rule51: budget > 212885038.648
+probabilities_array:[0.39015114 0.19686121 0.         0.         0.23123813 0.18174955]
+
+rule9: -3021.741 < num_voted_users < 98792.966
+probabilities_array:[0.20972893 0.1933377  0.21028976 0.19228208 0.         0.19436155]
+
+rule49: -124143687.635 < budget < 44370675.506
+probabilities_array:[0.1854593  0.21406052 0.19587947 0.04360259 0.         0.36099812]
+
+rule30: 1903.918 < actor_2_facebook_likes < 4554.465
+probabilities_array:[0.         0.2183817  0.0696018  0.24234396 0.06671856 0.40295398]
+
+rule101: Negative num_voted_users - 98792.966, num_user_for_reviews - 315.768
+probabilities_array:[0.         0.19113323 0.16137297 0.         0.26602927 0.38146457]
+
+rule18: 315.768 < num_user_for_reviews < 594.168
+probabilities_array:[0.         0.20215358 0.01763387 0.14085129 0.10652869 0.5328326 ]
+
+rule112: Positive num_voted_users - 98792.966, movie_facebook_likes - 9095.070
+probabilities_array:[0.07967298 0.16722713 0.06763696 0.21059045 0.         0.4748725 ]
+
+rule13: 75.856 < num_critic_for_reviews < 159.437
+probabilities_array:[0.         0.11481545 0.21689144 0.2504255  0.15619949 0.26166818]
+
+rule22: 722.070 < director_facebook_likes < 2693.078
+probabilities_array:[0.31898367 0.10746866 0.10975052 0.11652097 0.         0.34727624]
+
+rule164: Positive director_facebook_likes - 722.070, budget - 44370675.506
+probabilities_array:[0.09232686 0.16011848 0.17549604 0.         0.         0.5720586 ]
+
+rule102: Positive num_voted_users - 98792.966, director_facebook_likes - 722.070
+probabilities_array:[0.10574815 0.11776983 0.18955539 0.11264122 0.         0.47428536]
+
+rule27: actor_1_facebook_likes > 18637.066
+probabilities_array:[0.         0.14786465 0.07725537 0.16106981 0.02552505 0.58828515]
+
+rule14: 159.437 < num_critic_for_reviews < 243.019
+probabilities_array:[0.         0.17725252 0.03875177 0.         0.10924979 0.6747459 ]
+
+rule135: Negative num_critic_for_reviews - 159.437, budget - 44370675.506
+probabilities_array:[0.04817175 0.1697929  0.11251473 0.00471862 0.         0.664802  ]
+
+rule3: imdb_score > 7.205
+probabilities_array:[0.2325374  0.12147712 0.11029185 0.         0.         0.53569365]
+
+rule155: Negative director_facebook_likes - 722.070, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.01531293 0.15149087 0.01358731 0.17172204 0.         0.6478869 ]
+
+rule119: Negative num_critic_for_reviews - 159.437, num_user_for_reviews - 315.768
+probabilities_array:[0.06443984 0.15829736 0.10048361 0.         0.         0.6767792 ]
+
+rule5: 1996.525 < title_year < 2003.285
+probabilities_array:[0.28931838 0.12209328 0.         0.         0.         0.58858836]
+
+rule75: Negative imdb_score - 6.470, budget - 44370675.506
+probabilities_array:[0.         0.18743084 0.07783984 0.         0.         0.7347293 ]
+
+rule12: num_critic_for_reviews < 75.856
+probabilities_array:[0.31850374 0.10976798 0.         0.         0.         0.5717283 ]
+
+rule203: Negative movie_facebook_likes - 9095.070, duration - 109.249
+probabilities_array:[0.         0.18223637 0.05165681 0.         0.         0.7661068 ]
+
+rule94: Positive title_year - 2003.285, duration - 109.249
+probabilities_array:[0.06421148 0.1423556  0.08666876 0.         0.         0.70676416]
+
+
+---2---
+rule17: 37.369 < num_user_for_reviews < 315.768
+probabilities_array:[0.         0.23317616 0.30756435 0.21470128 0.0089003  0.23565787]
+
+rule9: -3021.741 < num_voted_users < 98792.966
+probabilities_array:[0.20972893 0.1933377  0.21028976 0.19228208 0.         0.19436155]
+
+rule13: 75.856 < num_critic_for_reviews < 159.437
+probabilities_array:[0.         0.11481545 0.21689144 0.2504255  0.15619949 0.26166818]
+
+rule0: imdb_score < 5.735
+probabilities_array:[0.         0.29487923 0.21265392 0.13327786 0.         0.35918903]
+
+rule49: -124143687.635 < budget < 44370675.506
+probabilities_array:[0.1854593  0.21406052 0.19587947 0.04360259 0.         0.36099812]
+
+rule137: Negative num_user_for_reviews - 315.768, director_facebook_likes - 722.070
+probabilities_array:[0.         0.00579463 0.24965006 0.12605545 0.11869742 0.4998025 ]
+
+rule101: Negative num_voted_users - 98792.966, num_user_for_reviews - 315.768
+probabilities_array:[0.         0.19113323 0.16137297 0.         0.26602927 0.38146457]
+
+rule102: Positive num_voted_users - 98792.966, director_facebook_likes - 722.070
+probabilities_array:[0.10574815 0.11776983 0.18955539 0.11264122 0.         0.47428536]
+
+rule131: Negative num_critic_for_reviews - 159.437, movie_facebook_likes - 9095.070
+probabilities_array:[3.8251921e-05 0.0000000e+00 1.7842008e-01 2.2717267e-01 1.0070597e-01
+ 4.9366307e-01]
+
+rule151: Negative num_user_for_reviews - 315.768, budget - 44370675.506
+probabilities_array:[0.         0.         0.20560575 0.1481328  0.02494835 0.6213131 ]
+
+rule15: num_critic_for_reviews > 243.019
+probabilities_array:[0.         0.         0.17553098 0.0929654  0.16736755 0.5641361 ]
+
+rule164: Positive director_facebook_likes - 722.070, budget - 44370675.506
+probabilities_array:[0.09232686 0.16011848 0.17549604 0.         0.         0.5720586 ]
+
+rule42: 9095.070 < movie_facebook_likes < 23900.973
+probabilities_array:[0.00109903 0.         0.25245175 0.         0.03854653 0.70790267]
+
+rule4: title_year < 1996.525
+probabilities_array:[0.         0.02555496 0.0955991  0.2821276  0.35087135 0.24584702]
+
+rule22: 722.070 < director_facebook_likes < 2693.078
+probabilities_array:[0.31898367 0.10746866 0.10975052 0.11652097 0.         0.34727624]
+
+rule117: Negative num_voted_users - 98792.966, budget - 44370675.506
+probabilities_array:[0.         0.00327815 0.15113032 0.13585573 0.16254614 0.54718965]
+
+rule23: director_facebook_likes > 2693.078
+probabilities_array:[0.         0.02394414 0.16237225 0.         0.22762962 0.5860539 ]
+
+rule57: Negative imdb_score - 6.470, num_critic_for_reviews - 159.437
+probabilities_array:[0.08322388 0.         0.11416643 0.17376216 0.10449923 0.5243484 ]
+
+rule54: Positive imdb_score - 6.470, num_voted_users - 98792.966
+probabilities_array:[0.         0.00105381 0.1945788  0.01597019 0.06077112 0.7276261 ]
+
+rule149: Negative num_user_for_reviews - 315.768, duration - 109.249
+probabilities_array:[0.01929766 0.0141976  0.18045269 0.07343849 0.         0.7126136 ]
+
+rule3: imdb_score > 7.205
+probabilities_array:[0.2325374  0.12147712 0.11029185 0.         0.         0.53569365]
+
+rule195: Negative actor_3_facebook_likes - 763.417, budget - 44370675.506
+probabilities_array:[0.04540184 0.         0.13564123 0.04220582 0.1482574  0.62849367]
+
+rule125: Negative num_critic_for_reviews - 159.437, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.04776043 0.         0.16899379 0.06580364 0.         0.71744215]
+
+rule10: 98792.966 < num_voted_users < 200607.672
+probabilities_array:[0.         0.         0.09732752 0.36936164 0.         0.53331083]
+
+rule147: Negative num_user_for_reviews - 315.768, movie_facebook_likes - 9095.070
+probabilities_array:[0.         0.         0.08376537 0.34091637 0.08640091 0.4889173 ]
+
+rule30: 1903.918 < actor_2_facebook_likes < 4554.465
+probabilities_array:[0.         0.2183817  0.0696018  0.24234396 0.06671856 0.40295398]
+
+rule64: Positive imdb_score - 6.470, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.         0.01561891 0.12577645 0.11569987 0.06152236 0.6813824 ]
+
+
+---3---
+rule4: title_year < 1996.525
+probabilities_array:[0.         0.02555496 0.0955991  0.2821276  0.35087135 0.24584702]
+
+rule13: 75.856 < num_critic_for_reviews < 159.437
+probabilities_array:[0.         0.11481545 0.21689144 0.2504255  0.15619949 0.26166818]
+
+rule147: Negative num_user_for_reviews - 315.768, movie_facebook_likes - 9095.070
+probabilities_array:[0.         0.         0.08376537 0.34091637 0.08640091 0.4889173 ]
+
+rule10: 98792.966 < num_voted_users < 200607.672
+probabilities_array:[0.         0.         0.09732752 0.36936164 0.         0.53331083]
+
+rule17: 37.369 < num_user_for_reviews < 315.768
+probabilities_array:[0.         0.23317616 0.30756435 0.21470128 0.0089003  0.23565787]
+
+rule9: -3021.741 < num_voted_users < 98792.966
+probabilities_array:[0.20972893 0.1933377  0.21028976 0.19228208 0.         0.19436155]
+
+rule30: 1903.918 < actor_2_facebook_likes < 4554.465
+probabilities_array:[0.         0.2183817  0.0696018  0.24234396 0.06671856 0.40295398]
+
+rule131: Negative num_critic_for_reviews - 159.437, movie_facebook_likes - 9095.070
+probabilities_array:[3.8251921e-05 0.0000000e+00 1.7842008e-01 2.2717267e-01 1.0070597e-01
+ 4.9366307e-01]
+
+rule112: Positive num_voted_users - 98792.966, movie_facebook_likes - 9095.070
+probabilities_array:[0.07967298 0.16722713 0.06763696 0.21059045 0.         0.4748725 ]
+
+rule53: Negative imdb_score - 6.470, title_year - 2003.285
+probabilities_array:[0.02447519 0.         0.06830679 0.25603962 0.07593013 0.57524824]
+
+rule171: Negative actor_1_facebook_likes - 7400.443, cast_total_facebook_likes - 11017.299
+probabilities_array:[0.         0.         0.         0.25343865 0.13801582 0.60854554]
+
+rule107: Negative num_voted_users - 98792.966, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.         0.00338686 0.00197409 0.21559377 0.19749482 0.58155054]
+
+rule0: imdb_score < 5.735
+probabilities_array:[0.         0.29487923 0.21265392 0.13327786 0.         0.35918903]
+
+rule57: Negative imdb_score - 6.470, num_critic_for_reviews - 159.437
+probabilities_array:[0.08322388 0.         0.11416643 0.17376216 0.10449923 0.5243484 ]
+
+rule22: 722.070 < director_facebook_likes < 2693.078
+probabilities_array:[0.31898367 0.10746866 0.10975052 0.11652097 0.         0.34727624]
+
+rule74: Positive imdb_score - 6.470, budget - 44370675.506
+probabilities_array:[0.06923513 0.         0.02599592 0.17877147 0.14783369 0.5781638 ]
+
+rule2: 6.470 < imdb_score < 7.205
+probabilities_array:[0.00619079 0.00743885 0.         0.16580051 0.25272432 0.5678455 ]
+
+rule27: actor_1_facebook_likes > 18637.066
+probabilities_array:[0.         0.14786465 0.07725537 0.16106981 0.02552505 0.58828515]
+
+rule18: 315.768 < num_user_for_reviews < 594.168
+probabilities_array:[0.         0.20215358 0.01763387 0.14085129 0.10652869 0.5328326 ]
+
+rule137: Negative num_user_for_reviews - 315.768, director_facebook_likes - 722.070
+probabilities_array:[0.         0.00579463 0.24965006 0.12605545 0.11869742 0.4998025 ]
+
+rule117: Negative num_voted_users - 98792.966, budget - 44370675.506
+probabilities_array:[0.         0.00327815 0.15113032 0.13585573 0.16254614 0.54718965]
+
+rule155: Negative director_facebook_likes - 722.070, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.01531293 0.15149087 0.01358731 0.17172204 0.         0.6478869 ]
+
+rule102: Positive num_voted_users - 98792.966, director_facebook_likes - 722.070
+probabilities_array:[0.10574815 0.11776983 0.18955539 0.11264122 0.         0.47428536]
+
+rule19: num_user_for_reviews > 594.168
+probabilities_array:[0.         0.         0.00692965 0.13931943 0.26377678 0.58997405]
+
+rule78: Positive title_year - 2003.285, num_critic_for_reviews - 159.437
+probabilities_array:[0.0170117  0.02194205 0.         0.19883873 0.04692281 0.7152847 ]
+
+rule151: Negative num_user_for_reviews - 315.768, budget - 44370675.506
+probabilities_array:[0.         0.         0.20560575 0.1481328  0.02494835 0.6213131 ]
+
+rule109: Negative num_voted_users - 98792.966, actor_3_facebook_likes - 763.417
+probabilities_array:[0.         0.00228744 0.0453104  0.19650644 0.03645685 0.7194389 ]
+
+rule95: Negative title_year - 2003.285, duration - 109.249
+probabilities_array:[0.03477247 0.         0.04364326 0.13053729 0.20727596 0.58377105]
+
+rule199: Negative cast_total_facebook_likes - 11017.299, duration - 109.249
+probabilities_array:[0.07633528 0.         0.         0.17316078 0.05831181 0.6921921 ]
+
+rule46: 109.249 < duration < 123.831
+probabilities_array:[0.         0.09193287 0.10119054 0.14501514 0.02688617 0.6349753 ]
+
+rule38: 11017.299 < cast_total_facebook_likes < 24281.864
+probabilities_array:[0.00348371 0.         0.11593422 0.16353789 0.03772815 0.6793161 ]
+
+rule207: Negative duration - 109.249, budget - 44370675.506
+probabilities_array:[0.         0.         0.         0.11971046 0.3071906  0.57309896]
+
+rule161: Negative director_facebook_likes - 722.070, movie_facebook_likes - 9095.070
+probabilities_array:[0.02217173 0.10255123 0.02818877 0.1483373  0.         0.698751  ]
+
+rule97: Negative title_year - 2003.285, budget - 44370675.506
+probabilities_array:[0.12255432 0.03984401 0.04372184 0.12876467 0.00612125 0.65899396]
+
+rule173: Negative actor_1_facebook_likes - 7400.443, movie_facebook_likes - 9095.070
+probabilities_array:[0.06363924 0.         0.10514707 0.13964608 0.         0.69156766]
+
+rule50: 44370675.506 < budget < 212885038.648
+probabilities_array:[0.         0.         0.         0.09926407 0.33111736 0.5696186 ]
+
+rule62: Positive imdb_score - 6.470, actor_1_facebook_likes - 7400.443
+probabilities_array:[0.00929666 0.03878164 0.03001697 0.14059043 0.08460036 0.696714  ]
+
+rule87: Negative title_year - 2003.285, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.08253934 0.06573141 0.         0.13360396 0.02676587 0.69135946]
+
+rule15: num_critic_for_reviews > 243.019
+probabilities_array:[0.         0.         0.17553098 0.0929654  0.16736755 0.5641361 ]
+
+
+---4---
+rule4: title_year < 1996.525
+probabilities_array:[0.         0.02555496 0.0955991  0.2821276  0.35087135 0.24584702]
+
+rule51: budget > 212885038.648
+probabilities_array:[0.39015114 0.19686121 0.         0.         0.23123813 0.18174955]
+
+rule101: Negative num_voted_users - 98792.966, num_user_for_reviews - 315.768
+probabilities_array:[0.         0.19113323 0.16137297 0.         0.26602927 0.38146457]
+
+rule50: 44370675.506 < budget < 212885038.648
+probabilities_array:[0.         0.         0.         0.09926407 0.33111736 0.5696186 ]
+
+rule207: Negative duration - 109.249, budget - 44370675.506
+probabilities_array:[0.         0.         0.         0.11971046 0.3071906  0.57309896]
+
+rule13: 75.856 < num_critic_for_reviews < 159.437
+probabilities_array:[0.         0.11481545 0.21689144 0.2504255  0.15619949 0.26166818]
+
+rule11: num_voted_users > 200607.672
+probabilities_array:[0.         0.         0.         0.         0.33599982 0.6640002 ]
+
+rule2: 6.470 < imdb_score < 7.205
+probabilities_array:[0.00619079 0.00743885 0.         0.16580051 0.25272432 0.5678455 ]
+
+rule19: num_user_for_reviews > 594.168
+probabilities_array:[0.         0.         0.00692965 0.13931943 0.26377678 0.58997405]
+
+rule113: Negative num_voted_users - 98792.966, movie_facebook_likes - 9095.070
+probabilities_array:[0.0000000e+00 0.0000000e+00 1.6549083e-04 0.0000000e+00 3.0858788e-01
+ 6.9124669e-01]
+
+rule23: director_facebook_likes > 2693.078
+probabilities_array:[0.         0.02394414 0.16237225 0.         0.22762962 0.5860539 ]
+
+rule95: Negative title_year - 2003.285, duration - 109.249
+probabilities_array:[0.03477247 0.         0.04364326 0.13053729 0.20727596 0.58377105]
+
+rule107: Negative num_voted_users - 98792.966, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.         0.00338686 0.00197409 0.21559377 0.19749482 0.58155054]
+
+rule43: movie_facebook_likes > 23900.973
+probabilities_array:[0.         0.0324426  0.         0.07419246 0.23072487 0.6626401 ]
+
+rule117: Negative num_voted_users - 98792.966, budget - 44370675.506
+probabilities_array:[0.         0.00327815 0.15113032 0.13585573 0.16254614 0.54718965]
+
+rule35: actor_3_facebook_likes > 2058.738
+probabilities_array:[0.         0.         0.         0.02280032 0.2593929  0.71780676]
+
+rule15: num_critic_for_reviews > 243.019
+probabilities_array:[0.         0.         0.17553098 0.0929654  0.16736755 0.5641361 ]
+
+rule134: Positive num_critic_for_reviews - 159.437, budget - 44370675.506
+probabilities_array:[0.03036659 0.         0.02585716 0.06468849 0.20728339 0.67180437]
+
+rule165: Negative director_facebook_likes - 722.070, budget - 44370675.506
+probabilities_array:[0.00960947 0.         0.         0.10744169 0.20138372 0.68156517]
+
+rule74: Positive imdb_score - 6.470, budget - 44370675.506
+probabilities_array:[0.06923513 0.         0.02599592 0.17877147 0.14783369 0.5781638 ]
+
+rule137: Negative num_user_for_reviews - 315.768, director_facebook_likes - 722.070
+probabilities_array:[0.         0.00579463 0.24965006 0.12605545 0.11869742 0.4998025 ]
+
+rule103: Negative num_voted_users - 98792.966, director_facebook_likes - 722.070
+probabilities_array:[0.         0.         0.         0.         0.23880187 0.7611981 ]
+
+rule195: Negative actor_3_facebook_likes - 763.417, budget - 44370675.506
+probabilities_array:[0.04540184 0.         0.13564123 0.04220582 0.1482574  0.62849367]
+
+rule171: Negative actor_1_facebook_likes - 7400.443, cast_total_facebook_likes - 11017.299
+probabilities_array:[0.         0.         0.         0.25343865 0.13801582 0.60854554]
+
+rule1: 5.735 < imdb_score < 6.470
+probabilities_array:[0.26383966 0.         0.02858202 0.07519739 0.11010489 0.52227604]
+
+rule26: 7400.443 < actor_1_facebook_likes < 18637.066
+probabilities_array:[0.00472805 0.         0.10507957 0.08535941 0.1507171  0.6541158 ]
+
+rule80: Positive title_year - 2003.285, num_user_for_reviews - 315.768
+probabilities_array:[0.         0.03202947 0.02439499 0.10131007 0.1604087  0.68185675]
+
+rule131: Negative num_critic_for_reviews - 159.437, movie_facebook_likes - 9095.070
+probabilities_array:[3.8251921e-05 0.0000000e+00 1.7842008e-01 2.2717267e-01 1.0070597e-01
+ 4.9366307e-01]
+
+rule47: duration > 123.831
+probabilities_array:[1.0900461e-05 0.0000000e+00 1.0493637e-01 7.7752464e-02 1.5157381e-01
+ 6.6572642e-01]
+
+rule18: 315.768 < num_user_for_reviews < 594.168
+probabilities_array:[0.         0.20215358 0.01763387 0.14085129 0.10652869 0.5328326 ]
+
+rule57: Negative imdb_score - 6.470, num_critic_for_reviews - 159.437
+probabilities_array:[0.08322388 0.         0.11416643 0.17376216 0.10449923 0.5243484 ]
+
+rule7: title_year > 2010.046
+probabilities_array:[0.06185433 0.00163449 0.03682647 0.         0.17072836 0.72895634]
+
+rule66: Positive imdb_score - 6.470, actor_3_facebook_likes - 763.417
+probabilities_array:[0.00725225 0.         0.09823494 0.03329174 0.15644325 0.7047778 ]
+
+rule31: actor_2_facebook_likes > 4554.465
+probabilities_array:[0.00908978 0.         0.04305996 0.00214383 0.18840538 0.75730103]
+
+rule147: Negative num_user_for_reviews - 315.768, movie_facebook_likes - 9095.070
+probabilities_array:[0.         0.         0.08376537 0.34091637 0.08640091 0.4889173 ]
+
+rule141: Negative num_user_for_reviews - 315.768, actor_2_facebook_likes - 1903.918
+probabilities_array:[0.         0.09666503 0.07164855 0.0440988  0.12335221 0.6642354 ]
+
+rule148: Positive num_user_for_reviews - 315.768, duration - 109.249
+probabilities_array:[0.0630683  0.05838389 0.         0.00166494 0.1510024  0.72588044]
+
+rule187: Negative actor_2_facebook_likes - 1903.918, budget - 44370675.506
+probabilities_array:[0.         0.00197625 0.         0.11531295 0.15266922 0.7300416 ]
+
