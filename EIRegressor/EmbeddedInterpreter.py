@@ -1,10 +1,9 @@
-# EmbeddedInterpreter.py
-
 # coding=utf-8
+import random
+
 import numpy as np
 import pandas as pd
 import os
-import random  # Import random for selecting nearest regressors
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 from sklearn.pipeline import Pipeline
 import torch
@@ -21,13 +20,13 @@ class EmbeddedInterpreter():
     Implementation of Embedded interpreter regression based on DS model
     """
 
-    def __init__(self, regressor=None, model_optimizer=None, model_preprocessor=None, n_buckets=3, bucketing_method="quantile",
-                 reg_default_args={}, reg_hp_args={}, hp_grids=None, statistic=None, verbose=False, **cla_kwargs):
+    def __init__(self, regressor=None, model_optimizer=None, model_preprocessor=None, n_buckets=3,
+                 bucketing_method="quantile",
+                 reg_default_args={}, reg_hp_args={}, hp_grids=None, statistic=None, **cla_kwargs):
         """
         Initialize the EmbeddedInterpreter with new parameters for fine-tuning.
         :param hp_grids: List of hyperparameter grids for each bucket's regressor.
         :param optimizer_settings: Settings for the ModelOptimizer.
-        :param verbose: If True, print bucket distributions during training and prediction.
         """
         self.n_buckets = n_buckets
         self.bins = []
@@ -35,14 +34,13 @@ class EmbeddedInterpreter():
         self.y_dtype = None
         self.training_medians = None
         self.classifier = DSClassifierMultiQ(num_classes=n_buckets, **cla_kwargs)
-        self.verbose = verbose  # Initialize the verbose flag
         if not statistic:
             self.regressors = [regressor(**reg_default_args) for _ in range(n_buckets)]
-            self.hp_grids = hp_grids or [reg_hp_args for _ in range(n_buckets)]  # Default to empty grids if none provided
+            self.hp_grids = hp_grids or [reg_hp_args for _ in
+                                         range(n_buckets)]  # Default to empty grids if none provided
             self.optimizer = model_optimizer
             self.preprocessor = model_preprocessor
         self.statistic = statistic
-        self.global_mean = None  # Initialize global_mean
 
     def get_nearest_fitted_regressors(self, i):
         """
@@ -66,98 +64,132 @@ class EmbeddedInterpreter():
         chosen_index = random.choice(nearest_indices)
         return self.regressors[chosen_index]
 
+
     def fit(self, X_train, y_train, **cla_kwargs):
         """
-        Fits the model using the training data
-        :param X: Features for training
-        :param y: Labels of features
-        :param cla_kwargs: Arguments for the DS classifier fitting
+        Fit the embedded interpreter model.
         """
-
         self.y_dtype = y_train.dtype
-        if not self.bins:
+        if self.bins == []:
             (buckets, bins) = bucketing(
                 labels=y_train, features=X_train, bins=self.n_buckets, type=self.bucketing_method)
             self.bins = bins  # To test classifier later
         else:
             buckets = pd.cut(y_train, self.bins)
 
-        # Print bucket distribution for training data if verbose is True
-        if self.verbose:
-            print(f"\n[Training] Bucket Distribution for n_buckets={self.n_buckets}:")
-            if isinstance(buckets, pd.Series):
-                bucket_counts = buckets.value_counts().sort_index()
-                for interval, count in bucket_counts.items():
-                    print(f"  {interval}: {count} samples")
-            elif isinstance(buckets, np.ndarray):
-                unique, counts = np.unique(buckets, return_counts=True)
-                for bucket, count in zip(unique, counts):
-                    print(f"  Bucket {bucket}: {count} samples")
-            else:
-                print("  [Warning] Unknown bucket type. Unable to print distribution.")
+        # Print bin statistics
+        print("\nBin Statistics:")
+        print("-" * 50)
+        bucket_counts = pd.value_counts(buckets, sort=False)
+        for i, count in enumerate(bucket_counts):
+            bin_start = self.bins[i] if i == 0 else self.bins[i]
+            bin_end = self.bins[i + 1]
+            print(f"Bin {i}: Range [{bin_start:.3f}, {bin_end:.3f}], Count: {count}")
+        print("-" * 50)
 
         self.classifier.fit(X_train, buckets, **cla_kwargs)
         pred_bucket = self.classifier.predict(X_train)
 
-        # Print predicted bucket distribution after classification if verbose is True
-        if self.verbose:
-            print(f"\n[Training] Predicted Bucket Distribution after Classification for n_buckets={self.n_buckets}:")
-            if isinstance(pred_bucket, pd.Series):
-                bucket_counts = pred_bucket.value_counts().sort_index()
-                for bucket, count in bucket_counts.items():
-                    print(f"  Bucket {bucket}: {count} samples")
-            elif isinstance(pred_bucket, np.ndarray):
-                unique, counts = np.unique(pred_bucket, return_counts=True)
-                for bucket, count in zip(unique, counts):
-                    print(f"  Bucket {bucket}: {count} samples")
-            else:
-                print("  [Warning] Unknown predicted bucket type. Unable to print distribution.")
+        # Print predicted bucket statistics
+        print("\nPredicted Bucket Statistics:")
+        print("-" * 50)
+        pred_counts = pd.value_counts(pred_bucket, sort=False)
+        for i in range(self.n_buckets):
+            count = pred_counts.get(i, 0)  # Use get to handle cases where a bucket might be empty
+            print(f"Predicted Bucket {i}: Count: {count}")
+        print("-" * 50)
 
         self.training_medians = replace_nan_median(X_train)
-        self.global_mean = np.mean(y_train)  # Compute global mean for fallback
 
         if not self.statistic:
             for i in range(self.n_buckets):
-                bucket_X = X_train[pred_bucket == i]
-                bucket_y = y_train[pred_bucket == i]
+                # Get current bucket's data
+                current_bucket_X = X_train[pred_bucket == i]
+                current_bucket_y = y_train[pred_bucket == i]
+
+                # Initialize bucket_X and bucket_y as the current bucket's data
+                bucket_X = current_bucket_X
+                bucket_y = current_bucket_y
+
+                # If there are no data points in the current bucket, fall back to true buckets
                 if len(bucket_X) == 0:
-                    if self.verbose:
-                        print(f"Warning: Bucket {i} has no samples.")
-                    self.regressors[i] = None  # Mark regressor as unfitted
-                    continue  # Skip fitting for this bucket
+                    print(f"\nWarning: Predicted bucket {i} is empty, falling back to true bucket")
+                    current_bucket_X = X_train[buckets == i]
+                    current_bucket_y = y_train[buckets == i]
+                    bucket_X = current_bucket_X
+                    bucket_y = current_bucket_y
+                    print(f"True bucket {i} size: {len(bucket_X)}")
+
+                # Convert to DataFrame if necessary
+                if isinstance(bucket_X, np.ndarray):
+                    bucket_X = pd.DataFrame(bucket_X)
+                if isinstance(bucket_y, np.ndarray):
+                    bucket_y = pd.Series(bucket_y)
+
+                # Include the previous bucket (i-1) if it exists
+                if i - 1 >= 0:
+                    neighbor_X = X_train[pred_bucket == (i - 1)]
+                    neighbor_y = y_train[pred_bucket == (i - 1)]
+                    if len(neighbor_X) == 0:  # Fallback to true bucket if predicted is empty
+                        neighbor_X = X_train[buckets == (i - 1)]
+                        neighbor_y = y_train[buckets == (i - 1)]
+
+                    # Convert to DataFrame if necessary
+                    if isinstance(neighbor_X, np.ndarray):
+                        neighbor_X = pd.DataFrame(neighbor_X)
+                    if isinstance(neighbor_y, np.ndarray):
+                        neighbor_y = pd.Series(neighbor_y)
+
+                    # Concatenate the data and labels
+                    bucket_X = pd.concat([bucket_X, neighbor_X], ignore_index=True)
+                    bucket_y = pd.concat([bucket_y, neighbor_y], ignore_index=True)
+
+                # Include the next bucket (i+1) if it exists
+                if i + 1 < self.n_buckets:
+                    neighbor_X = X_train[pred_bucket == (i + 1)]
+                    neighbor_y = y_train[pred_bucket == (i + 1)]
+                    if len(neighbor_X) == 0:  # Fallback to true bucket if predicted is empty
+                        neighbor_X = X_train[buckets == (i + 1)]
+                        neighbor_y = y_train[buckets == (i + 1)]
+
+                    # Convert to DataFrame if necessary
+                    if isinstance(neighbor_X, np.ndarray):
+                        neighbor_X = pd.DataFrame(neighbor_X)
+                    if isinstance(neighbor_y, np.ndarray):
+                        neighbor_y = pd.Series(neighbor_y)
+
+                    # Concatenate the data and labels
+                    bucket_X = pd.concat([bucket_X, neighbor_X], ignore_index=True)
+                    bucket_y = pd.concat([bucket_y, neighbor_y], ignore_index=True)
+
+                # Print final bucket size after including neighbors
+                print(f"\nBucket {i} final size (including neighbors): {len(bucket_X)}")
+
+                # Check if the current regressor is None
+                if self.regressors[i] is None:
+                    nearest_regressor = self.get_nearest_fitted_regressors(i)
+                    if nearest_regressor is not None:
+                        print(f"\nUsing nearest fitted regressor for bucket {i}")
+                        self.regressors[i] = clone(
+                            nearest_regressor)  # Clone the regressor to avoid modifying the original
+                    else:
+                        print(f"\nWarning: No fitted regressors available for bucket {i}")
+                        continue  # Skip this bucket if no fitted regressors are available
+
+                # Fit the regressor for the current bucket (and neighbors)
                 if self.hp_grids[i]:  # Check if there is a grid for the current bucket
                     regressor_pipeline = Pipeline([
                         ('preprocessor', self.preprocessor),
                         ('regressor', self.regressors[i])
                     ])
-
                     optimized_regressor = self.optimizer.optimize(
                         regressor_pipeline, self.hp_grids[i], bucket_X, bucket_y,
                         scoring='r2',  # Set scoring to a regression metric
-                        cv=3  # Or another value, possibly passed through optimizer_settings
+                        cv=5  # Or another value, possibly passed through optimizer_settings
                     )
                     self.regressors[i] = optimized_regressor
                 else:
                     self.regressors[i].fit(bucket_X, bucket_y)
-        else:
-            self.bucket_statistics = []
-            for i in range(self.n_buckets):
-                bucket_X = X_train[pred_bucket == i]
-                bucket_y = y_train[pred_bucket == i]
-                if len(bucket_X) == 0:
-                    if self.verbose:
-                        print(f"Warning: Bucket {i} has no samples.")
-                    self.bucket_statistics.append(np.nan)
-                    continue
-                # Calculate and store statistics
-                if self.statistic == 'median':
-                    stat = np.median(bucket_y)
-                elif self.statistic == 'mean':
-                    stat = np.mean(bucket_y)
-                self.bucket_statistics.append(stat)
-
-        # Compute the coverage for each rule
-        self.compute_rule_coverage(X_train)
 
     def predict(self, X_test, return_buckets=False):
         """
@@ -174,40 +206,13 @@ class EmbeddedInterpreter():
             for i in range(self.n_buckets):
                 if not (buck_pred == i).any():
                     continue
-                if self.regressors[i] is not None:
-                    y_pred[buck_pred == i] = self.regressors[i].predict(X_test[buck_pred == i])
-                else:
-                    # Handle empty regressor by finding the nearest fitted regressor
-                    nearest_regressor = self.get_nearest_fitted_regressors(i)
-                    if nearest_regressor is not None:
-                        if self.verbose:
-                            print(f"Bucket {i} has no fitted regressor. Using nearest fitted regressor.")
-                        y_pred[buck_pred == i] = nearest_regressor.predict(X_test[buck_pred == i])
-                    else:
-                        # Assign a default value if no regressors are fitted
-                        if self.verbose:
-                            print(f"No fitted regressors available. Assigning global mean to bucket {i}.")
-                        y_pred[buck_pred == i] = self.global_mean  # Assign global mean
+                y_pred[buck_pred == i] = self.regressors[i].predict(X_test[buck_pred == i])
         else:
             for i in range(self.n_buckets):
                 if not (buck_pred == i).any():
                     continue
                 # Use pre-calculated statistics instead of recalculating
                 y_pred[buck_pred == i] = self.bucket_statistics[i]
-
-        # Print bucket distribution for test data if verbose is True
-        if self.verbose:
-            print(f"\n[Test] Predicted Bucket Distribution for n_buckets={self.n_buckets}:")
-            if isinstance(buck_pred, pd.Series):
-                bucket_counts = buck_pred.value_counts().sort_index()
-                for bucket, count in bucket_counts.items():
-                    print(f"  Bucket {bucket}: {count} samples")
-            elif isinstance(buck_pred, np.ndarray):
-                unique, counts = np.unique(buck_pred, return_counts=True)
-                for bucket, count in zip(unique, counts):
-                    print(f"  Bucket {bucket}: {count} samples")
-            else:
-                print("  [Warning] Unknown predicted bucket type. Unable to print distribution.")
 
         if return_buckets:
             return buck_pred, y_pred
@@ -242,7 +247,7 @@ class EmbeddedInterpreter():
 
     def predict_proba(self, X):
         """
-        Predict the score of belonging to all classes
+        Predict the score of belogning to all classes
         :param X: Feature vector
         :return: Class scores for each feature vector
         """
@@ -250,9 +255,9 @@ class EmbeddedInterpreter():
 
     def predict_explain(self, X):
         """
-        Predict the score of belonging to each class and give an explanation of that decision
+        Predict the score of belogning to each class and give an explanation of that decision
         :param x: A single Feature vectors
-        :return: Class scores for each feature vector and an explanation of the decision
+        :return: Class scores for each feature vector and a explanation of the decision
         """
         return self.classifier.predict_explain(X)
 
@@ -269,7 +274,7 @@ class EmbeddedInterpreter():
     def find_most_important_rules(self, classes=None, threshold=0.2):
         """
         Shows the most contributive rules for the classes specified
-        :param classes: Array of classes, by default shows all classes
+        :param classes: Array of classes, by default shows all clases
         :param threshold: score minimum value considered to be contributive
         :return: A list containing the information about most important rules
         """
@@ -278,7 +283,7 @@ class EmbeddedInterpreter():
     def print_most_important_rules(self, classes=None, threshold=0.2):
         """
         Prints the most contributive rules for the classes specified
-        :param classes: Array of classes, by default shows all classes
+        :param classes: Array of classes, by default shows all clases
         :param threshold: score minimum value considered to be contributive
         :return:
         """
@@ -293,14 +298,7 @@ class EmbeddedInterpreter():
         """
         min_value, max_value = y_values.min(), y_values.max()
         extended_bins = [min(min_value, self.bins[0])] + list(self.bins[1:-1]) + [max(max_value, self.bins[-1])]
-        buckets = pd.cut(y_values, bins=extended_bins, labels=False, include_lowest=True)
-
-        # Handle NaN assignments if any
-        if np.isnan(buckets).any():
-            print("Warning: Some samples could not be assigned to a bucket. Assigning them to the nearest bucket.")
-            buckets = buckets.fillna(method='ffill').fillna(method='bfill')
-
-        return buckets
+        return pd.cut(y_values, bins=extended_bins, labels=False, include_lowest=True)
 
     def evaluate_classifier(self, X_test, y_test):
         """
@@ -320,9 +318,9 @@ class EmbeddedInterpreter():
         """
         Write the most contributive rules for the classes specified in an output file
         :param filename: Output file name
-        :param classes: Array of classes, by default shows all classes
+        :param classes: Array of classes, by default shows all clases
         :param threshold: score minimum value considered to be contributive
-        :param results: Dictionary with the results to print in txt 
+        :param results: Dictionary with the results to print in txt
         :return:
         """
         rules = self.classifier.model.find_most_important_rules(
@@ -358,69 +356,35 @@ class EmbeddedInterpreter():
 
         return results
 
-    def compute_similarity(self, x, y_true, threshold=0.2, include_rule_coverage=False):
+    def compute_similarity(self, x, y_true, threshold=0.2):
         """
         Compute the similarity between the activated rules for input x and the most important rules for the actual class y_true.
         Similarity is defined as the proportion of the intersection between these two rule sets over the union.
-        When include_rule_coverage is True, computes Weighted Jaccard Similarity using rule coverage.
         :param x: Input sample (feature vector)
         :param y_true: Actual class label (integer index)
         :param threshold: Threshold for important rules
-        :param include_rule_coverage: Flag to include rule coverage in similarity computation
         :return: Similarity score
         """
         # Get the activated rules for x
         rules, preds = self.classifier.model.get_rules_by_instance(x)
-        # 'preds' are the activated rules (DSRule instances)
-        activated_rules_set = set(preds)
+        # Represent the activated rules as a set of their string representations
+        activated_rules_set = set([str(pred) for pred in preds])
 
         # Get the most important rules for y_true
         important_rules_dict = self.classifier.model.find_most_important_rules(classes=[y_true], threshold=threshold)
         important_rules_list = important_rules_dict.get(y_true, [])
-        # Build a mapping from rule captions to DSRule objects
-        rule_caption_to_rule = {str(rule): rule for rule in self.classifier.model.preds}
-        # Get the DSRule objects for the important rules
-        important_rules_set = set()
-        for rule_info in important_rules_list:
-            rule_caption = rule_info[2]  # Rule caption
-            rule_obj = rule_caption_to_rule.get(rule_caption)
-            if rule_obj:
-                important_rules_set.add(rule_obj)
+        # The important rules are stored as tuples; the third element is the rule's caption (string representation)
+        important_rules_set = set([rule_info[2] for rule_info in important_rules_list])
 
-        # Compute the intersection and union of the rule sets
+        # Compute the intersection and union of the two rule sets
         intersection = activated_rules_set & important_rules_set
-        union = activated_rules_set  # Only activated_rules_set is considered for union
+        # union = activated_rules_set | important_rules_set
+        union = important_rules_set
 
-        if include_rule_coverage:
-            # Compute the Weighted Jaccard Similarity
-            # Sum the coverage of overlapping rules (intersection)
-            overlap_coverage = sum(rule.coverage for rule in intersection)
-            # Sum the coverage of all rules in the union
-            total_coverage = sum(rule.coverage for rule in union)
-            # Compute similarity, handling division by zero
-            if total_coverage > 0:
-                similarity = overlap_coverage / total_coverage
-            else:
-                similarity = 0.0
+        # Compute the similarity as the proportion of intersection over union
+        if len(union) == 0:
+            similarity = 0.0
         else:
-            # Original similarity calculation (unweighted)
-            if len(important_rules_set) == 0:
-                similarity = 0.0
-            else:
-                similarity = len(intersection) / len(important_rules_set)
+            similarity = len(intersection) / len(union)
 
         return similarity
-
-    def compute_rule_coverage(self, X_data):
-        """
-        Computes and updates the coverage for each rule in the classifier model.
-        :param X_data: Training data as a NumPy array.
-        """
-        # Convert X_data to DataFrame
-        X_df = pd.DataFrame(X_data)
-
-        # Iterate over all rules and compute coverage
-        for rule in self.classifier.model.preds:
-            # Apply rule to X_df to get a boolean array indicating where the rule applies
-            # Compute coverage as the sum of True values in the boolean array
-            rule.coverage = X_df.apply(rule, axis=1).sum()
