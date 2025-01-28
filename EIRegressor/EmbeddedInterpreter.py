@@ -3,7 +3,7 @@
 # coding=utf-8
 import numpy as np
 import pandas as pd
-import os
+from sklearn.base import clone
 import random  # Import random for selecting nearest regressors
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 from sklearn.pipeline import Pipeline
@@ -117,12 +117,80 @@ class EmbeddedInterpreter():
         self.global_mean = np.mean(y_train)  # Compute global mean for fallback
 
         if not self.statistic:
+
             for i in range(self.n_buckets):
-                bucket_X = X_train[pred_bucket == i]
-                bucket_y = y_train[pred_bucket == i]
+                # Get current bucket's data
+                current_bucket_X = X_train[pred_bucket == i]
+                current_bucket_y = y_train[pred_bucket == i]
+
+                # Initialize bucket_X and bucket_y as the current bucket's data
+                bucket_X = current_bucket_X
+                bucket_y = current_bucket_y
+
+                # If there are no data points in the current bucket, fall back to true buckets
                 if len(bucket_X) == 0:
+                    current_bucket_X = X_train[buckets == i]
+                    current_bucket_y = y_train[buckets == i]
+                    bucket_X = current_bucket_X
+                    bucket_y = current_bucket_y
+
+                # Convert to DataFrame if necessary
+                if isinstance(bucket_X, np.ndarray):
+                    bucket_X = pd.DataFrame(bucket_X)
+                if isinstance(bucket_y, np.ndarray):
+                    bucket_y = pd.Series(bucket_y)
+
+                # Include the previous bucket (i-1) if it exists
+                if i - 1 >= 0:
+                    neighbor_X = X_train[pred_bucket == (i - 1)]
+                    neighbor_y = y_train[pred_bucket == (i - 1)]
+                    if len(neighbor_X) == 0:  # Fallback to true bucket if predicted is empty
+                        neighbor_X = X_train[buckets == (i - 1)]
+                        neighbor_y = y_train[buckets == (i - 1)]
+
+                    # Convert to DataFrame if necessary
+                    if isinstance(neighbor_X, np.ndarray):
+                        neighbor_X = pd.DataFrame(neighbor_X)
+                    if isinstance(neighbor_y, np.ndarray):
+                        neighbor_y = pd.Series(neighbor_y)
+
+                    # Concatenate the data and labels
+                    bucket_X = pd.concat([bucket_X, neighbor_X], ignore_index=True)
+                    bucket_y = pd.concat([bucket_y, neighbor_y], ignore_index=True)
+
+                # Include the next bucket (i+1) if it exists
+                if i + 1 < self.n_buckets:
+                    neighbor_X = X_train[pred_bucket == (i + 1)]
+                    neighbor_y = y_train[pred_bucket == (i + 1)]
+                    if len(neighbor_X) == 0:  # Fallback to true bucket if predicted is empty
+                        neighbor_X = X_train[buckets == (i + 1)]
+                        neighbor_y = y_train[buckets == (i + 1)]
+
+                    # Convert to DataFrame if necessary
+                    if isinstance(neighbor_X, np.ndarray):
+                        neighbor_X = pd.DataFrame(neighbor_X)
+                    if isinstance(neighbor_y, np.ndarray):
+                        neighbor_y = pd.Series(neighbor_y)
+
+                    # Concatenate the data and labels
+                    bucket_X = pd.concat([bucket_X, neighbor_X], ignore_index=True)
+                    bucket_y = pd.concat([bucket_y, neighbor_y], ignore_index=True)
+
+
+                # Check if the current regressor is None
+                if self.regressors[i] is None:
+                    nearest_regressor = self.get_nearest_fitted_regressors(i)
+                    if nearest_regressor is not None:
+                        self.regressors[i] = clone(
+                            nearest_regressor)  # Clone the regressor to avoid modifying the original
+                    else:
+                        if self.verbose:
+                            print(f"\nWarning: No fitted regressors available for bucket {i}")
+                        continue  # Skip this bucket if no fitted regressors are available
                     if self.verbose:
                         print(f"Warning: Bucket {i} has no samples.")
+                        print(f"\nUsing nearest fitted regressor for bucket {i}")
+
                     self.regressors[i] = None  # Mark regressor as unfitted
                     continue  # Skip fitting for this bucket
                 if self.hp_grids[i]:  # Check if there is a grid for the current bucket
@@ -322,7 +390,7 @@ class EmbeddedInterpreter():
         :param filename: Output file name
         :param classes: Array of classes, by default shows all classes
         :param threshold: score minimum value considered to be contributive
-        :param results: Dictionary with the results to print in txt 
+        :param results: Dictionary with the results to print in txt
         :return:
         """
         rules = self.classifier.model.find_most_important_rules(
