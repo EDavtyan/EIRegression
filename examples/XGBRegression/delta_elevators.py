@@ -37,7 +37,8 @@ def execute(save_dir, n_buckets=3, i=None, bucketing_method="quantile", single_r
         'regressor__colsample_bytree': [0.7, 0.8, 0.9],
         'regressor__gamma': [0, 0.1, 0.2],
         'regressor__reg_alpha': [0, 0.1, 0.5],
-        'regressor__reg_lambda': [0.5, 1, 1.5]
+        'regressor__reg_lambda': [0.5, 1, 1.5],
+        'regressor__n_jobs': [-1]
     }
 
     regressor_default_args = {
